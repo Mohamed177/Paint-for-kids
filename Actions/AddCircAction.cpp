@@ -8,12 +8,22 @@ AddCircAction::AddCircAction(ApplicationManager * pApp) :Action(pApp)
 {
 }
 
-void AddCircAction::ReadActionParameters()
+bool AddCircAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
+	pOut->CreateFigMenu();
+	int x = pIn->IsFilled();
+	if (x == 2)
+	{
+		pOut->ClearToolBar();
+		pOut->CreateDrawToolBar();
+		return false;
+	}
+	RectGfxInfo.isFilled = x;	//default is not filled
+	pOut->ClearToolBar();
+	pOut->CreateDrawToolBar();
 	pOut->PrintMessage("New Circle: Click at first corner");
 
 	//Read Center and store in point P1
@@ -24,19 +34,20 @@ void AddCircAction::ReadActionParameters()
 	//Read P2 on Surface and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
 
-	RectGfxInfo.isFilled = false;	//default is not filled
 									//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
 	RectGfxInfo.BorderWdth = pOut->getCrntPenWidth();
 	pOut->ClearStatusBar();
-
+	return true;
 }
 
 void AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
-	ReadActionParameters();
+	bool t = ReadActionParameters();
+	if (!t)
+		return;
 	double Raduis = sqrt(((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x)));
 	if ((Center.y-Raduis) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Raduis))
 	{

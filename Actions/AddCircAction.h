@@ -5,7 +5,7 @@ public:
 	AddCircAction(ApplicationManager *pApp);
 
 	//Reads rectangle parameters
-	virtual void ReadActionParameters();
+	virtual bool ReadActionParameters();
 
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
