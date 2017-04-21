@@ -24,7 +24,7 @@ public:
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a rectangle
 	void DrawTRI(Point P1, Point P2,Point P3, GfxInfo RectGfxInfo, bool selected=false) const;	
 	void DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;
-	void DrawCIRC(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;
+	void DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) const;
 	///Make similar functions for drawing all other figures.
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar

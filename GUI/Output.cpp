@@ -313,9 +313,8 @@ void Output::DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y);
 }
-void Output::DrawCIRC(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) const
 {
-	double r = sqrt( ((P2.y - P1.y) *(P2.y - P1.y)) + ((P2.x - P1.x)*(P2.x - P1.x)));
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -336,6 +335,7 @@ void Output::DrawCIRC(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	pWind->DrawCircle(P1.x, P1.y, r, style);
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
