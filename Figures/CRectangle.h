@@ -11,6 +11,7 @@ private:
 public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
+	bool Is_Selected(Point P) const;
 };
 
 #endif
