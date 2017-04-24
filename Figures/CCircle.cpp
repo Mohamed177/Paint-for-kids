@@ -14,8 +14,9 @@ void CCircle::Draw(Output *pOut) const
 
 bool CCircle::Is_Selected(Point P) const
 {
-	double Raduis = sqrt(((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x)));
-	if ((P.x*P.x + P.y * P.y) <= (Raduis*Raduis))
+	double Raduis = ((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x));
+	double Raduis2 = ((P.y - Center.y) *(P.y - Center.y)) + ((P.x - Center.x)*(P.x - Center.x));
+	if (Raduis2<=Raduis )
 	{
 		return true;
 	}

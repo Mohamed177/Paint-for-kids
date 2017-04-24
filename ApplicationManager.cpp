@@ -1,7 +1,7 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddCircAction.h"
-
+#include "Actions\AddTriAction.h"
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -29,7 +29,6 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType) 
 {
 	Action* pAct = NULL;
-	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -39,6 +38,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case DRAW_LINE:
 			///create AddLineAction here
+
+			break;
+		case DRAW_TRI:
+			pAct = new AddTriAction(this);
 
 			break;
 		case DRAW_CIRC:

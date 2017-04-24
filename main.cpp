@@ -1,6 +1,15 @@
 #include "ApplicationManager.h"
-
-
+int CrossProuct(Point p1, Point p2) 
+{
+	return (p1.x * p2.y) - (p2.x * p1.y);
+}
+Point pPoint(Point p1, Point p2)  
+{
+	Point v;
+	v.x = p2.x - p1.x;
+	v.y = p2.y - p1.y ;
+	return v;
+}
 int main()
 {
 
