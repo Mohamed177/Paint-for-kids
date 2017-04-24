@@ -53,8 +53,16 @@ void AddRectAction::Execute()
 	 if (!t)
 		 return;
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
+	 if (P1.y > UI.ToolBarHeight && P2.y > UI.ToolBarHeight && P1.y < (UI.height - UI.StatusBarHeight) && P2.y < (UI.height - UI.StatusBarHeight))
+	 {
+		 CRectangle *R = new CRectangle(P1, P2, RectGfxInfo);
 
-	//Add the rectangle to the list of figures
-	pManager->AddFigure(R);
+		 //Add the rectangle to the list of figures
+		 pManager->AddFigure(R);
+	 }
+	 else
+	 {
+		 Output* pOut = pManager->GetOutput();
+		 pOut->PrintMessage("Error ! Draw at DrawArea");
+	 }
 }
