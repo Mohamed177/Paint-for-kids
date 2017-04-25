@@ -1,5 +1,4 @@
 #include "CRectangle.h"
-
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -44,5 +43,9 @@ bool CRectangle::Is_Selected(Point P) const
 void CRectangle::Save(ofstream &OutFile)
 {
 	OutFile << "Rectangle " << ID << ' ' << Corner1.x << ' ' << Corner1.y << ' ' << Corner2.x << ' ' << Corner2.y << ' ';
-	
+	OutFile << FigGfxInfo.DrawClr;
+	if (FigGfxInfo.isFilled)
+		OutFile << FigGfxInfo.FillClr << endl;
+	else 
+		OutFile << "NO_FILL\n";
 }

@@ -43,3 +43,8 @@ bool CTriangle::IsValid(Point P1, Point  P2, Point P3)
 CTriangle::~CTriangle()
 {
 }
+
+void CTriangle::Save(ofstream &OutFile)
+{
+
+}

@@ -13,7 +13,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
 	bool IsValid(Point, Point, Point);
-	
+	void Save(ofstream &OutFile);
 	~CTriangle();
 };
 

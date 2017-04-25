@@ -2,6 +2,8 @@
 #include "Actions\AddRectAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\AddTriAction.h"
+#include "Actions\SaveAction.h"
+#include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -46,6 +48,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case DRAW_CIRC:
 			pAct = new AddCircAction(this);
+			break;
+		case SAVE:
+			pAct = new SaveAction(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			
@@ -110,4 +116,11 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+
+
+void ApplicationManager::SaveAll(ofstream &OutFile) const
+{
+	for (int i = 0; i < FigCount; i++)
+		FigList[i]->Save(OutFile);
 }

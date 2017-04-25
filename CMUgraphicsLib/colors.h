@@ -7,7 +7,6 @@ This file was last modified on 05.16.1999
 #define COLORS_H
 
 #include "version.h"
-
 class color {
 
   public:
@@ -17,7 +16,19 @@ class color {
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
     }
 
-
+	bool operator==(color a) const
+	{
+		if ((ucRed == a.ucRed) && (ucBlue == a.ucBlue) && (ucGreen == a.ucGreen))
+			return true;
+		return false; 
+	}
+	bool operator!=(color a)
+	{
+		if ((ucRed != a.ucRed) || (ucBlue != a.ucBlue) || (ucGreen != a.ucGreen))
+			return true;
+		return false;
+	}
+	friend ofstream& operator<<(ofstream& OutFile, color a);
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
     unsigned char ucGreen;
@@ -25,8 +36,6 @@ class color {
 
 };
 
-bool operator==(color a, color b);
-bool operator!=(color a, color b);
 
 /*
 

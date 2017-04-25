@@ -22,3 +22,6 @@ bool CCircle::Is_Selected(Point P) const
 	}
 	return false;
 }
+
+void CCircle::Save(ofstream &OutFile)
+{}
