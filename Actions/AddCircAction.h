@@ -1,4 +1,6 @@
+#pragma once
 #include "Action.h"
+
 class AddCircAction :public Action
 {
 public:

@@ -1,4 +1,6 @@
+#pragma once
 #include "CFigure.h"
+
 class CCircle: public CFigure
 {
 public:
