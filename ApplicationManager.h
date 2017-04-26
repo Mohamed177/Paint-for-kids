@@ -37,6 +37,10 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
+
+	// -- Get Fig Counter Management
+	int GetFig_Counter();
+
 };
 
 #endif

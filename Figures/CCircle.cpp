@@ -23,5 +23,18 @@ bool CCircle::Is_Selected(Point P) const
 	return false;
 }
 
-void CCircle::Save(ofstream &OutFile)
-{}
+void CCircle::Save(ofstream & OutFile) 
+{
+	OutFile<< "Circle" << ID << ' ' << Center.x << ' ' << Center.y << ' ' << P2.x << ' ' << P2.y << ' ';
+	OutFile<< FigGfxInfo.DrawClr;
+	OutFile<< " ";
+	if (FigGfxInfo.isFilled)
+	{
+		OutFile << FigGfxInfo.FillClr;
+	}
+	else
+	{
+		OutFile << "Not_Filled";
+	}
+	OutFile << endl;
+}

@@ -13,7 +13,7 @@ bool AddCircAction::ReadActionParameters()
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->CreateFigMenu();
+	pOut->CreateFigMenu();     //Filled Or Not
 	int x = pIn->IsFilled();
 	if (x == 2)
 	{

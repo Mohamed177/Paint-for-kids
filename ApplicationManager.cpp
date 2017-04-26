@@ -1,8 +1,10 @@
 #include "ApplicationManager.h"
+#include"Actions\AddLineAction.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\SelectAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -39,7 +41,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case DRAW_LINE:
-			///create AddLineAction here
+			pAct = new AddLineAction(this);
 
 			break;
 		case DRAW_TRI:
@@ -52,6 +54,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case SAVE:
 			pAct = new SaveAction(this);
 			break;
+		case TO_SELECT:
+			pAct = new SelectAction(this);
 		case EXIT:
 			///create ExitAction here
 			
@@ -80,11 +84,20 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;	
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure *ApplicationManager::GetFigure(int x, int y) const
+CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-
+	Point P;
+	P.x = x;
+	P.y = y;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i ]->Is_Selected(P))
+		{
+			return FigList[i ];
+		}
+	}
 
 	///Add your code here to search for a figure given a point x,y	
 
@@ -123,4 +136,9 @@ void ApplicationManager::SaveAll(ofstream &OutFile) const
 {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
+}
+//------ Get Fig Counter 
+int ApplicationManager::GetFig_Counter()
+{
+	return FigCount;
 }

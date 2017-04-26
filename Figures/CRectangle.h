@@ -2,7 +2,7 @@
 #define CRECT_H
 
 #include "CFigure.h"
-#include <fstream>
+
 
 class CRectangle : public CFigure
 {
