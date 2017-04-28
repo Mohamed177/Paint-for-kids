@@ -7,6 +7,7 @@
 #include "Actions\SelectAction.h"
 #include "Actions\ZoomInAction.h"
 #include"Actions\ZoomOutAction.h"
+#include "Actions\DeleteAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -70,6 +71,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ZoomOutAction(this);
 			break;
 
+		case DEL:
+			pAct = new DeleteAction(this);
+
 		case EXIT:
 			///create ExitAction here
 			
@@ -123,7 +127,8 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
+{
+	pOut->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
@@ -150,6 +155,27 @@ void ApplicationManager::SaveAll(ofstream &OutFile) const
 {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
+}
+void ApplicationManager::Delete_Figs()
+{
+	int i = 0;
+	while (i < FigCount)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			delete FigList[i];
+			FigList[i] = NULL;
+			for (int j = i; j < FigCount-1; j++)
+			{
+				swap(FigList[j], FigList[j+1]);
+			}
+			FigCount--;
+		}
+		else
+		{
+			i++;
+		}
+	}
 }
 //------ Get Fig Counter 
 int ApplicationManager::GetFig_Counter()
