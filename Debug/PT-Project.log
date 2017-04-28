@@ -1,5 +1,0 @@
-﻿  CRectangle.cpp
-c:\users\mohamed\desktop\oop\project framework\figures\crectangle.cpp(69): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\mohamed\desktop\oop\project framework\figures\crectangle.cpp(70): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  PT-Project.vcxproj -> C:\Users\Mohamed\Desktop\OOP\Project Framework\.\Debug\PT Project.exe
-  PT-Project.vcxproj -> .\Debug/PT Project.pdb (Full PDB)
