@@ -14,6 +14,7 @@ public:
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
 	void CreateFigMenu() const;
+	void CreateResizeMenu() const;
 	void ClearToolBar() const; //        E7NA ELLY 3MLNAHA.
 
 	Input* CreateInput() const; //creates a pointer to the Input object	

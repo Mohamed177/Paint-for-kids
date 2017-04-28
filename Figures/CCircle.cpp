@@ -38,3 +38,8 @@ void CCircle::Save(ofstream & OutFile)
 	}
 	OutFile << endl;
 }
+
+void CCircle::Resize(float factor = 2)
+{
+	return;
+}

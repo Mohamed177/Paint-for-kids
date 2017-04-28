@@ -201,6 +201,26 @@ int Input::IsFilled() const
 	goto f;
 }
 
+int Input::ResizeFactor() const
+{
+f:
+	int x, y;
+	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
+	if (y >= 0 && y < UI.ToolBarHeight)
+	{
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		if (ClickedItemOrder<5)
+		{
+			return ClickedItemOrder;
+		}
+		goto f;
+
+	}
+	goto f;
+}
+
 Input::~Input()
 {
 }

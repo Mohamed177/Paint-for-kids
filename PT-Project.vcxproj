@@ -131,6 +131,7 @@
     <ClCompile Include="Actions\AddCircAction.cpp" />
     <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
+    <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Actions\AddCircAction.h" />
     <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
+    <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />

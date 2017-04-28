@@ -56,3 +56,8 @@ CLine::~CLine()
 {
 
 }
+
+void CLine::Resize(float factor = 2)
+{
+	return;
+}

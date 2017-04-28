@@ -213,6 +213,25 @@ void Output::CreateFigMenu() const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreateResizeMenu() const
+{
+	ClearToolBar();
+
+	string MenuItemImages[5];
+	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\NOT_Filled.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\Filled.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
+	for (int i = 0; i<5; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);

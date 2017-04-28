@@ -7,6 +7,7 @@
 #include "Actions\SelectAction.h"
 #include "Actions\ZoomInAction.h"
 #include"Actions\ZoomOutAction.h"
+#include "Actions\ResizeAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -68,6 +69,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case ZOOMOUT:
 			pAct = new ZoomOutAction(this);
+			break;
+
+		case RESIZE:
+			pAct = new ResizeAction(this);
 			break;
 
 		case EXIT:
@@ -151,6 +156,16 @@ void ApplicationManager::SaveAll(ofstream &OutFile) const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
+
+void ApplicationManager::ResizeSelected(float factor)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+			FigList[i]->Resize(factor);
+	}
+}
+
 //------ Get Fig Counter 
 int ApplicationManager::GetFig_Counter()
 {

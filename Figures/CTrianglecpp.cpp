@@ -48,3 +48,8 @@ void CTriangle::Save(ofstream &OutFile)
 {
 
 }
+
+void CTriangle::Resize(float factor = 2)
+{
+	return;
+}

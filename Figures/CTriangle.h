@@ -14,6 +14,7 @@ public:
 	bool Is_Selected(Point P) const;
 	bool IsValid(Point, Point, Point);
 	void Save(ofstream &OutFile);
+	void Resize(float factor);
 	~CTriangle();
 };
 
