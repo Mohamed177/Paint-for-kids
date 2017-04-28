@@ -337,6 +337,15 @@ void Output::DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) co
 	pWind->DrawCircle(P1.x, P1.y, r, style);
 }
 
+void Output::StoreImage(image &imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight)
+{
+	pWind->StoreImage(imgThis, usX,  usY, usWidth,  usHeight);
+}
+
+void Output::DrawImage(image &imgThis, const int iX, const int iY, const int iWidth, const int iHeight)
+{
+	pWind->DrawImage(imgThis, iX, iY, iWidth, iHeight);
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()

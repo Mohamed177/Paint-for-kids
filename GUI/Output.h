@@ -33,7 +33,10 @@ public:
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
 
-	
+	void StoreImage(image &imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight); // momken tt3'yr lw 3'alt
+
+	void DrawImage(image &imgThis, const int iX, const int iY, const int iWidth, const int iHeight);
+
 	~Output();
 };
 

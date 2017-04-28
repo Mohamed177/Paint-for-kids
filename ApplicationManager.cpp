@@ -5,6 +5,8 @@
 #include "Actions\AddTriAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\ZoomInAction.h"
+#include"Actions\ZoomOutAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -51,11 +53,23 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DRAW_CIRC:
 			pAct = new AddCircAction(this);
 			break;
+
 		case SAVE:
 			pAct = new SaveAction(this);
 			break;
+
 		case TO_SELECT:
 			pAct = new SelectAction(this);
+			break;
+
+		case ZOOMIN:
+			pAct = new ZoomIn(this);
+			break;
+
+		case ZOOMOUT:
+			pAct = new ZoomOutAction(this);
+			break;
+
 		case EXIT:
 			///create ExitAction here
 			
