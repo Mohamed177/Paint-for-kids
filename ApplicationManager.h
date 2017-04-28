@@ -39,6 +39,8 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
 	void ResizeSelected(float factor);
+	void Delete_Figs();
+
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 

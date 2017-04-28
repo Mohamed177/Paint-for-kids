@@ -7,11 +7,8 @@
 #include "Actions\SelectAction.h"
 #include "Actions\ZoomInAction.h"
 #include"Actions\ZoomOutAction.h"
-<<<<<<< HEAD
 #include "Actions\ResizeAction.h"
-=======
 #include "Actions\DeleteAction.h"
->>>>>>> 9d89237ad807cc6e8ee7d1805cedc5166ec43442
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -75,14 +72,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ZoomOutAction(this);
 			break;
 
-<<<<<<< HEAD
 		case RESIZE:
 			pAct = new ResizeAction(this);
 			break;
-=======
+
 		case DEL:
 			pAct = new DeleteAction(this);
->>>>>>> 9d89237ad807cc6e8ee7d1805cedc5166ec43442
+			break;
 
 		case EXIT:
 			///create ExitAction here
@@ -166,7 +162,6 @@ void ApplicationManager::SaveAll(ofstream &OutFile) const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
-<<<<<<< HEAD
 
 void ApplicationManager::ResizeSelected(float factor)
 {
@@ -177,7 +172,6 @@ void ApplicationManager::ResizeSelected(float factor)
 	}
 }
 
-=======
 void ApplicationManager::Delete_Figs()
 {
 	int i = 0;
@@ -199,7 +193,6 @@ void ApplicationManager::Delete_Figs()
 		}
 	}
 }
->>>>>>> 9d89237ad807cc6e8ee7d1805cedc5166ec43442
 //------ Get Fig Counter 
 int ApplicationManager::GetFig_Counter()
 {
