@@ -1,9 +1,10 @@
 #include "SelectAction.h"
 
+
 SelectAction::SelectAction(ApplicationManager * pApp):Action(pApp)
 {
-	Counter = 0;
 	temp = NULL;
+	Counter = 0;
 }
 
 bool SelectAction::ReadActionParameters()
@@ -13,27 +14,36 @@ bool SelectAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Any Figs. ");
 	pIn->GetPointClicked(P.x,P.y);
-
-	temp = pManager->GetFigure(P.x, P.y);
-	if (P.y > UI.ToolBarHeight && P.y < (UI.height - UI.StatusBarHeight))
+	while(P.y > UI.ToolBarHeight )
 	{
+		temp = pManager->GetFigure(P.x, P.y);
 		if (temp)
 		{
 			temp->SetSelected(!(temp->IsSelected()));
-			pOut->ClearStatusBar();
-			return temp;
+			if (temp->IsSelected())
+				Counter++;
+			else
+				Counter--;
 		}
+		pIn->GetPointClicked(P.x, P.y);
 	}
-	temp = NULL;
 	pOut->ClearStatusBar();
-	return temp;
+	return  true;
 }
 
 void SelectAction::Execute()
 {
-	do {
-		CFigure* temp = NULL;
-		bool test=ReadActionParameters();
-	} while (P.y > UI.ToolBarHeight && P.y < (UI.height - UI.StatusBarHeight));
-
+ Output * pOut= pManager->GetOutput();
+	bool test=ReadActionParameters();
+	if (Counter == 1) 
+	{
+		//temp->PrintInfo(pOut);
+	}
+	else if (Counter >1)
+	{
+		string s = "";
+		s = to_string(Counter);
+		pOut->PrintMessage( "You selected " +s + " figures");
+	}
+	temp = NULL;
 }
