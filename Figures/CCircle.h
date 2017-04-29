@@ -8,9 +8,9 @@ public:
 	void Draw(Output *pOut) const;
 	bool Is_Selected( Point P)const;
 	void Save(ofstream& OutFile);
-	void Resize(float factor);
+	void Resize(float K);
 private:
-	Point Center;
-	Point P2;
+	Point Center,P2;
+	double Raduis;
 };
 
