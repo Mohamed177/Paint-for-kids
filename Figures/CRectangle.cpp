@@ -1,4 +1,5 @@
 #include "CRectangle.h"
+
 CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
@@ -79,42 +80,58 @@ void CRectangle::Resize(float factor)
 		if (Corner1.x != Corner2.x)
 			if (Corner1.x < Corner2.x)
 			{
-				if (mid13.x - side13 >= 0)
-				{
-					Corner1.x = mid13.x - side13;
-					Corner2.x = mid13.x + side13;
-				}
-				//else 
-					// cant resize
+				Corner1.x = mid13.x - side13;
+				Corner2.x = mid13.x + side13;
 			}
 			else
 			{
-				if (mid13.x + side13 <= UI.width)
-				{
-					Corner1.x = mid13.x + side13;
-					Corner2.x = mid13.x - side13;
-				}
-				//else
+				Corner1.x = mid13.x + side13;
+				Corner2.x = mid13.x - side13;
 			}
 		if (Corner1.y != Corner2.y)
 			if (Corner1.y < Corner2.y)
 			{
-				if (mid14.y - side14 >= 0)
-				{
-					Corner1.y = mid14.y - side14;
-					Corner2.y = mid14.y + side14;
-				}
-				//else 
-				// cant resize
+				Corner1.y = mid14.y - side14;
+				Corner2.y = mid14.y + side14;
 			}
 			else
 			{
-				if (mid14.y + side14 <= (UI.height - UI.StatusBarHeight - UI.ToolBarHeight))
-				{
-					Corner2.y = mid14.y - side14;
-					Corner1.y = mid14.y + side14;
-				}
-				//else
+				Corner1.y = mid14.y + side14;
+				Corner2.y = mid14.y - side14;
 			}
 	}
+}
+
+void CRectangle::PrintInfo(Output* pOut)
+{
+	string info = "Rectangle of ID : " + to_string(ID) + " Corner 1 : ( " + to_string(Corner1.x) + " , " + to_string(Corner1.y);
+	info += " ) Conrer 2 : ( " + to_string(Corner2.x) + " , " + to_string(Corner2.y);
+	string Color = FigGfxInfo.DrawClr;
+	if (FigGfxInfo.isFilled)
+		Color += " No Fill.";
+	else
+		Color += FigGfxInfo.FillClr;
+	pOut->PrintMessage(info);
+}
+
+void CRectangle::Load(ifstream &Infile)
+{
+	string drwColor, Fcolor;
+	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> drwColor >> Fcolor;
+	FigGfxInfo.DrawClr = drwColor;
+	if (Fcolor == "NO_FILL")
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.FillClr = true;
+		FigGfxInfo.FillClr = Fcolor;
+	}
+}
+
+void CRectangle::Move(Point nCorner)
+{
+	if (Corner1.x != nCorner.x)
+		Corner2.x += nCorner.x - Corner1.x;
+	if (Corner1.y != nCorner.y)
+		Corner2.y += nCorner.y - Corner1.y;
 }

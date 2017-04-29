@@ -29,6 +29,126 @@ class color {
 		return false;
 	}
 	friend ofstream& operator<<(ofstream& OutFile, color a);
+
+	color(const string& s)
+	{
+		if (s == "BLACK")
+		{
+			ucRed = 0;
+			ucGreen = 0;
+			ucBlue = 0;
+		}
+		else if (s == "BLUE")
+		{
+			ucRed = 0;
+			ucGreen = 0;
+			ucBlue = 255;
+		}
+		else if (s == "RED")
+		{
+			ucRed = 255;
+			ucGreen = 0;
+			ucBlue = 0;
+		}
+		else if (s == "DARKGREEN")
+		{
+			ucRed = 0;
+			ucGreen = 100;
+			ucBlue = 0;
+		}
+		else if (s == "GREEN")
+		{
+			ucRed = 0;
+			ucGreen = 255;
+			ucBlue = 0;
+		}
+		else if (s == "BROWN")
+		{
+			ucRed = 162;
+			ucGreen = 42;
+			ucBlue = 42;
+		}
+		else if (s == "BLUEVIOLET")
+		{
+			ucRed = 138;
+			ucGreen = 43;
+			ucBlue = 226;
+		}
+		else if (s == "CYAN")
+		{
+			ucRed = 0;
+			ucGreen = 255;
+			ucBlue = 255;
+		}
+		else if (s == "VIOLET")
+		{
+			ucRed = 238;
+			ucGreen = 130;
+			ucBlue = 238;
+		}
+		else if (s == "GRAY")
+		{
+			ucRed = 190;
+			ucGreen = 190;
+			ucBlue = 190;
+		}
+		else if (s == "ORANGE")
+		{
+			ucRed = 225;
+			ucGreen = 165;
+			ucBlue = 0;
+		}
+		else if (s == "PINK")
+		{
+			ucRed = 225;
+			ucGreen = 192;
+			ucBlue = 203;
+		}
+		else if (s == "SEAGREEN")
+		{
+			ucRed = 46;
+			ucGreen = 139;
+			ucBlue = 87;
+		}
+		else if (s == "YELLOW")
+		{
+			ucRed = 255;
+			ucGreen = 255;
+			ucBlue = 0;
+		}
+	}
+
+	operator string()
+	{
+		if (ucRed == 0 && ucGreen == 0 && ucBlue == 0)
+			return string ("BLACK");
+		else if (ucRed == 0 && ucGreen == 0 && ucBlue == 255)
+			return string ("BLUE");
+		else if (ucRed == 255 && ucGreen == 0 && ucBlue == 0)
+			return string ("RED");
+		else if (ucRed == 0 && ucGreen == 100 && ucBlue == 0)
+			return string ("DARKGREEN");
+		else if (ucRed == 0 && ucGreen == 255 && ucBlue == 0)
+			return string ("GREEN");
+		else if (ucRed == 162 && ucGreen == 42 && ucBlue == 42)
+			return string ("BROWN");
+		else if (ucRed == 138 && ucGreen == 43 && ucBlue == 226)
+			return string ("BLUEVIOLET");
+		else if (ucRed == 0 && ucGreen == 255 && ucBlue == 255)
+			return string ("CYAN");
+		else if (ucRed == 238 && ucGreen == 130 && ucBlue == 238)
+			return string ("VIOLET");
+		else if (ucRed == 190 && ucGreen == 190 && ucBlue == 190)
+			return string ("GRAY");
+		else if (ucRed == 225 && ucGreen == 165 && ucBlue == 0)
+			return string ("ORANGE");
+		else if (ucRed == 225 && ucGreen == 192 && ucBlue == 203)
+			return string ("PINK");
+		else if (ucRed == 46 && ucGreen == 139 && ucBlue == 87)
+			return string ("SEAGREEN");
+		else if (ucRed == 255 && ucGreen == 255 && ucBlue == 0)
+			return string ("YELLOW");
+	}
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
     unsigned char ucGreen;
