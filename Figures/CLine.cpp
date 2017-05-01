@@ -56,6 +56,9 @@ CLine::~CLine()
 {
 
 }
+void CLine::Load(ifstream &Infile) 
+{
+}
 
 void CLine::Resize(float factor = 2)
 {

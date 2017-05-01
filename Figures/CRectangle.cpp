@@ -111,6 +111,7 @@ void CRectangle::PrintInfo(Output* pOut)
 		Color += " No Fill.";
 	else
 		Color += FigGfxInfo.FillClr;
+	info += Color;
 	pOut->PrintMessage(info);
 }
 

@@ -8,6 +8,7 @@ public:
 	void Draw(Output *pOut) const;
 	bool Is_Selected( Point P)const;
 	void Save(ofstream& OutFile);
+	void Load(ifstream &Infile);
 	void Resize(float K);
 private:
 	Point Center,P2;

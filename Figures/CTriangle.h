@@ -10,11 +10,13 @@ class CTriangle :
 	Point p3;
 public:
 	CTriangle(Point, Point,Point , GfxInfo FigureGfxInfo);
-	virtual void Draw(Output* pOut) const;
+	 void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
 	bool IsValid(Point, Point, Point);
 	void Save(ofstream &OutFile);
 	void Resize(float factor);
+	 void Load(ifstream &Infile) ;
+	void PrintInfo(Output* pOut);
 	~CTriangle();
 };
 

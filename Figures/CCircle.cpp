@@ -49,3 +49,6 @@ void CCircle::Resize(float K = 2)
 	return;
 
 }
+void CCircle::Load(ifstream &Infile) 
+{
+}

@@ -9,6 +9,7 @@ class CFigure
 {
 protected:
 	int ID;		//Each figure has an ID
+	static int counter ;
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
@@ -35,7 +36,7 @@ public:
 	//virtual void Move() = 0;		//Move the figure
 
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

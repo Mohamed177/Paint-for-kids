@@ -53,7 +53,6 @@ void AddCircAction::Execute()
 	{
 		//Create a rectangle with the parameters read from the user
 		CCircle *C = new CCircle(Center, P2, RectGfxInfo);
-
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(C);
 	}

@@ -9,6 +9,10 @@
 #include"Actions\ZoomOutAction.h"
 #include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
+#include"Figures\CCircle.h"
+#include"Figures\CLine.h"
+#include"Figures\CRectangle.h"
+#include"Figures\CTriangle.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -161,6 +165,50 @@ void ApplicationManager::SaveAll(ofstream &OutFile) const
 {
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
+}
+void ApplicationManager::LoadAll(ifstream &LoadFile) 
+{
+	Point p;
+	p.x = 0;
+	p.y = 0;
+	GfxInfo Gfx;
+	Gfx.BorderWdth = 1; Gfx.DrawClr = BLACK; Gfx.FillClr = BLACK; Gfx.isFilled = false;
+	if (FigCount != 0) 
+	{
+		Action* pAct = new SaveAction(this);
+		pAct->Execute();
+		delete pAct;
+	}
+	FigCount = 0;
+	color Draw, fill, background;
+	int x = 0;
+	//LoadFile >> Draw >> fill >> background;
+	LoadFile >> x;
+	for (int  i = 0; i < x; i++)
+	{
+		string s = "";
+		LoadFile >> s;
+		switch (s[0])
+		{
+		case 'L' :
+			FigList[i] = new CLine( p , p , Gfx);
+			break;
+		case 'R':
+			FigList[i] = new CRectangle( p , p , Gfx);
+			break;
+		case 'T':
+			FigList[i] = new CTriangle(p , p , p , Gfx);
+			break;
+		case 'C':
+			FigList[i] = new CCircle(p , p , Gfx);
+			break;
+		default:
+			break;
+		}
+		//FigList[i]->Load(LoadFile);
+		FigCount++;
+	}
+
 }
 
 void ApplicationManager::ResizeSelected(float factor)

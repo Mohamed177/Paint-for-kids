@@ -1,9 +1,12 @@
 #include "CFigure.h"
 
+int CFigure::counter = 1;
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	ID = counter;
+	counter++;
 }
 
 void CFigure::SetSelected(bool s)

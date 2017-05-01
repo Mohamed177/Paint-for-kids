@@ -38,6 +38,7 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
+	void LoadAll(ifstream &OutFile) ;
 	void ResizeSelected(float factor);
 	void Delete_Figs();
 

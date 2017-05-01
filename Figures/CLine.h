@@ -12,6 +12,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
 	void Save(ofstream &OutFile);
+	void Load(ifstream &Infile);
 	void Resize(float factor);
 	~CLine();
 };
