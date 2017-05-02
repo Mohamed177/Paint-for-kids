@@ -46,6 +46,7 @@ void ResizeAction::Execute()
 	if (!t)
 		return;
 	pManager->ResizeSelected(factor);
+	pManager->Saved = false;
 }
 
 ResizeAction::~ResizeAction()

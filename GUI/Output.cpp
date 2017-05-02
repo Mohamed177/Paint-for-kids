@@ -74,7 +74,7 @@ void Output::ClearToolBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
 	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
+	pWind->SetBrush(LIGHTGOLDENRODYELLOW);
 	pWind->DrawRectangle(0, 0, 1300, 50);
 }
 //////////////////////////////////////////////////////////////////////////////////////////

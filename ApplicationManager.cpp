@@ -13,6 +13,10 @@
 #include"Figures\CLine.h"
 #include"Figures\CRectangle.h"
 #include"Figures\CTriangle.h"
+#include "Actions\ChngBackClr.h"
+#include "Actions\ExitAction.h"
+#include "CMUgraphicsLib\colors.h"
+#include "Actions\LoadAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -20,7 +24,7 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+	Saved = false;
 	FigCount = 0;
 		
 	//Create an array of figure pointers and set them to NULL		
@@ -64,6 +68,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new SaveAction(this);
 			break;
 
+		case LOAD:
+			pAct = new LoadAction(this);
+			break;
+
 		case TO_SELECT:
 			pAct = new SelectAction(this);
 			break;
@@ -80,11 +88,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new ResizeAction(this);
 			break;
 
+		case CHNG_BK_CLR:
+			pAct = new ChngBackClr(this);
+			break;
+
 		case DEL:
 			pAct = new DeleteAction(this);
 			break;
 
 		case EXIT:
+			pAct = new ExitAction(this);
+			break;
 			///create ExitAction here
 			
 			break;
@@ -163,6 +177,8 @@ ApplicationManager::~ApplicationManager()
 
 void ApplicationManager::SaveAll(ofstream &OutFile) const
 {
+	string drwcolor = UI.DrawColor, fllclr = UI.FillColor, bckclr = UI.BkGrndColor;
+	OutFile << (string)UI.DrawColor << ' ' << (string)UI.FillColor << ' ' << (string)UI.BkGrndColor << endl << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
@@ -180,9 +196,12 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 		delete pAct;
 	}
 	FigCount = 0;
-	color Draw, fill, background;
 	int x = 0;
-	//LoadFile >> Draw >> fill >> background;
+	string a, b, c;
+	LoadFile >> a >> b >> c;
+	UI.DrawColor = a;
+	UI.FillColor = b;
+	UI.BkGrndColor = c;
 	LoadFile >> x;
 	for (int  i = 0; i < x; i++)
 	{
@@ -205,7 +224,7 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 		default:
 			break;
 		}
-		//FigList[i]->Load(LoadFile);
+		FigList[i]->Load(LoadFile);
 		FigCount++;
 	}
 

@@ -49,9 +49,9 @@ bool CLine::Is_Selected(Point P) const
 
 void CLine::Save(ofstream &OutFile)
 {
-	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ';
-
+	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << " \n";
 }
+
 CLine::~CLine()
 {
 

@@ -20,6 +20,7 @@ private:
 	Output *pOut;
 
 public:	
+	bool Saved;
 	ApplicationManager(); 
 	~ApplicationManager();
 	image zoomin[100] = {};

@@ -14,5 +14,6 @@ bool DeleteAction::ReadActionParameters()
 void DeleteAction::Execute()
 {
 	pManager->Delete_Figs();
+	pManager->Saved = false;
 }
 

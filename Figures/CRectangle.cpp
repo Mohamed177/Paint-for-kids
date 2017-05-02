@@ -44,11 +44,11 @@ bool CRectangle::Is_Selected(Point P) const
 void CRectangle::Save(ofstream &OutFile)
 {
 	OutFile << "Rectangle " << ID << ' ' << Corner1.x << ' ' << Corner1.y << ' ' << Corner2.x << ' ' << Corner2.y << ' ';
-	OutFile << FigGfxInfo.DrawClr;
+	OutFile << (string)FigGfxInfo.DrawClr;
 	if (FigGfxInfo.isFilled)
-		OutFile << FigGfxInfo.FillClr << endl;
+		OutFile << ' ' << (string)FigGfxInfo.FillClr << endl;
 	else 
-		OutFile << "NO_FILL\n";
+		OutFile << " NO_FILL\n";
 }
 
 void CRectangle::Resize(float factor)
@@ -124,7 +124,7 @@ void CRectangle::Load(ifstream &Infile)
 		FigGfxInfo.isFilled = false;
 	else
 	{
-		FigGfxInfo.FillClr = true;
+		FigGfxInfo.isFilled = true;
 		FigGfxInfo.FillClr = Fcolor;
 	}
 }

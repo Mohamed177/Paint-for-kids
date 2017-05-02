@@ -5,8 +5,10 @@ This file was last modified on 05.16.1999
 
 #ifndef COLORS_H
 #define COLORS_H
-
 #include "version.h"
+#include <iostream>
+#include <string>
+using namespace std;
 class color {
 
   public:
@@ -15,21 +17,7 @@ class color {
     color(unsigned char Red = 0, unsigned char Green = 0, unsigned char Blue = 0) { 
         ucRed = Red;  ucGreen = Green;  ucBlue = Blue; 
     }
-
-	bool operator==(color a) const
-	{
-		if ((ucRed == a.ucRed) && (ucBlue == a.ucBlue) && (ucGreen == a.ucGreen))
-			return true;
-		return false; 
-	}
-	bool operator!=(color a)
-	{
-		if ((ucRed != a.ucRed) || (ucBlue != a.ucBlue) || (ucGreen != a.ucGreen))
-			return true;
-		return false;
-	}
-	friend ofstream& operator<<(ofstream& OutFile, color a);
-
+	
 	color(const string& s)
 	{
 		if (s == "BLACK")
@@ -116,39 +104,50 @@ class color {
 			ucGreen = 255;
 			ucBlue = 0;
 		}
+		else if (s == "LIGHTGOLDENRODYELLOW")
+		{
+			ucRed = 250;
+			ucGreen = 250;
+			ucBlue = 210;
+		}
 	}
 
 	operator string()
 	{
 		if (ucRed == 0 && ucGreen == 0 && ucBlue == 0)
-			return string ("BLACK");
+			return string("BLACK");
 		else if (ucRed == 0 && ucGreen == 0 && ucBlue == 255)
-			return string ("BLUE");
+			return string("BLUE");
 		else if (ucRed == 255 && ucGreen == 0 && ucBlue == 0)
-			return string ("RED");
+			return string("RED");
 		else if (ucRed == 0 && ucGreen == 100 && ucBlue == 0)
-			return string ("DARKGREEN");
+			return string("DARKGREEN");
 		else if (ucRed == 0 && ucGreen == 255 && ucBlue == 0)
-			return string ("GREEN");
+			return string("GREEN");
 		else if (ucRed == 162 && ucGreen == 42 && ucBlue == 42)
-			return string ("BROWN");
+			return string("BROWN");
 		else if (ucRed == 138 && ucGreen == 43 && ucBlue == 226)
-			return string ("BLUEVIOLET");
+			return string("BLUEVIOLET");
 		else if (ucRed == 0 && ucGreen == 255 && ucBlue == 255)
-			return string ("CYAN");
+			return string("CYAN");
 		else if (ucRed == 238 && ucGreen == 130 && ucBlue == 238)
-			return string ("VIOLET");
+			return string("VIOLET");
 		else if (ucRed == 190 && ucGreen == 190 && ucBlue == 190)
-			return string ("GRAY");
+			return string("GRAY");
 		else if (ucRed == 225 && ucGreen == 165 && ucBlue == 0)
-			return string ("ORANGE");
+			return string("ORANGE");
 		else if (ucRed == 225 && ucGreen == 192 && ucBlue == 203)
-			return string ("PINK");
+			return string("PINK");
 		else if (ucRed == 46 && ucGreen == 139 && ucBlue == 87)
-			return string ("SEAGREEN");
+			return string("SEAGREEN");
 		else if (ucRed == 255 && ucGreen == 255 && ucBlue == 0)
-			return string ("YELLOW");
+			return string("YELLOW");
+		else if (ucRed == 250 && ucGreen == 250 && ucBlue == 210)
+			return string("LIGHTGOLDENRODYELLOW");
 	}
+	
+	//friend ofstream& operator<<(ofstream& OutFile, color a);
+		
     // Color components.  0 = no intensity, 255 = full intensity
     unsigned char ucRed;
     unsigned char ucGreen;
@@ -311,5 +310,6 @@ const color DARKMAGENTA = color(139, 0, 139);
 const color DARKRED = color(139, 0, 0);
 const color LIGHTGREEN = color(144, 238, 144);
 
-
+bool operator==(color a, color b);
+bool operator!=(color a, color b);
 #endif //COLOR_H

@@ -47,11 +47,11 @@ CTriangle::~CTriangle()
 void CTriangle::Save(ofstream &OutFile)
 {
 	OutFile << "TRIANG " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ' << p3.x << ' ' << p3.y << ' ';
-	OutFile << FigGfxInfo.DrawClr;
+	OutFile << (string)FigGfxInfo.DrawClr;
 	if (FigGfxInfo.isFilled)
-		OutFile << FigGfxInfo.FillClr << endl;
+		OutFile << ' ' << (string)FigGfxInfo.FillClr << endl;
 	else
-		OutFile << "NO_FILL\n";
+		OutFile << " NO_FILL\n";
 }
 
 void CTriangle::PrintInfo(Output* pOut) 
@@ -127,7 +127,7 @@ void CTriangle::Load(ifstream &Infile)
 		FigGfxInfo.isFilled = false;
 	else
 	{
-		FigGfxInfo.FillClr = true;
+		FigGfxInfo.isFilled = true;
 		FigGfxInfo.FillClr = Fcolor;
 	}
 }

@@ -11,7 +11,7 @@ Point pPoint(Point p1, Point p2)
 	v.y = p2.y - p1.y ;
 	return v;
 }
-ofstream& operator<<(ofstream& OutFile, color a)
+/*ofstream& operator<<(ofstream& OutFile, color a)
 {
 	if (a == BLACK)
 		OutFile << "BLACK ";
@@ -42,7 +42,7 @@ ofstream& operator<<(ofstream& OutFile, color a)
 	else if (a == YELLOW)
 		OutFile << "YELLOW ";
 	return OutFile;
-}
+}*/
 int main()
 {
 
