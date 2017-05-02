@@ -1,14 +1,15 @@
 #include "ApplicationManager.h"
-#include"Actions\AddLineAction.h"
+#include "Actions\AddLineAction.h"
 #include "Actions\AddRectAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\SaveAction.h"
 #include "Actions\SelectAction.h"
 #include "Actions\ZoomInAction.h"
-#include"Actions\ZoomOutAction.h"
+#include "Actions\ZoomOutAction.h"
 #include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions\ChngBackClr.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -78,6 +79,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case DEL:
 			pAct = new DeleteAction(this);
+			break;
+
+		case CHNG_BK_CLR:
+			pAct = new ChngBackClr(this);
 			break;
 
 		case EXIT:

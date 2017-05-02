@@ -4,8 +4,9 @@
 class SaveAction : public Action
 {
 	ofstream OutFile;
-	string FileName;
 public:
+	static int No_of_Saves;
+	static string FileName;
 	bool ReadActionParameters();
 	void Execute();
 	SaveAction(ApplicationManager* pApp);

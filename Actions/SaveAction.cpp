@@ -4,10 +4,11 @@
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 
-
+int SaveAction::No_of_Saves = 0;
+string SaveAction::FileName = "";
 SaveAction::SaveAction(ApplicationManager* pApp):Action(pApp)
 {
-	FileName = "";
+	No_of_Saves++;
 }
 
 
