@@ -148,11 +148,12 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 	Point P;
 	P.x = x;
 	P.y = y;
-	for (int i = 0; i < FigCount; i++)
+	for (int i = FigCount-1; i >= 0; i--)
 	{
 		if (FigList[i ]->Is_Selected(P))
 		{
-			return FigList[i ];
+
+			return FigList[i];
 		}
 	}
 
