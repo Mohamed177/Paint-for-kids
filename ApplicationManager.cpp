@@ -330,8 +330,10 @@ bool  ApplicationManager::move( Point v )
 			count++;
 		}
 	}
-	Center.x = (Center.x) / count;
-	Center.y = (Center.y) / count;
+	if (count != 0) {
+		Center.x = (Center.x) / count;
+		Center.y = (Center.y) / count;
+	}
 	v.x = (-Center.x + v.x);
 	v.y = (-Center.y + v.y);
 	bool t = true;

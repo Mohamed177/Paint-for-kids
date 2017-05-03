@@ -25,6 +25,7 @@ void LoadAction::Execute()
 	LoadFile.open(FileName);
 	pManager->LoadAll(LoadFile);
 	LoadFile.close();
+	pManager->Saved = true;
 }
 
 LoadAction::~LoadAction()

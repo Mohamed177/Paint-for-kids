@@ -12,7 +12,7 @@ bool ExitAction::ReadActionParameters()
 		return true;
 	Output* pOut = pManager->GetOutput();
 	Input *pIn = pManager->GetInput();
-	pOut->PrintMessage("Your graph is not saved, enter y to save and n to exit wihtout saving.");
+	pOut->PrintMessage("Your graph is not saved, enter y to save and n to exit without saving.");
 	if (pIn->GetSrting(pOut) == "y" || pIn->GetSrting(pOut) == "Y")
 		return true;
 	return false;

@@ -14,20 +14,21 @@ bool MoveAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("click theat any  point to move the figures ");
+	pOut->PrintMessage("click at any  point to move the figures ");
 	pIn->GetPointClicked(v.x, v.y);
 	return true;
 }
 
 void MoveAction::Execute()
 {
-	bool t = ReadActionParameters();
+	 bool t = ReadActionParameters();
 	 t = pManager->move(v);
+	 Output* pOut = pManager->GetOutput();
 	 if (!t)
 	 {
-		 Output* pOut = pManager->GetOutput();
 		 pOut->PrintMessage("you can't move figures here try somewhere else :)");
 	 }
+	 pOut->ClearStatusBar();
 }
 
 
