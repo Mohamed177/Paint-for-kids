@@ -17,6 +17,9 @@
 #include "Actions\ExitAction.h"
 #include "CMUgraphicsLib\colors.h"
 #include "Actions\LoadAction.h"
+#include"Actions\MoveAction.h"
+#include"Actions\CopyAction.h"
+#include"Actions\CutAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -26,10 +29,14 @@ ApplicationManager::ApplicationManager()
 	pIn = pOut->CreateInput();
 	Saved = false;
 	FigCount = 0;
+	Ccount = 0;
 		
 	//Create an array of figure pointers and set them to NULL		
-	for(int i=0; i<MaxFigCount; i++)
-		FigList[i] = NULL;	
+	for (int i = 0; i < MaxFigCount; i++)
+	{
+		FigList[i] = NULL;
+		CopyList[i] = NULL;
+	}
 }
 
 //==================================================================================//
@@ -50,6 +57,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 		case DRAW_RECT:
 			pAct = new AddRectAction(this);
+			break;
+		case COPY:
+			pAct = new CopyAction(this);
+			break;
+		case CUT:
+			pAct = new CutAction(this);
 			break;
 
 		case DRAW_LINE:
@@ -95,7 +108,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case DEL:
 			pAct = new DeleteAction(this);
 			break;
-
+		case MOVE:
+			pAct = new MoveAction(this);
+			break;
 		case EXIT:
 			pAct = new ExitAction(this);
 			break;
@@ -219,7 +234,7 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 			FigList[i] = new CTriangle(p , p , p , Gfx);
 			break;
 		case 'C':
-			FigList[i] = new CCircle(p , p , Gfx);
+			FigList[i] = new CCircle(p , 0, Gfx);
 			break;
 		default:
 			break;
@@ -259,6 +274,90 @@ void ApplicationManager::Delete_Figs()
 			i++;
 		}
 	}
+}
+void ApplicationManager::Copy() 
+{
+	for (int  i = 0; i < Ccount; i++)
+	{
+		delete CopyList[i];
+		CopyList[i] = NULL;
+	}
+	Ccount = 0;
+	for (int  i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			CopyList[Ccount++] = FigList[i]->copy();
+		}
+	}
+}
+void ApplicationManager::Cut() 
+{
+	for (int i = 0; i < Ccount; i++)
+	{
+		delete CopyList[i];
+		CopyList[i] = NULL;
+	}
+	Ccount = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			CopyList[Ccount++] = FigList[i]->copy();
+			delete FigList[i];
+			FigList[i] = NULL;
+			for (int j = i; j < FigCount - 1; j++)
+			{
+				swap(FigList[j], FigList[j + 1]);
+			}
+			FigCount--;
+			i--;
+		}
+	}
+}
+bool  ApplicationManager::move( Point v ) 
+{
+	Point Center;
+	int count = 0;
+	for (int  i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			Point p = FigList[i]->GetCenter();
+			Center.x += p.x;
+			Center.y += p.y;
+			count++;
+		}
+	}
+	Center.x = (Center.x) / count;
+	Center.y = (Center.y) / count;
+	v.x = (-Center.x + v.x);
+	v.y = (-Center.y + v.y);
+	bool t = true;
+	for (int  i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			if (!(FigList[i]->ValidMove(v)))
+			{
+				t = false;
+				break;
+			}
+		}
+	}
+	if (!t)
+	{
+		return false;
+	}
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			FigList[i]->Move(v);
+		}
+	}
+	return true;
+
 }
 //------ Get Fig Counter 
 int ApplicationManager::GetFig_Counter()

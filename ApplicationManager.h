@@ -14,7 +14,8 @@ class ApplicationManager
 private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
+	int Ccount;
+	CFigure*CopyList[MaxFigCount];
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -33,7 +34,6 @@ public:
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-		
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
@@ -42,7 +42,9 @@ public:
 	void LoadAll(ifstream &OutFile) ;
 	void ResizeSelected(float factor);
 	void Delete_Figs();
-
+	void Copy();
+	void Cut();
+	bool move(Point v);
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 

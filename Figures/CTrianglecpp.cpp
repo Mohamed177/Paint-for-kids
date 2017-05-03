@@ -92,7 +92,7 @@ void CTriangle::Resize(float factor)
 			v3.x = v3.x * 2 - mid.x;
 			v3.y = v3.y * 2 - mid.y;
 		}
-		if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight)))
+		if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <=UI.width &&v2.x <= UI.width &&v3.x <= UI.width))
 		{
 			p1 = v1;
 			p2 = v2;
@@ -130,4 +130,41 @@ void CTriangle::Load(ifstream &Infile)
 		FigGfxInfo.isFilled = true;
 		FigGfxInfo.FillClr = Fcolor;
 	}
+}
+Point CTriangle::GetCenter() 
+{
+	Point mid;
+	mid.x = (p1.x + p2.x + p3.x) / 3;
+	mid.y = (p1.y + p2.y + p3.y) / 3;
+	return mid;
+}
+bool CTriangle:: ValidMove(Point p ) 
+{
+	Point v1, v2, v3;
+	v1.x = p1.x + p.x;
+	v1.y = p1.y + p.y;
+	v2.x = p2.x + p.x;
+	v2.y = p2.y + p.y;
+	v3.x = p3.x + p.x;
+	v3.y = p3.y + p.y;
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width &&v1.x >=0 &&v2.x >=0 &&v3.x >=0))
+	{
+		return true;
+	}
+	return false;
+}
+CFigure * CTriangle ::copy() 
+{
+	CTriangle *T = new CTriangle(p1, p2, p3, FigGfxInfo);
+	CFigure * v = T;
+	return v;
+}
+void  CTriangle::Move(Point v ) 
+{
+	p1.x += v.x;
+	p1.y += v.y;
+	p2.x += v.x;
+	p2.y += v.y;
+	p3.x += v.x;
+	p3.y += v.y;
 }

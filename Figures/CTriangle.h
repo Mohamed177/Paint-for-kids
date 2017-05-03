@@ -17,6 +17,10 @@ public:
 	void Resize(float factor);
 	 void Load(ifstream &Infile) ;
 	void PrintInfo(Output* pOut);
+	Point GetCenter();
+	bool ValidMove(Point);
+	CFigure *copy();
+	void Move( Point v );
 	~CTriangle();
 };
 

@@ -14,6 +14,10 @@ public:
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
 	void Resize(float factor);
+	 Point GetCenter();
+	 bool ValidMove(Point);
+	 CFigure *copy();
+	 void Move(Point v);
 	~CLine();
 };
 

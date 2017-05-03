@@ -131,8 +131,36 @@ void CRectangle::Load(ifstream &Infile)
 
 void CRectangle::Move(Point nCorner)
 {
-	if (Corner1.x != nCorner.x)
-		Corner2.x += nCorner.x - Corner1.x;
-	if (Corner1.y != nCorner.y)
-		Corner2.y += nCorner.y - Corner1.y;
+	Corner1.x += nCorner.x;
+	Corner1.y += nCorner.y;
+	Corner2.x += nCorner.x;
+	Corner2.y += nCorner.y;
+} 
+
+Point CRectangle::GetCenter() 
+{
+	Point v;
+	v.x = (Corner1.x + Corner2.x) / 2;
+	v.y = (Corner1.y + Corner2.y) / 2;
+	return v;
+
+}
+bool CRectangle::ValidMove(Point p) 
+{
+	Point v1, v2;
+	v1.x = Corner1.x + p.x;
+	v1.y = Corner1.y + p.y;
+	v2.x = Corner2.x + p.x;
+	v2.y = Corner2.y + p.y;
+		if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) &&  v1.x <= UI.width &&v2.x <= UI.width&&  v1.x >=0 &&v2.x >=0))
+		{
+			return true;
+		}
+	return false;
+}
+CFigure * CRectangle::copy() 
+{
+	CRectangle *R = new CRectangle(Corner1, Corner2, FigGfxInfo);
+	CFigure * v = R;
+	return v;
 }

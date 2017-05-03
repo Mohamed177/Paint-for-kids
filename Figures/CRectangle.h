@@ -18,6 +18,9 @@ public:
 	virtual void Resize(float);
 	void PrintInfo(Output* pOut);
 	void Move(Point nCorner);
+	Point GetCenter();
+	bool ValidMove(Point);
+	CFigure *copy();
 };
 
 #endif

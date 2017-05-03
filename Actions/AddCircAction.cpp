@@ -53,7 +53,7 @@ void AddCircAction::Execute()
 	if ((Center.y-Raduis) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Raduis))
 	{
 		//Create a rectangle with the parameters read from the user
-		CCircle *C = new CCircle(Center, P2, RectGfxInfo);
+		CCircle *C = new CCircle(Center, Raduis, RectGfxInfo);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(C);
 	}

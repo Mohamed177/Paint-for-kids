@@ -30,14 +30,14 @@ public:
 
 	///Decide the parameters that you should pass to each function	
 
-
+	virtual Point GetCenter()=0;
 	//virtual void Rotate() = 0;	//Rotate the figure
 	virtual void Resize(float) = 0;	//Resize the figure
-	//virtual void Move() = 0;		//Move the figure
-
+	virtual void Move(Point) = 0;		//Move the figure
+	virtual bool ValidMove(Point)=0;
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
-
+	virtual CFigure * copy() = 0;
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 

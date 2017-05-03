@@ -59,8 +59,45 @@ CLine::~CLine()
 void CLine::Load(ifstream &Infile) 
 {
 }
+ Point CLine::GetCenter() 
+{
+	 Point v;
+	 v.x = (p1.x + p2.x) / 2;
+	 v.y = (p1.y + p2.y) / 2;
+	 return v;
+
+}
 
 void CLine::Resize(float factor = 2)
 {
 	return;
+}
+
+bool CLine::ValidMove(Point p ) 
+{
+	Point v1, v2;
+	v1.x = p1.x + p.x;
+	v1.y = p1.y + p.y;
+	v2.x = p2.x + p.x;
+	v2.y = p2.y + p.y;
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=0 &&v2.x >=0))
+	{
+		return true;
+	}
+	return false;
+}
+CFigure * CLine::copy() 
+{
+	CLine *L = new CLine(p1, p2, FigGfxInfo);
+	CFigure * v = L;
+	return v;
+
+}
+
+void CLine::Move(Point v)
+{
+	p1.x += v.x;
+	p1.y += v.y;
+	p2.x += v.x;
+	p2.y += v.y;
 }
