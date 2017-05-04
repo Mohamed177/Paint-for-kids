@@ -3,10 +3,10 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-class PastAction:public Action
+class PasteAction:public Action
 {
 public:
-	PastAction(ApplicationManager* pApp);
+	PasteAction(ApplicationManager* pApp);
 
 private:
 	Point P;

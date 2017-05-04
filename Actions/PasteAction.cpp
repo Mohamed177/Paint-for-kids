@@ -1,16 +1,16 @@
-#include "PastAction.h"
+#include "PasteAction.h"
 
-PastAction::PastAction(ApplicationManager * pApp):Action(pApp)
+PasteAction::PasteAction(ApplicationManager * pApp):Action(pApp)
 {
 
 }
 
-bool PastAction::ReadActionParameters()
+bool PasteAction::ReadActionParameters()
 {
 	
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("Click To past");
+	pOut->PrintMessage("Click To paste");
 	pIn->GetPointClicked(P.x, P.y);
 	if (P.y > UI.ToolBarHeight && P.y > UI.ToolBarHeight && P.y < (UI.height - UI.StatusBarHeight))
 	{
@@ -19,11 +19,11 @@ bool PastAction::ReadActionParameters()
 	return false;
 }
 
-void PastAction::Execute()
+void PasteAction::Execute()
 {
 	if (ReadActionParameters())
 	{
-		pManager->past(P);
+		pManager->paste(P);
 	}
 	pManager->GetOutput()->ClearStatusBar();
 }

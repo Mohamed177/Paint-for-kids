@@ -47,7 +47,7 @@ public:
 	bool move(Point v);
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
-	bool past(Point p);
+	bool paste(Point p);
 };
 
 #endif

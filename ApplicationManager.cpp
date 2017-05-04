@@ -20,7 +20,7 @@
 #include"Actions\MoveAction.h"
 #include"Actions\CopyAction.h"
 #include"Actions\CutAction.h"
-#include"Actions\PastAction.h"
+#include"Actions\PasteAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -67,7 +67,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 
 		case PASTE:
-			pAct = new PastAction(this);
+			pAct = new PasteAction(this);
 			break;
 
 		case DRAW_LINE:
@@ -372,10 +372,18 @@ int ApplicationManager::GetFig_Counter()
 {
 	return FigCount;
 }
-bool ApplicationManager::past(Point v)
+
+//-------------------- Paste Function
+bool ApplicationManager::paste(Point v)
 {
 	Point Center;
 	int count = 0;
+	if (Ccount==0)
+	{
+		pOut->PrintMessage("No Figures to Paste");
+		Sleep(1000);
+		return false;
+	}
 	for (int i = 0; i < Ccount; i++)
 	{
 			Point p = CopyList[i]->GetCenter();
@@ -406,8 +414,7 @@ bool ApplicationManager::past(Point v)
 	int temp_counter = FigCount;
 	for (int i = 0; i < Ccount; i++)
 	{
-		FigList[FigCount++] = CopyList[i];
-		CopyList[i] = NULL;
+		FigList[FigCount++] =CopyList[i]->copy();
 	}
 	for (int i = temp_counter; i < FigCount; i++)
 	{
