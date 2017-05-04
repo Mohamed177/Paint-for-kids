@@ -20,6 +20,7 @@
 #include"Actions\MoveAction.h"
 #include"Actions\CopyAction.h"
 #include"Actions\CutAction.h"
+#include"Actions\PastAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -63,6 +64,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case CUT:
 			pAct = new CutAction(this);
+			break;
+
+		case PASTE:
+			pAct = new PastAction(this);
 			break;
 
 		case DRAW_LINE:
@@ -366,4 +371,47 @@ bool  ApplicationManager::move( Point v )
 int ApplicationManager::GetFig_Counter()
 {
 	return FigCount;
+}
+bool ApplicationManager::past(Point v)
+{
+	Point Center;
+	int count = 0;
+	for (int i = 0; i < Ccount; i++)
+	{
+			Point p = CopyList[i]->GetCenter();
+			Center.x += p.x;
+			Center.y += p.y;
+			count++;
+	}
+	if (count != 0) {
+		Center.x = (Center.x) / count;
+		Center.y = (Center.y) / count;
+	}
+	v.x = (-Center.x + v.x);
+	v.y = (-Center.y + v.y);
+	bool t = true;
+	for (int i = 0; i < Ccount; i++)
+	{
+		if (!(CopyList[i]->ValidMove(v)))
+		{		
+			t = false;
+			break;
+		}
+		
+	}
+	if (!t)
+	{
+		return false;
+	}
+	int temp_counter = FigCount;
+	for (int i = 0; i < Ccount; i++)
+	{
+		FigList[FigCount++] = CopyList[i];
+		CopyList[i] = NULL;
+	}
+	for (int i = temp_counter; i < FigCount; i++)
+	{
+		FigList[i]->Move(v);
+	}
+
 }
