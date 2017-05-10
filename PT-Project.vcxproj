@@ -141,6 +141,7 @@
     <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\Scramble.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\Scramble.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />
     <ClInclude Include="Actions\ZoomOutAction.h" />

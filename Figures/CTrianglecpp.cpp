@@ -44,6 +44,28 @@ CTriangle::~CTriangle()
 {
 }
 
+void CTriangle::Zoom(float factor)
+{
+	Point wcenter, p, Center;
+	Center = GetCenter();
+	wcenter.x = UI.width / 2;
+	wcenter.y = UI.height / 2;
+	if (factor > 1)
+	{
+		p.x = Center.x - wcenter.x;
+		p.y = Center.y - wcenter.y;
+	}
+	else
+	{
+		p.x = wcenter.x - Center.x;
+		p.y = wcenter.y - Center.y;
+		p.x *= 1.0 - factor;
+		p.y *= 1.0 - factor;
+	}
+	Resize(factor, true);
+	Move(p);
+}
+
 void CTriangle::Save(ofstream &OutFile)
 {
 	OutFile << "TRIANG " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ' << p3.x << ' ' << p3.y << ' ';
@@ -71,7 +93,7 @@ void CTriangle::PrintInfo(Output* pOut)
 	pOut->PrintMessage(info);
 }
 
-void CTriangle::Resize(float factor)
+void CTriangle::Resize(float factor, bool zoom = false)
 {
 	Point mid;
 	mid.x = (p1.x + p2.x + p3.x) / 3;
@@ -92,7 +114,16 @@ void CTriangle::Resize(float factor)
 			v3.x = v3.x * 2 - mid.x;
 			v3.y = v3.y * 2 - mid.y;
 		}
-		if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <=UI.width &&v2.x <= UI.width &&v3.x <= UI.width))
+		if (!zoom)
+		{
+			if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width))
+			{
+				p1 = v1;
+				p2 = v2;
+				p3 = v3;
+			}
+		}
+		else 
 		{
 			p1 = v1;
 			p2 = v2;

@@ -56,6 +56,9 @@ CLine::~CLine()
 {
 
 }
+void CLine::Zoom(float factor)
+{
+}
 void CLine::Load(ifstream &Infile) 
 {
 }
@@ -68,7 +71,7 @@ void CLine::Load(ifstream &Infile)
 
 }
 
-void CLine::Resize(float factor = 2)
+void CLine::Resize(float factor, bool zoom = false)
 {
 	return;
 }
@@ -101,3 +104,5 @@ void CLine::Move(Point v)
 	p2.x += v.x;
 	p2.y += v.y;
 }
+
+

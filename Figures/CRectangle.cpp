@@ -51,7 +51,7 @@ void CRectangle::Save(ofstream &OutFile)
 		OutFile << " NO_FILL\n";
 }
 
-void CRectangle::Resize(float factor)
+void CRectangle::Resize(float factor, bool zoom = false)
 {
 	Point mid13, mid14, Corner3, Corner4;
 
@@ -75,7 +75,35 @@ void CRectangle::Resize(float factor)
 	chk2 = (mid13.x + side13 <= UI.width);
 	chk3 = (mid14.y - side14 >= 0);
 	chk4 = (mid14.y + side14 <= (UI.height - UI.StatusBarHeight - UI.ToolBarHeight));
-	if (chk1 && chk2 && chk3 && chk4)
+	if (!zoom)
+	{
+		if (chk1 && chk2 && chk3 && chk4)
+		{
+			if (Corner1.x != Corner2.x)
+				if (Corner1.x < Corner2.x)
+				{
+					Corner1.x = mid13.x - side13;
+					Corner2.x = mid13.x + side13;
+				}
+				else
+				{
+					Corner1.x = mid13.x + side13;
+					Corner2.x = mid13.x - side13;
+				}
+			if (Corner1.y != Corner2.y)
+				if (Corner1.y < Corner2.y)
+				{
+					Corner1.y = mid14.y - side14;
+					Corner2.y = mid14.y + side14;
+				}
+				else
+				{
+					Corner1.y = mid14.y + side14;
+					Corner2.y = mid14.y - side14;
+				}
+		}
+	}
+	else
 	{
 		if (Corner1.x != Corner2.x)
 			if (Corner1.x < Corner2.x)
@@ -163,4 +191,26 @@ CFigure * CRectangle::copy()
 	CRectangle *R = new CRectangle(Corner1, Corner2, FigGfxInfo);
 	CFigure * v = R;
 	return v;
+}
+
+void CRectangle::Zoom(float factor)
+{
+	Point wcenter, p, Center;
+	Center = GetCenter();
+	wcenter.x = UI.width / 2;
+	wcenter.y = UI.height / 2;
+	if (factor > 1)
+	{
+		p.x = Center.x - wcenter.x;
+		p.y = Center.y - wcenter.y;
+	}
+	else
+	{
+		p.x = wcenter.x - Center.x;
+		p.y = wcenter.y - Center.y;
+		p.x *= 1.0 - factor;
+		p.y *= 1.0 - factor;
+	}
+	Resize(factor,true);
+	Move(p);
 }

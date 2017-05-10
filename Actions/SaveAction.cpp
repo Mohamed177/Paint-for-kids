@@ -30,6 +30,7 @@ void SaveAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return;
+	pManager->Saved = true;
 	OutFile.open(FileName);
 	pManager->SaveAll(OutFile);
 	OutFile.close();

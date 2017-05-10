@@ -1,5 +1,5 @@
 #include "CCircle.h"
-
+#include <cmath>
 CCircle::CCircle(Point P1, double R, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P1;
@@ -38,13 +38,16 @@ void CCircle::Save(ofstream & OutFile)
 	OutFile << endl;
 }
 
-void CCircle::Resize(float K = 2)
+void CCircle::Resize(float K = 2,bool zoom = false)
 {
 	double Raduis2 = K * Raduis;
-	if ((Center.y - Raduis2) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Raduis2))
-	{
+	if (zoom)
 		Raduis = Raduis2;
-	}
+	else 
+		if ((Center.y - Raduis2) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Raduis2))
+		{
+			Raduis = Raduis2;
+		}
 	return;
 
 }
@@ -63,17 +66,44 @@ void CCircle::Resize(float K = 2)
 	 }
 	 return false;
  }
+
  void CCircle::Move(Point p)
  {
 	 Center.x += p.x;
 	 Center.y +=  p.y;
  }
+
  CFigure * CCircle:: copy() 
  {
 	 CCircle *C = new CCircle(Center, Raduis, FigGfxInfo);
 	 CFigure * v = C;
 	 return v;
  }
+
+ void CCircle::Zoom(float factor)
+ {
+	 Point wcenter, p;
+	 wcenter.x = UI.width / 2;
+	 wcenter.y = UI.height / 2;
+	 if (factor > 1)
+	 {
+		 p.x = Center.x - wcenter.x;
+		 p.y = Center.y - wcenter.y;
+		 p.x *= factor-1;
+		 p.y *= factor-1;
+	 }
+	 else
+	 {
+		 p.x = wcenter.x - Center.x;
+		 p.y = wcenter.y - Center.y;
+		 p.x *= 1.0 - factor;
+		 p.y *= 1.0 - factor;
+	 }
+	
+	 Resize(factor,true);
+	 Move(p);
+ }
+
 void CCircle::Load(ifstream &Infile) 
 {
 }

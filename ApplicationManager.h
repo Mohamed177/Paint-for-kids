@@ -16,16 +16,17 @@ private:
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	int Ccount;
 	CFigure*CopyList[MaxFigCount];
+	CFigure* ZoomList[MaxFigCount];
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
 
 public:	
+	int Zcount; /// public or private(setter and getter) 
 	bool Saved;
 	ApplicationManager(); 
 	~ApplicationManager();
-	image zoomin[100] = {};
-	image zoomout[100] = {};
+	
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
@@ -37,14 +38,17 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface(ActionType act) const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
 	void LoadAll(ifstream &OutFile) ;
 	void ResizeSelected(float factor);
 	void Delete_Figs();
 	void Copy();
+	void ZoomCopy();
+	void Zoom(float factor);
 	void Cut();
 	bool move(Point v);
+	void ScrambleMove();
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);
