@@ -49,6 +49,8 @@ public:
 	void Cut();
 	bool move(Point v);
 	void ScrambleMove();
+	void switchtoplay();
+	void ChngeBrdrClr();
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

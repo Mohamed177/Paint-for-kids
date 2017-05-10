@@ -205,7 +205,17 @@
     <ClCompile Include="Actions\PasteAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Actions\Scramble.cpp">
+=======
+    <ClCompile Include="Actions\SwtchTOplay.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SwtchTOdraw.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ChngBrdrWdth.cpp">
+>>>>>>> b8931809b810f0125b7ba3353791f5638afcafa4
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -352,7 +362,17 @@
     <ClInclude Include="Actions\PasteAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Actions\Scramble.h">
+=======
+    <ClInclude Include="Actions\SwtchTOplay.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SwtchTOdraw.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChngBrdrWdth.h">
+>>>>>>> b8931809b810f0125b7ba3353791f5638afcafa4
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
