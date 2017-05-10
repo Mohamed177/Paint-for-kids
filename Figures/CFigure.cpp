@@ -24,3 +24,7 @@ void CFigure::ChngFillClr(color Fclr)
 	FigGfxInfo.FillClr = Fclr; 
 }
 
+void CFigure::ChngBrdWdt(int p)
+{
+	FigGfxInfo.BorderWdth = p;
+}

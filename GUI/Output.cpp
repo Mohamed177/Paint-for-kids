@@ -164,6 +164,41 @@ void Output::CreateColorToolBar() const
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output:: CreateBorderToolbar() const
+{
+	ClearToolBar();
+
+	//You can draw the tool bar icons in any way you want.
+	//Below is one possible way
+
+	//First prepare List of images for each menu item
+	//To control the order of these images in the menu, 
+	//reoder them in UI_Info.h ==> enum DrawMenuItem
+	string MenuItemImages[11];
+	MenuItemImages[0] = "images\\MenuItems\\Black.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\Blue.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\Red.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\Green.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\Brown.jpg";
+	MenuItemImages[5] = "images\\MenuItems\\BlueViolet.jpg";
+	MenuItemImages[6] = "images\\MenuItems\\Cyan.jpg";
+	MenuItemImages[7] = "images\\MenuItems\\DarkGreen.jpg";
+	MenuItemImages[8] = "images\\MenuItems\\Violet.jpg";
+	MenuItemImages[9] = "images\\MenuItems\\Gray.jpg";
+	MenuItemImages[10] = "images\\MenuItems\\Gray.jpg";
+	
+
+	//Draw menu item one image at a time
+	for (int i = 0; i<11; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreatePlayToolBar() const
 {
 	ClearToolBar();
@@ -261,7 +296,14 @@ color Output::getCrntFillColor() const	//get current filling color
 	
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+//////////////////////////////////////////////////////////////////////////////////////////
 
+void Output::setCrntPenWidth(int p)
+{
+	UI.PenWidth = p;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

@@ -9,6 +9,9 @@
 #include"Actions\ZoomOutAction.h"
 #include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions\ChngBrdrWdth.h"
+#include"Actions\SwtchTOplay.h"
+#include"Actions\SwtchTOdraw.h"
 #include"Figures\CCircle.h"
 #include"Figures\CLine.h"
 #include"Figures\CRectangle.h"
@@ -22,6 +25,7 @@
 #include"Actions\CutAction.h"
 #include"Actions\PasteAction.h"
 #include <fstream>
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -119,8 +123,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case EXIT:
 			pAct = new ExitAction(this);
 			break;
-			///create ExitAction here
-			
+		case TO_PLAY:
+			pAct = new SwtchTOplay(this);
+			break;
+		case TO_DRAW:
+			pAct = new SwtchTOdraw(this);
+			break;
+		case CHNG_BRDR_WDTH:
+			pAct = new ChngBrdrWdth(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -421,4 +431,58 @@ bool ApplicationManager::paste(Point v)
 		FigList[i]->Move(v);
 	}
 
+}
+
+void ApplicationManager::switchtoplay()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected()) FigList[i]->SetSelected(false);
+	}
+}
+
+
+void ApplicationManager::ChngeBrdrClr()
+{
+f:
+	int x, y;
+	pIn->GetPointClicked(x, y);	//Get the coordinates of the user click
+
+	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
+	{
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			if (ClickedItemOrder > 11) goto f;
+			if (ClickedItemOrder == 11)
+			{
+				pOut->ClearToolBar();
+				pOut->CreateDrawToolBar();
+				return;
+			}
+			int brdr[11] = { 1,2,4,6,8,10,12,14,16,18,20 };
+			bool flag = false;
+			for (int i = 0; i < FigCount; i++)
+			{
+				if (FigList[i]->IsSelected())
+				{
+					flag = true;
+					FigList[i]->ChngBrdWdt(brdr[ClickedItemOrder]);
+				}
+			}
+			if (!flag) pOut->setCrntPenWidth(brdr[ClickedItemOrder]);
+
+		}
+		else goto f;
+		pOut->ClearToolBar();
+		pOut->CreateDrawToolBar();
+		
+
+	}
 }

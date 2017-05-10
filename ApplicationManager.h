@@ -45,6 +45,8 @@ public:
 	void Copy();
 	void Cut();
 	bool move(Point v);
+	void switchtoplay();
+	void ChngeBrdrClr();
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

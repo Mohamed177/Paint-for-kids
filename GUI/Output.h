@@ -12,6 +12,7 @@ public:
 	window* CreateWind(int, int, int , int) const; //creates the application window
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
+	void CreateBorderToolbar() const;
 	void CreateStatusBar() const;	//create the status bar
 	void CreateFigMenu() const;
 	void CreateResizeMenu() const;
@@ -33,6 +34,7 @@ public:
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
+	void setCrntPenWidth(int p); // hand-made 
 
 	void StoreImage(image &imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight); // momken tt3'yr lw 3'alt
 
