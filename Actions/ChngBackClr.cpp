@@ -19,7 +19,8 @@ void ChngBackClr::Execute()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->CreateColorToolBar();
-	pOut->setBackColor(pIn->ChangeColor());
+	pOut->PrintMessage("Choose The New Back Ground Color. ");
+	pOut->setBackColor(pIn->ChangeBackColor());
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
 	pManager->Saved = false;

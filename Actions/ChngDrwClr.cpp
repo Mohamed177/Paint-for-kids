@@ -21,7 +21,9 @@ void ChangeDrawColor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->ClearToolBar();
 	pOut->CreateColorToolBar();
+	pOut->PrintMessage("Choose The New Draw Color. ");
 	pManager->ChangeDrwColor();
+	pOut->CreateDrawToolBar();
+	//pManager->Saved = false;
 }

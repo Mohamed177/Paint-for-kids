@@ -21,7 +21,8 @@ void ChngBrdrWdth :: Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->ClearToolBar();
 	pOut->CreateBorderToolbar();
-	pManager->ChngeBrdrClr(); 
+	pOut->PrintMessage("Choose The New Border Width. ");
+	pManager->ChngeBrdrWdth(); 
+	pManager->Saved = false;
 }

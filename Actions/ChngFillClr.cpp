@@ -21,7 +21,9 @@ void ChangeFillColor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->ClearToolBar();
 	pOut->CreateColorToolBar();
+	pOut->PrintMessage("Choose The New Fill Color. ");
 	pManager->ChangeFllColor();
+	pOut->CreateDrawToolBar();
+	pManager->Saved = false;
 }

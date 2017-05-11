@@ -128,11 +128,11 @@ ActionType Input::GetUserAction() const
 
 }
 /////////////////////////////////
-color Input::ChangeColor() 
+color Input::ChangeBackColor() 
 {
+
 	f:
 	int x, y;
-	color c = SNOW;
 	pWind->WaitMouseClick(x, y);	//Get the coordinates of the user click
 	if (y >= 0 && y < UI.ToolBarHeight)
 	{
@@ -141,6 +141,8 @@ color Input::ChangeColor()
 		int ClickedItemOrder = (x / UI.MenuItemWidth);
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+		if (ClickedItemOrder == 14) return UI.BkGrndColor;
+		color c = SNOW;
 		switch (ClickedItemOrder)
 		{
 		case ITM_BLACK: { c = BLACK;   }
@@ -170,15 +172,16 @@ color Input::ChangeColor()
 		case ITM_SEAGREEN: { c = SEAGREEN; }
 						break;
 		case ITM_YELLOW: { c = YELLOW; }
-						break;
+						break; 
 		default:goto f;
 		}
-		
+		return c;
 	}
-	else {
+	else 
+	{
 		goto f;
 	}
-	return c;
+	
 }
 
 int Input::IsFilled() const
