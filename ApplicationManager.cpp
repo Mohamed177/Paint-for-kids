@@ -40,6 +40,7 @@ ApplicationManager::ApplicationManager()
 	FigCount = 0;
 	Ccount = 0;
 	Zcount = 0;
+	no_of_zoomed_figs = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 	{
@@ -140,6 +141,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case CHNG_BRDR_WDTH:
 			pAct = new ChngBrdrWdth(this);
 			break;
+		case TO_SCRAMBLE_FIND:
+			pAct = new Scramble(this);
+			break;
+
 		case CHNG_DRAW_CLR:
 			pAct = new ChangeDrawColor(this);
 			break;
@@ -198,7 +203,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 void ApplicationManager::UpdateInterface(ActionType act) const
 {
 	pOut->ClearDrawArea();
-	if (act == ZOOMIN || act == ZOOMOUT)
+	if (act == ZOOMIN || act == ZOOMOUT || act == TO_SCRAMBLE_FIND)
 	{
 		for (int i = 0; i < FigCount; i++)
 			ZoomList[i]->Draw(pOut);
@@ -333,21 +338,23 @@ void ApplicationManager::ZoomCopy()
 {
 	if (Zcount == 0)
 	{
-		for (int i = 0; i < Zcount; i++)
+		for (int i = 0; i < no_of_zoomed_figs; i++)
 		{
 			delete ZoomList[i];
 			ZoomList[i] = NULL;
 		}
+		no_of_zoomed_figs = 0;
 		for (int i = 0; i < FigCount; i++)
 		{
 			ZoomList[i] = FigList[i]->copy();
+			no_of_zoomed_figs++;
 		}
 	}
 }
 
 void ApplicationManager::Zoom(float factor)
 {
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < no_of_zoomed_figs; i++)
 	{
 		ZoomList[i]->Zoom(factor);
 	}
@@ -428,26 +435,11 @@ void ApplicationManager::ScrambleMove()
 {
 	Point Center;
 	Point v;
-	v.x = UI.width / 4;
-	v.y = UI.height / 2;
-	int count = 0;
-	for (int i = 0; i < Zcount; i++)
+	v.x = UI.width / -4;
+	v.y = 0;
+	for (int i = 0; i < no_of_zoomed_figs; i++)
 	{
-		Point p = ZoomList[i]->GetCenter();
-		Center.x += p.x;
-		Center.y += p.y;
-		count++;
-	}
-	if (count != 0) {
-		Center.x = (Center.x) / count;
-		Center.y = (Center.y) / count;
-	}
-	
-	v.x = (-Center.x + v.x);
-	v.y = (-Center.y + v.y);
-	for (int i = 0; i < Zcount; i++)
-	{
-			ZoomList[i]->Move(v);
+		ZoomList[i]->Move(v);
 	}
 }
 
