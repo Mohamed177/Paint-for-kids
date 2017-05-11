@@ -81,6 +81,7 @@ void Output::ClearToolBar() const
 void Output::CreateDrawToolBar() const
 {
 	ClearToolBar();
+	PrintMessage("");
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -150,8 +151,10 @@ void Output::CreateColorToolBar() const
 	MenuItemImages[11] = "images\\MenuItems\\Pink.jpg";
 	MenuItemImages[12] = "images\\MenuItems\\SeaGreen.jpg";
 	MenuItemImages[13] = "images\\MenuItems\\Yellow.jpg";
+	MenuItemImages[14] = "images\\MenuItems\\back.jpg";
+	
 
-	//TODO: Prepare images for each menu item and add it to the list
+
 
 	//Draw menu item one image at a time
 	for (int i = 0; i<ITM_COLOR_COUNT; i++)
@@ -175,22 +178,23 @@ void Output:: CreateBorderToolbar() const
 	//First prepare List of images for each menu item
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
-	string MenuItemImages[11];
-	MenuItemImages[0] = "images\\MenuItems\\Black.jpg";
-	MenuItemImages[1] = "images\\MenuItems\\Blue.jpg";
-	MenuItemImages[2] = "images\\MenuItems\\Red.jpg";
-	MenuItemImages[3] = "images\\MenuItems\\Green.jpg";
-	MenuItemImages[4] = "images\\MenuItems\\Brown.jpg";
-	MenuItemImages[5] = "images\\MenuItems\\BlueViolet.jpg";
-	MenuItemImages[6] = "images\\MenuItems\\Cyan.jpg";
-	MenuItemImages[7] = "images\\MenuItems\\DarkGreen.jpg";
-	MenuItemImages[8] = "images\\MenuItems\\Violet.jpg";
-	MenuItemImages[9] = "images\\MenuItems\\Gray.jpg";
-	MenuItemImages[10] = "images\\MenuItems\\Gray.jpg";
+	string MenuItemImages[12];
+	MenuItemImages[0] = "images\\MenuItems\\1.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\2.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\4.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\6.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\8.jpg";
+	MenuItemImages[5] = "images\\MenuItems\\10.jpg";
+	MenuItemImages[6] = "images\\MenuItems\\12.jpg";
+	MenuItemImages[7] = "images\\MenuItems\\14.jpg";
+	MenuItemImages[8] = "images\\MenuItems\\16.jpg";
+	MenuItemImages[9] = "images\\MenuItems\\18.jpg";
+	MenuItemImages[10] = "images\\MenuItems\\20.jpg";
+	MenuItemImages[11] = "images\\MenuItems\\back.jpg";
 	
 
 	//Draw menu item one image at a time
-	for (int i = 0; i<11; i++)
+	for (int i = 0; i<12; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
@@ -246,6 +250,27 @@ void Output::CreateFigMenu() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreatePickHideToolbar() const
+{
+	ClearToolBar();
+
+	string MenuItemImages[5];
+	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
+	for (int i = 0; i<5; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateResizeMenu() const
@@ -312,6 +337,12 @@ void Output::setCrntPenWidth(int p)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::setBackColor(color k)
+{
+	UI.BkGrndColor = k;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

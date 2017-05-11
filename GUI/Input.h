@@ -12,7 +12,7 @@ private:
 	window *pWind;	//Pointer to the Graphics Window
 public:
 	Input(window *pW);	
-	color ChangeColor();	//na2sa lsa 
+	color ChangeBackColor();	//na2sa lsa 
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting(Output* pO) const;	 //Returns a string entered by the user
 	int IsFilled() const;

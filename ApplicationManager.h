@@ -51,7 +51,9 @@ public:
 	bool move(Point v);
 	void ScrambleMove();
 	void switchtoplay();
-	void ChngeBrdrClr();
+	void ChngeBrdrWdth();
+	void ChangeDrwColor();
+	void ChangeFllColor();
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

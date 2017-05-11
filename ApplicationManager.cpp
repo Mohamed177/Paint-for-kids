@@ -17,6 +17,8 @@
 #include"Figures\CRectangle.h"
 #include"Figures\CTriangle.h"
 #include "Actions\ChngBackClr.h"
+#include"Actions\ChngDrwClr.h"
+#include"Actions\ChngFillClr.h"
 #include "Actions\ExitAction.h"
 #include "CMUgraphicsLib\colors.h"
 #include "Actions\LoadAction.h"
@@ -139,6 +141,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new Scramble(this);
 			break;
 
+		case CHNG_DRAW_CLR:
+			pAct = new ChangeDrawColor(this);
+			break;
+		case CHNG_FILL_CLR:
+			pAct = new ChangeFillColor(this);
+			break;
+		
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -486,6 +495,7 @@ bool ApplicationManager::paste(Point v)
 
 }
 
+//-------------------- Switch To Play Mode Function
 void ApplicationManager::switchtoplay()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -495,7 +505,8 @@ void ApplicationManager::switchtoplay()
 }
 
 
-void ApplicationManager::ChngeBrdrClr()
+//-------------------- Change Border Width Function
+void ApplicationManager::ChngeBrdrWdth()
 {
 f:
 	int x, y;
@@ -519,7 +530,9 @@ f:
 				pOut->CreateDrawToolBar();
 				return;
 			}
+
 			int brdr[11] = { 1,2,4,6,8,10,12,14,16,18,20 };
+
 			bool flag = false;
 			for (int i = 0; i < FigCount; i++)
 			{
@@ -533,9 +546,158 @@ f:
 
 		}
 		else goto f;
-		pOut->ClearToolBar();
 		pOut->CreateDrawToolBar();
 		
 
 	}
 }
+
+
+//-------------------- Change Draw Color Function
+void ApplicationManager:: ChangeDrwColor()
+{
+	bool flag = false; // to check if ther is any selected figs.
+	color c;
+	
+f:
+	int x, y;
+	pIn->GetPointClicked(x, y);	           //Get the coordinates of the user click
+	if (y >= 0 && y < UI.ToolBarHeight)
+	{
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+		if (ClickedItemOrder == 14) return; // back button pressed.
+		
+		// else , getting the pressed color.
+	    c = SNOW;
+		switch (ClickedItemOrder)
+		{
+		case ITM_BLACK: { c = BLACK;   }
+						break;
+		case ITM_BLUE: { c = BLUE; }
+					   break;
+		case ITM_RED: {  c = RED; }
+					  break;
+		case ITM_GREEN: { c = GREEN; }
+						break;
+		case ITM_BROWN: { c = BROWN; }
+						break;
+		case ITM_BLUEVIOLET: {  c = BLUEVIOLET; }
+							 break;
+		case ITM_CYAN: { c = CYAN; }
+					   break;
+		case ITM_DARKGREEN: { c = DARKGREEN; }
+							break;
+		case ITM_VIOLET: {  c = VIOLET; }
+						 break;
+		case ITM_GRAY: { c = GRAY; }
+					   break;
+		case ITM_ORANGE: { c = ORANGE; }
+						 break;
+		case ITM_PINK: {  c = PINK; }
+					   break;
+		case ITM_SEAGREEN: { c = SEAGREEN; }
+						   break;
+		case ITM_YELLOW: { c = YELLOW; }
+						 break;
+		default:goto f;
+		}
+		
+	}
+	else // in the user didn't press in the tool bar
+	{
+		goto f;
+	}
+
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			flag = true;
+			FigList[i]->ChngDrawClr(c);
+		}
+	}
+	if (!flag) UI.DrawColor = c;
+	
+}
+
+
+//-------------------- Change Fill Color Function
+void ApplicationManager::ChangeFllColor()
+{
+	bool flag = false; // to check if there is any selected figs.
+	color c;
+
+f:
+	int x, y;
+	pIn->GetPointClicked(x, y);	           //Get the coordinates of the user click
+	if (y >= 0 && y < UI.ToolBarHeight)
+	{
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+		if (ClickedItemOrder == 14) return; // back button pressed.
+
+											
+							// else , getting the pressed color.
+		c = SNOW;
+		switch (ClickedItemOrder)
+		{
+		case ITM_BLACK: { c = BLACK;   }
+						break;
+		case ITM_BLUE: { c = BLUE; }
+					   break;
+		case ITM_RED: {  c = RED; }
+					  break;
+		case ITM_GREEN: { c = GREEN; }
+						break;
+		case ITM_BROWN: { c = BROWN; }
+						break;
+		case ITM_BLUEVIOLET: {  c = BLUEVIOLET; }
+							 break;
+		case ITM_CYAN: { c = CYAN; }
+					   break;
+		case ITM_DARKGREEN: { c = DARKGREEN; }
+							break;
+		case ITM_VIOLET: {  c = VIOLET; }
+						 break;
+		case ITM_GRAY: { c = GRAY; }
+					   break;
+		case ITM_ORANGE: { c = ORANGE; }
+						 break;
+		case ITM_PINK: {  c = PINK; }
+					   break;
+		case ITM_SEAGREEN: { c = SEAGREEN; }
+						   break;
+		case ITM_YELLOW: { c = YELLOW; }
+						 break;
+		default:goto f;
+		}
+
+	}
+	else // in the user didn't press in the tool bar
+	{
+		goto f;
+	}
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			flag = true;
+			FigList[i]->ChngFillClr(c);
+		}
+	}
+	if (!flag) UI.FillColor = c;
+	
+}
+
+
