@@ -121,7 +121,7 @@ void Output::CreateDrawToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(DEEPSKYBLUE, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
@@ -230,7 +230,7 @@ void Output::CreatePlayToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
+	pWind->SetPen(DEEPSKYBLUE, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
@@ -293,7 +293,6 @@ void Output::CreateResizeMenu() const
 
 void Output::ScrambleScreen() const
 {
-	ClearDrawArea();
 	pWind->SetPen(DEEPSKYBLUE, 4);
 	pWind->DrawLine(UI.width / 2, UI.ToolBarHeight, UI.width / 2, UI.height - UI.StatusBarHeight);
 	PrintMessage("Choose the highlighted figures.");
