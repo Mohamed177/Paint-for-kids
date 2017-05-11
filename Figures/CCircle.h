@@ -11,7 +11,7 @@ public:
 	void Load(ifstream &Infile);
 	void Resize(float K, bool zoom);
     Point GetCenter();
-	bool ValidMove(Point);
+	bool ValidMove(Point, bool srcamble);
 	void Move(Point);
 	CFigure * copy() ;
 private:

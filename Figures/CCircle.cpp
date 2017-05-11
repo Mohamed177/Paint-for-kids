@@ -55,12 +55,15 @@ void CCircle::Resize(float K = 2,bool zoom = false)
 {
 	 return Center;
 }
- bool  CCircle::ValidMove(Point p ) 
+ bool  CCircle::ValidMove(Point p, bool scramble = 0)
  {
 	 Point v1, v2;
 	 v1.x = Center.x + p.x;
 	 v1.y = Center.y + p.y;
-	 if ((v1.y > UI.ToolBarHeight && (v1.y+Raduis) > UI.ToolBarHeight && (v1.y+Raduis) < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&(v1.x-Raduis) <= UI.width && ( v1.x +Raduis)<=UI.width &&v1.x >=0 && (v1.x - Raduis) >=0 && (v1.x + Raduis) >=0))
+	 int left_border = 0;
+	 if (scramble)
+		 left_border = UI.width / 2;
+	 if ((v1.y > UI.ToolBarHeight && (v1.y+Raduis) > UI.ToolBarHeight && (v1.y+Raduis) < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&(v1.x-Raduis) <= UI.width && ( v1.x +Raduis)<=UI.width &&v1.x >=left_border && (v1.x - Raduis) >=left_border && (v1.x + Raduis) >= left_border))
 	 {
 		 return true;
 	 }

@@ -2,8 +2,8 @@
 #include "Action.h"
 class Scramble:public Action
 {
-	int True_counts, Fasle_counts;
-
+	int True_counts, False_counts;
+	Point p;
 public:
 	Scramble(ApplicationManager *pApp);
 	virtual bool ReadActionParameters();

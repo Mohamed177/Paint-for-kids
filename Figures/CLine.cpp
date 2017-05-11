@@ -76,14 +76,17 @@ void CLine::Resize(float factor, bool zoom = false)
 	return;
 }
 
-bool CLine::ValidMove(Point p ) 
+bool CLine::ValidMove(Point p, bool scramble = 0) 
 {
 	Point v1, v2;
 	v1.x = p1.x + p.x;
 	v1.y = p1.y + p.y;
 	v2.x = p2.x + p.x;
 	v2.y = p2.y + p.y;
-	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=0 &&v2.x >=0))
+	int left_border = 0;
+	if (scramble)
+		left_border = UI.width / 2;
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=left_border &&v2.x >=left_border))
 	{
 		return true;
 	}

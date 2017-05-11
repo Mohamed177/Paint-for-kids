@@ -19,7 +19,6 @@ public:
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	 virtual bool Is_Selected(Point v) const = 0; 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -35,10 +34,12 @@ public:
 	//virtual void Rotate() = 0;	//Rotate the figure
 	virtual void Resize(float, bool zoom = false) = 0;	//Resize the figure
 	virtual void Move(Point) = 0;		//Move the figure
-	virtual bool ValidMove(Point)=0;
+	virtual bool ValidMove(Point,bool srcamble = 0)=0;
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual CFigure * copy() = 0;
+	virtual int getID();
+	virtual void setID(int i);
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 

@@ -28,3 +28,13 @@ void CFigure::ChngBrdWdt(int p)
 {
 	FigGfxInfo.BorderWdth = p;
 }
+
+int CFigure::getID()
+{
+	return ID;
+}
+
+void CFigure::setID(int i)
+{
+	ID = i;
+}
