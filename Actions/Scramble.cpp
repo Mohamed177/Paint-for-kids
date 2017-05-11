@@ -19,11 +19,7 @@ void Scramble::Execute()
 	pOut->ScrambleScreen();
 	pManager->Zcount = 0;
 	pManager->ZoomCopy();
-	Point c;
-	c.x = UI.width / 4;
-	c.y = UI.height / 2;
 	pManager->Zoom(1.0/2);
-	
-	pManager->move(c);
+	pManager->ScrambleMove();
 
 }

@@ -269,7 +269,7 @@ void Output::CreateResizeMenu() const
 void Output::ScrambleScreen() const
 {
 	ClearDrawArea();
-	pWind->SetPen(CYAN, 4);
+	pWind->SetPen(DEEPSKYBLUE, 4);
 	pWind->DrawLine(UI.width / 2, UI.ToolBarHeight, UI.width / 2, UI.height - UI.StatusBarHeight);
 	PrintMessage("Choose the highlighted figures.");
 }

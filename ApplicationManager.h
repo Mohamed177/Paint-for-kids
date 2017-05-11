@@ -15,6 +15,7 @@ private:
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	int Ccount;
+	int no_of_zoomed_figs;
 	CFigure*CopyList[MaxFigCount];
 	CFigure* ZoomList[MaxFigCount];
 	//Pointers to Input and Output classes
