@@ -110,3 +110,9 @@ void CCircle::Resize(float K = 2,bool zoom = false)
 void CCircle::Load(ifstream &Infile) 
 {
 }
+
+
+char CCircle::GetType()
+{
+	return 'C';
+}

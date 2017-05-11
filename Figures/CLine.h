@@ -18,6 +18,7 @@ public:
 	 bool ValidMove(Point, bool scramble);
 	 CFigure *copy();
 	 void Move(Point v);
+	 char GetType();
 	~CLine();
 
 	// Inherited via CFigure

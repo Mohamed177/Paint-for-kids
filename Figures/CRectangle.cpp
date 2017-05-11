@@ -217,3 +217,9 @@ void CRectangle::Zoom(float factor)
 	Resize(factor,true);
 	Move(p);
 }
+
+
+char CRectangle::GetType()
+{
+	return 'R';
+}

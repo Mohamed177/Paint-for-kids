@@ -109,3 +109,8 @@ void CLine::Move(Point v)
 }
 
 
+
+char CLine::GetType()
+{
+	return 'L';
+}

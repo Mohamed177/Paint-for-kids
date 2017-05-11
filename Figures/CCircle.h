@@ -9,6 +9,7 @@ public:
 	bool Is_Selected( Point P)const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream &Infile);
+	char GetType();
 	void Resize(float K, bool zoom);
     Point GetCenter();
 	bool ValidMove(Point, bool srcamble);

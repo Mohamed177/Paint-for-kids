@@ -62,6 +62,7 @@ public:
 	void RandomPoint();
 	int highlight();
 	bool getScrmbleFig(Point, int z_id);
+	void PickHideCopy(CFigure** ,int &);
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

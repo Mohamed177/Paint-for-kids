@@ -18,12 +18,14 @@ public:
 	virtual void Resize(float, bool zoom);
 	void PrintInfo(Output* pOut);
 	void Move(Point nCorner);
+	
 	Point GetCenter();
 	bool ValidMove(Point,bool);
 	CFigure *copy();
 
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
+	char GetType();
 };
 
 #endif

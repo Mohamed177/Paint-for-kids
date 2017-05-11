@@ -21,6 +21,7 @@ public:
 	bool ValidMove(Point, bool);
 	CFigure *copy();
 	void Move( Point v );
+	char GetType();
 	~CTriangle();
 	virtual void Zoom(float factor);
 };
