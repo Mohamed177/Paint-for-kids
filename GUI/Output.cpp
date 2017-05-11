@@ -248,6 +248,27 @@ void Output::CreateFigMenu() const
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreatePickHideToolbar() const
+{
+	ClearToolBar();
+
+	string MenuItemImages[5];
+	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
+	for (int i = 0; i<5; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateResizeMenu() const
 {
 	ClearToolBar();
@@ -304,6 +325,12 @@ void Output::setCrntPenWidth(int p)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::setBackColor(color k)
+{
+	UI.BkGrndColor = k;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

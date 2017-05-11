@@ -10,19 +10,20 @@ ChngBackClr::ChngBackClr(ApplicationManager *pApp):Action(pApp)
 
 bool ChngBackClr::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-	pOut->CreateColorToolBar();
-	UI.BkGrndColor = pIn->ChangeColor();
-	pOut->ClearToolBar();
-	pOut->CreateDrawToolBar();
+
 	return true;
 }
 
 void ChngBackClr::Execute()
 {
-	bool t = ReadActionParameters();
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	pOut->CreateColorToolBar();
+	pOut->setBackColor(pIn->ChangeColor());
+	pOut->ClearToolBar();
+	pOut->CreateDrawToolBar();
 	pManager->Saved = false;
+
 }
 
 ChngBackClr::~ChngBackClr()

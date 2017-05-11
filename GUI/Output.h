@@ -14,6 +14,7 @@ public:
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateBorderToolbar() const;
 	void CreateStatusBar() const;	//create the status bar
+	void CreatePickHideToolbar() const;
 	void CreateFigMenu() const;
 	void CreateResizeMenu() const;
 	void ClearToolBar() const; //        E7NA ELLY 3MLNAHA.
@@ -35,6 +36,7 @@ public:
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
 	void setCrntPenWidth(int p); // hand-made 
+	void setBackColor(color k);
 
 	void StoreImage(image &imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight); // momken tt3'yr lw 3'alt
 

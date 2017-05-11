@@ -47,6 +47,8 @@ public:
 	bool move(Point v);
 	void switchtoplay();
 	void ChngeBrdrClr();
+	void ChangeDrwColor();
+	void ChangeFllColor();
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

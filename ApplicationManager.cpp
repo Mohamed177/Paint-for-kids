@@ -17,6 +17,8 @@
 #include"Figures\CRectangle.h"
 #include"Figures\CTriangle.h"
 #include "Actions\ChngBackClr.h"
+#include"Actions\ChngDrwClr.h"
+#include"Actions\ChngFillClr.h"
 #include "Actions\ExitAction.h"
 #include "CMUgraphicsLib\colors.h"
 #include "Actions\LoadAction.h"
@@ -131,6 +133,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case CHNG_BRDR_WDTH:
 			pAct = new ChngBrdrWdth(this);
+			break;
+		case CHNG_DRAW_CLR:
+			pAct = new ChangeDrawColor(this);
+			break;
+		case CHNG_FILL_CLR:
+			pAct = new ChangeFillColor(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -485,4 +493,40 @@ f:
 		
 
 	}
+}
+
+
+void ApplicationManager:: ChangeDrwColor()
+{
+	bool flag = false;
+	color c = pIn->ChangeColor();
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			flag = true;
+			FigList[i]->ChngDrawClr(c);
+		}
+	}
+	if (!flag) UI.DrawColor = c;
+	pOut->ClearToolBar();
+	pOut->CreateDrawToolBar();
+}
+
+
+void ApplicationManager::ChangeFllColor()
+{
+	bool flag = false;
+	color c = pIn->ChangeColor();
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			flag = true;
+			FigList[i]->ChngFillClr(c);
+		}
+	}
+	if (!flag) UI.FillColor = c;
+	pOut->ClearToolBar();
+	pOut->CreateDrawToolBar();
 }
