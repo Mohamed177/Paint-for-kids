@@ -53,6 +53,7 @@ public:
 	void ChngeBrdrWdth();
 	void ChangeDrwColor();
 	void ChangeFllColor();
+	void PickHideCopy(CFigure** ,int &);
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

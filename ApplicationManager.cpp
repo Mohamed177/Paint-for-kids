@@ -4,6 +4,7 @@
 #include "Actions\AddCircAction.h"
 #include "Actions\AddTriAction.h"
 #include "Actions\SaveAction.h"
+#include "Actions\PickAndHide.h"
 #include "Actions\SelectAction.h"
 #include "Actions\ZoomInAction.h"
 #include"Actions\ZoomOutAction.h"
@@ -129,6 +130,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			break;
 		case TO_PLAY:
 			pAct = new SwtchTOplay(this);
+			break;
+		case TO_PICK_HIDE:
+			pAct = new PickAndHide(this);
 			break;
 		case TO_DRAW:
 			pAct = new SwtchTOdraw(this);
@@ -709,3 +713,21 @@ f:
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Pick And Hide Copy Func.
+
+void ApplicationManager::PickHideCopy(CFigure** cpylist,int& figcount)
+{
+	for (int i = 0; i < figcount; i++)
+	{
+		delete cpylist[i];
+		cpylist[i] = NULL;
+	}
+	figcount = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		
+		cpylist[figcount++] = FigList[i]->copy();
+		
+	}
+}

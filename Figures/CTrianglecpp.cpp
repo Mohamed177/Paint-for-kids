@@ -199,3 +199,8 @@ void  CTriangle::Move(Point v )
 	p3.x += v.x;
 	p3.y += v.y;
 }
+
+char CTriangle::GetType()
+{
+	return 'T';
+}
