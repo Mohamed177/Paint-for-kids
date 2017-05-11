@@ -17,8 +17,8 @@ public:
 	void CreatePickHideToolbar() const;
 	void CreateFigMenu() const;
 	void CreateResizeMenu() const;
+	void ScrambleScreen() const;
 	void ClearToolBar() const; //        E7NA ELLY 3MLNAHA.
-
 	Input* CreateInput() const; //creates a pointer to the Input object	
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area

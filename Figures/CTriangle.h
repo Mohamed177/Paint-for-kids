@@ -14,7 +14,7 @@ public:
 	bool Is_Selected(Point P) const;
 	bool IsValid(Point, Point, Point);
 	void Save(ofstream &OutFile);
-	void Resize(float factor);
+	void Resize(float factor, bool zoom);
 	 void Load(ifstream &Infile) ;
 	void PrintInfo(Output* pOut);
 	Point GetCenter();
@@ -22,5 +22,6 @@ public:
 	CFigure *copy();
 	void Move( Point v );
 	~CTriangle();
+	virtual void Zoom(float factor);
 };
 

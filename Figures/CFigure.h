@@ -24,6 +24,7 @@ public:
 	 virtual bool Is_Selected(Point v) const = 0; 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	virtual void Zoom(float factor) = 0;
 	void ChngBrdWdt(int p);         //changes the figure's border width
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
@@ -32,7 +33,7 @@ public:
 
 	virtual Point GetCenter()=0;
 	//virtual void Rotate() = 0;	//Rotate the figure
-	virtual void Resize(float) = 0;	//Resize the figure
+	virtual void Resize(float, bool zoom = false) = 0;	//Resize the figure
 	virtual void Move(Point) = 0;		//Move the figure
 	virtual bool ValidMove(Point)=0;
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file

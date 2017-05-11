@@ -9,7 +9,7 @@ public:
 	bool Is_Selected( Point P)const;
 	void Save(ofstream& OutFile);
 	void Load(ifstream &Infile);
-	void Resize(float K);
+	void Resize(float K, bool zoom);
     Point GetCenter();
 	bool ValidMove(Point);
 	void Move(Point);
@@ -17,5 +17,8 @@ public:
 private:
 	Point Center,P2;
 	double Raduis;
+
+	// Inherited via CFigure
+	virtual void Zoom(float factor) override;
 };
 

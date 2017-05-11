@@ -25,7 +25,7 @@ bool SelectAction::ReadActionParameters()
 			else
 				Counter--;
 		}
-		pManager->UpdateInterface();
+		pManager->UpdateInterface(TO_SELECT);
 		pIn->GetPointClicked(P.x, P.y);
 	}
 	pOut->ClearStatusBar();

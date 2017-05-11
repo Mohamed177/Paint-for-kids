@@ -52,7 +52,7 @@ class color {
 		}
 		else if (s == "BROWN")
 		{
-			ucRed = 162;
+			ucRed = 165;
 			ucGreen = 42;
 			ucBlue = 42;
 		}
@@ -124,7 +124,7 @@ class color {
 			return string("DARKGREEN");
 		else if (ucRed == 0 && ucGreen == 255 && ucBlue == 0)
 			return string("GREEN");
-		else if (ucRed == 162 && ucGreen == 42 && ucBlue == 42)
+		else if (ucRed == 165 && ucGreen == 42 && ucBlue == 42)
 			return string("BROWN");
 		else if (ucRed == 138 && ucGreen == 43 && ucBlue == 226)
 			return string("BLUEVIOLET");

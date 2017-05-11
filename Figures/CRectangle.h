@@ -15,12 +15,15 @@ public:
 	bool Is_Selected(Point P) const;
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
-	virtual void Resize(float);
+	virtual void Resize(float, bool zoom);
 	void PrintInfo(Output* pOut);
 	void Move(Point nCorner);
 	Point GetCenter();
 	bool ValidMove(Point);
 	CFigure *copy();
+
+	// Inherited via CFigure
+	virtual void Zoom(float factor) override;
 };
 
 #endif

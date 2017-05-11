@@ -274,10 +274,10 @@ void Output::CreateResizeMenu() const
 	ClearToolBar();
 
 	string MenuItemImages[5];
-	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
-	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
-	MenuItemImages[2] = "images\\MenuItems\\NOT_Filled.jpg";
-	MenuItemImages[3] = "images\\MenuItems\\Filled.jpg";
+	MenuItemImages[0] = "images\\MenuItems\\X4.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\X2.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\X0.5.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\X0.25.jpg";
 	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
 	for (int i = 0; i<5; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
@@ -285,6 +285,14 @@ void Output::CreateResizeMenu() const
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+void Output::ScrambleScreen() const
+{
+	ClearDrawArea();
+	pWind->SetPen(CYAN, 4);
+	pWind->DrawLine(UI.width / 2, UI.ToolBarHeight, UI.width / 2, UI.height - UI.StatusBarHeight);
+	PrintMessage("Choose the highlighted figures.");
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

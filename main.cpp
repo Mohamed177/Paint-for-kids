@@ -59,10 +59,7 @@ int main()
 		AppManager.ExecuteAction(ActType);
 
 		//Update the interface
-		if (ActType == ZOOMIN || ActType == ZOOMOUT)
-			continue;
-		else
-			AppManager.UpdateInterface();	
+		AppManager.UpdateInterface(ActType);	
 
 	}while(ActType != EXIT);
 	

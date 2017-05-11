@@ -13,11 +13,14 @@ public:
 	bool Is_Selected(Point P) const;
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
-	void Resize(float factor);
+	void Resize(float factor, bool zoom);
 	 Point GetCenter();
 	 bool ValidMove(Point);
 	 CFigure *copy();
 	 void Move(Point v);
 	~CLine();
+
+	// Inherited via CFigure
+	virtual void Zoom(float factor) override;
 };
 
