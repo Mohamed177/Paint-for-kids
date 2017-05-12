@@ -289,7 +289,7 @@ f:
 		{
 			for (int i = 0; i < figcount; i++)
 			{
-				if (figlist[i]->GetFillInt() == s && figlist[i]->ISFILLED() )
+				if ( ( figlist[i]->GetFillInt() == s ) && figlist[i]->ISFILLED() )
 				{
 					Fcount++;
 				}
@@ -300,7 +300,7 @@ f:
 		{
 			for (int i = 0; i < figcount; i++)
 			{
-				if (figlist[i]->GetFillInt() && !(figlist[i]->ISFILLED()))
+				if (figlist[i]->GetFillInt() == s && !(figlist[i]->ISFILLED()))
 				{
 					Fcount++;
 				}
@@ -320,7 +320,7 @@ f:
 				{
 					for (int i = figcount - 1; i >= 0; i--) // start mn el2a5er , 3l4an lw 2 fig drawen on each other
 					{
-						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && filled == 1)
+						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && figlist[i]->ISFILLED())
 						{
 							Fcount--;
 							Correct++;
@@ -338,7 +338,7 @@ f:
 				{
 					for (int i = figcount - 1; i >= 0; i--) // start mn el2a5er , 3l4an lw 2 fig drawen on each other
 					{
-						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && filled == 0 )
+						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && !figlist[i]->ISFILLED())
 						{
 							Fcount--;
 							Correct++;
