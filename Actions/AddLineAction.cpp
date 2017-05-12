@@ -35,6 +35,7 @@ bool AddLineAction::ReadActionParameters()
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();
 	LineGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+	LineGfxInfo.isFilled = false;
 
 	pOut->ClearStatusBar();
 	return true;

@@ -11,6 +11,7 @@ public:
 	CLine(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
+
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
 	void Resize(float factor, bool zoom);
@@ -19,7 +20,7 @@ public:
 	 CFigure *copy();
 	 void Move(Point v);
 	 char GetType();
-	 color GetColor();
+
 	~CLine();
 
 	// Inherited via CFigure

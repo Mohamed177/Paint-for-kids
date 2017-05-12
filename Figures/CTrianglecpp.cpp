@@ -31,6 +31,7 @@ bool CTriangle::Is_Selected(Point v) const
 	return false;
 	
 }
+
 bool CTriangle::IsValid(Point P1, Point  P2, Point P3) 
 {
 	if (P1.y > UI.ToolBarHeight && P2.y > UI.ToolBarHeight && P3.y > UI.ToolBarHeight&& P1.y < (UI.height - UI.StatusBarHeight) && P2.y < (UI.height - UI.StatusBarHeight) && P1.y < (UI.height - UI.StatusBarHeight) && (p1.x>=0 && p1.x <=UI.width ) && (p2.x >= 0 && p2.x <= UI.width) && (p3.x >= 0 && p3.x <= UI.width))
@@ -207,9 +208,4 @@ void  CTriangle::Move(Point v )
 char CTriangle::GetType()
 {
 	return 'T';
-}
-
-color CTriangle::GetColor()
-{
-	return FigGfxInfo.FillClr;
 }

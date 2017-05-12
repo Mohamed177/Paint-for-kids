@@ -41,6 +41,7 @@ bool CRectangle::Is_Selected(Point P) const
 	return false;
 }
 
+
 void CRectangle::Save(ofstream &OutFile)
 {
 	OutFile << "Rectangle " << ID << ' ' << Corner1.x << ' ' << Corner1.y << ' ' << Corner2.x << ' ' << Corner2.y << ' ' << FigGfxInfo.BorderWdth << ' ';
@@ -225,7 +226,3 @@ char CRectangle::GetType()
 	return 'R';
 }
 
-color CRectangle::GetColor()
-{
-	return FigGfxInfo.FillClr;
-}

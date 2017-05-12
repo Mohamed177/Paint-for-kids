@@ -19,6 +19,7 @@ public:
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
+	 bool ISFILLED() const;     // check whether fig is filled or not
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	 virtual bool Is_Selected(Point v) const = 0; 
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -30,7 +31,8 @@ public:
 
 	///Decide the parameters that you should pass to each function	
 	virtual char GetType() = 0;
-	virtual color GetColor() = 0;
+	int GetFillInt() const;
+
 	virtual Point GetCenter()=0;
 	//virtual void Rotate() = 0;	//Rotate the figure
 	virtual void Resize(float, bool zoom = false) = 0;	//Resize the figure

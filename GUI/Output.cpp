@@ -407,21 +407,21 @@ void Output::DrawTRI(Point P1, Point P2,Point P3, GfxInfo RectGfxInfo, bool sele
 }
 
 
-void Output::DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+void Output::DrawLINE(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if (selected)
 		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
 	else
-		DrawingClr = RectGfxInfo.DrawClr;
+		DrawingClr = LineGfxInfo.DrawClr;
 
-	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
+	pWind->SetPen(DrawingClr, LineGfxInfo.BorderWdth);	//Set Drawing color & width
 	
 	drawstyle style;
-	if (RectGfxInfo.isFilled)
+	if (LineGfxInfo.isFilled)
 	{
 		style = FILLED;
-		pWind->SetBrush(RectGfxInfo.FillClr);
+		pWind->SetBrush(LineGfxInfo.FillClr);
 	}
 	else
 		style = FRAME;
@@ -451,7 +451,7 @@ void Output::DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) co
 	else
 		style = FRAME;
 
-	pWind->DrawPixel(P1.x, P1.y);
+	
 	pWind->DrawCircle(P1.x, P1.y, r, style);
 }
 

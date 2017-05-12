@@ -146,6 +146,7 @@ class color {
 			return string("LIGHTGOLDENRODYELLOW");
 	}
 	
+
 	//friend ofstream& operator<<(ofstream& OutFile, color a);
 		
     // Color components.  0 = no intensity, 255 = full intensity

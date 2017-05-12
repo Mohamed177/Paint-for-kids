@@ -12,6 +12,7 @@ public:
 	CTriangle(Point, Point,Point , GfxInfo FigureGfxInfo);
 	 void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
+
 	bool IsValid(Point, Point, Point);
 	void Save(ofstream &OutFile);
 	void Resize(float factor, bool zoom);
@@ -22,7 +23,7 @@ public:
 	CFigure *copy();
 	void Move( Point v );
 	char GetType();
-	color GetColor();
+
 	~CTriangle();
 	virtual void Zoom(float factor);
 };

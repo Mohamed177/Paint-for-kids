@@ -13,6 +13,7 @@ public:
 	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
 	virtual void Draw(Output* pOut) const;
 	bool Is_Selected(Point P) const;
+
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
 	virtual void Resize(float, bool zoom);
@@ -26,7 +27,7 @@ public:
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
 	char GetType();
-	color GetColor();
+	
 };
 
 #endif
