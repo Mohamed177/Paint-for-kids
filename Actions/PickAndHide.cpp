@@ -121,7 +121,7 @@ void PickAndHide:: PH_TypeMode()
 
 	 if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
 	{
-		for (int i = figcount-1; i >0; i--)
+		for (int i = figcount-1; i >=0; i--)
 		{
 			if(figlist[i]->Is_Selected(D))
 			{
@@ -687,7 +687,7 @@ void PickAndHide:: PH_AreaMode()
 	pIn->GetPointClicked(D.x, D.y);
 	if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
 	{
-		for (int i = figcount-1; i >0; i--)
+		for (int i = figcount-1; i >=0; i--)
 		{
 			if (figlist[i]->Is_Selected(D))
 			{
