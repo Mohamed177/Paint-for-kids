@@ -53,7 +53,7 @@ void AddCircAction::Execute()
 		return;
 	pManager->Saved = false;
 	double Radius = sqrt(((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x)));
-	if ((Center.y-Radius) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius))
+	if ((Center.y-Radius) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius) && Center.x - Radius > 0 && Center.x + Radius < UI.width)
 	{
 		//Create a rectangle with the parameters read from the user
 		CCircle *C = new CCircle(Center, Radius, RectGfxInfo);
