@@ -220,3 +220,8 @@ char CRectangle::GetType()
 {
 	return 'R';
 }
+
+color CRectangle::GetColor()
+{
+	return FigGfxInfo.FillClr;
+}

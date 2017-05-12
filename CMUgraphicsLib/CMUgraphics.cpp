@@ -773,7 +773,7 @@ void window::DrawPixel(const int iX, const int iY) {
     // Cheap trick to change pen width
     penTemp = penObject;
     penObject = NULL;
-   	penObject = CreatePen(PS_INSIDEFRAME, 1, RGB(colPen.ucRed, colPen.ucGreen, colPen.ucBlue));
+   	penObject = CreatePen(PS_INSIDEFRAME,2, RGB(colPen.ucRed, colPen.ucGreen, colPen.ucBlue));
 
     DrawLine(iX, iY, iX + 1, iY + 1);
     

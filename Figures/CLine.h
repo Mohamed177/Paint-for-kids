@@ -19,6 +19,7 @@ public:
 	 CFigure *copy();
 	 void Move(Point v);
 	 char GetType();
+	 color GetColor();
 	~CLine();
 
 	// Inherited via CFigure

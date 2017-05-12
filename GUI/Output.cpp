@@ -17,12 +17,12 @@ Output::Output()
 	UI.MenuItemWidth = 61;
 	
 	UI.DrawColor = BLUE;	//Drawing color
-	UI.FillColor = GREEN;	//Filling color
+	UI.FillColor = LIGHTSKYBLUE;	//Filling color
 	UI.MsgColor = RED;		//Messages color
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	//width of the figures frames
+	UI.PenWidth = 4;	//width of the figures frames
 
 	
 	//Create the output window
@@ -81,7 +81,7 @@ void Output::ClearToolBar() const
 void Output::CreateDrawToolBar() const
 {
 	ClearToolBar();
-	PrintMessage("");
+	PrintMessage("Drawing Mode .. Enjoy Drawing :)");
 	UI.InterfaceMode = MODE_DRAW;
 
 	//You can draw the tool bar icons in any way you want.
@@ -122,13 +122,17 @@ void Output::CreateDrawToolBar() const
 
 	//Draw a line under the toolbar
 	pWind->SetPen(DEEPSKYBLUE, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
+	pWind->DrawLine(0, UI.ToolBarHeight+3, UI.width, UI.ToolBarHeight+3);	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateColorToolBar() const
 {
 	ClearToolBar();
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
@@ -160,11 +164,6 @@ void Output::CreateColorToolBar() const
 	for (int i = 0; i<ITM_COLOR_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
-
-
-	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -198,15 +197,20 @@ void Output:: CreateBorderToolbar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreatePlayToolBar() const
 {
 	ClearToolBar();
+	PrintMessage("Welcome To Play Mode :) ..  Please Choose Your Favourite Game .");
 	UI.InterfaceMode = MODE_PLAY;
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
@@ -229,9 +233,7 @@ void Output::CreatePlayToolBar() const
 
 
 
-	//Draw a line under the toolbar
-	pWind->SetPen(DEEPSKYBLUE, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -247,8 +249,8 @@ void Output::CreateFigMenu() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -266,8 +268,8 @@ void Output::CreatePickHideToolbar() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 }
 
 
@@ -287,8 +289,8 @@ void Output::CreateResizeMenu() const
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
-	pWind->SetPen(RED, 3);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 }
 
 void Output::ScrambleScreen() const
@@ -304,17 +306,29 @@ void Output::ClearDrawArea() const
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
 	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
-	
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::DRAWPIXEL(Point P1) const
+{
+	
+	pWind->SetPen(UI.DrawColor,3);	//Set Drawing color & width
+
+	pWind->DrawPixel(P1.x, P1.y);
+
+}
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
 	
 	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
-	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+	pWind->SetFont(32, BOLD, BY_NAME, "Segoe Print");
+	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5)-12, msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -391,6 +405,8 @@ void Output::DrawTRI(Point P1, Point P2,Point P3, GfxInfo RectGfxInfo, bool sele
 
 	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y,P3.x,P3.y, style);
 }
+
+
 void Output::DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
@@ -400,7 +416,7 @@ void Output::DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		DrawingClr = RectGfxInfo.DrawClr;
 
 	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
-
+	
 	drawstyle style;
 	if (RectGfxInfo.isFilled)
 	{
@@ -412,7 +428,10 @@ void Output::DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 
 	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y);
+	
 }
+
+
 void Output::DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
@@ -432,7 +451,7 @@ void Output::DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) co
 	else
 		style = FRAME;
 
-
+	pWind->DrawPixel(P1.x, P1.y);
 	pWind->DrawCircle(P1.x, P1.y, r, style);
 }
 

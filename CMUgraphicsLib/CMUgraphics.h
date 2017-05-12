@@ -52,6 +52,7 @@ const unsigned char ITALICIZED = 0x02;
 const unsigned char UNDERLINED = 0x04;
 const unsigned char STRIKEOUT  = 0x08;
 
+
 // Generic Font family's
 enum fontfamily {
 	BY_NAME,	// use font name instead of abstract type

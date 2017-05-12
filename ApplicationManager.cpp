@@ -544,6 +544,7 @@ f:
 				{
 					flag = true;
 					FigList[i]->ChngBrdWdt(brdr[ClickedItemOrder]);
+					FigList[i]->SetSelected(false);
 				}
 			}
 			if (!flag) pOut->setCrntPenWidth(brdr[ClickedItemOrder]);
@@ -624,6 +625,7 @@ f:
 		{
 			flag = true;
 			FigList[i]->ChngDrawClr(c);
+			FigList[i]->SetSelected(false);
 		}
 	}
 	if (!flag) UI.DrawColor = c;
@@ -698,6 +700,7 @@ f:
 		{
 			flag = true;
 			FigList[i]->ChngFillClr(c);
+			FigList[i]->SetSelected(false);
 		}
 	}
 	if (!flag) UI.FillColor = c;
@@ -715,8 +718,8 @@ void ApplicationManager::PickHideCopy(CFigure** cpylist,int& figcount)
 		delete cpylist[i];
 		cpylist[i] = NULL;
 	}
-	figcount = 0;
-	for (int i = 0; i < FigCount; i++)
+	figcount = 0;  // now we have 0 figs in cpy list
+	for (int i = 0; i < FigCount /* 3l4an y copy mn el fiGLIST el 2slyya*/ ; i++)
 	{
 		
 		cpylist[figcount++] = FigList[i]->copy();

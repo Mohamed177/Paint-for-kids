@@ -10,6 +10,7 @@ public:
 	void Save(ofstream& OutFile);
 	void Load(ifstream &Infile);
 	char GetType();
+	color GetColor();
 	void Resize(float K, bool zoom);
     Point GetCenter();
 	bool ValidMove(Point);

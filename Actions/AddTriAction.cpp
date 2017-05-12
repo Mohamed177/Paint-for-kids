@@ -24,20 +24,27 @@ bool AddTriAction::ReadActionParameters()
 	triGfxInfo.isFilled = x;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->PrintMessage("New Triangle: Click at first point");
+	pOut->PrintMessage("Drawing a New Triangle : Click at first point");
 
 	//Read 1st point and store in point P1
 	pIn->GetPointClicked(p1.x, p1.y);
 
-	pOut->PrintMessage("New Triangle: Click at second  point ");
+	if ((p1.y > UI.ToolBarHeight) && (p1.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(p1);
+
+	pOut->PrintMessage("Drawing a New Triangle : Click at second  point ");
 
 	//Read 2nd point and store in point P2
 	pIn->GetPointClicked(p2.x, p2.y);
 
-	pOut->PrintMessage("New Triangle: Click at third point ");
+	if ((p2.y > UI.ToolBarHeight) && (p2.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(p2);
+
+	pOut->PrintMessage("Drawing a New Triangle : Click at third point ");
+
 
 	//Read 2nd point and store in point P2
 	pIn->GetPointClicked(p3.x, p3.y);
+
+	if ((p3.y > UI.ToolBarHeight) && (p3.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(p3);
 
 	//get drawing, filling colors and pen width from the interface
 	triGfxInfo.DrawClr = pOut->getCrntDrawColor();
@@ -68,7 +75,7 @@ void AddTriAction::Execute()
 	else
 	{
 		Output* pOut = pManager->GetOutput();
-		pOut->PrintMessage("Error ! Draw at DrawArea");
+		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	}
 }
 

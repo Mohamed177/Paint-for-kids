@@ -111,3 +111,8 @@ char CLine::GetType()
 {
 	return 'L';
 }
+
+color CLine::GetColor()
+{
+	return FigGfxInfo.FillClr;
+}

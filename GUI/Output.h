@@ -30,6 +30,8 @@ public:
 	void DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) const;
 	///Make similar functions for drawing all other figures.
 	
+	void DRAWPIXEL(Point P1) const;
+
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
 	color getCrntDrawColor() const;	//get current drwawing color

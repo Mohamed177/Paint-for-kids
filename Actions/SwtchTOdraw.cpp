@@ -24,5 +24,5 @@ void SwtchTOdraw::Execute()
 	Output* pOut = pManager->GetOutput();
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->PrintMessage("Welcome To Draw Mode :) ");
+	pOut->PrintMessage("Drawing Mode .. Enjoy Drawing :) ");
 }

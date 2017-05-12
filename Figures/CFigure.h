@@ -31,6 +31,7 @@ public:
 
 	///Decide the parameters that you should pass to each function	
 	virtual char GetType() = 0;
+	virtual color GetColor() = 0;
 	virtual Point GetCenter()=0;
 	//virtual void Rotate() = 0;	//Rotate the figure
 	virtual void Resize(float, bool zoom = false) = 0;	//Resize the figure

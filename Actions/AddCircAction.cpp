@@ -24,12 +24,15 @@ bool AddCircAction::ReadActionParameters()
 	RectGfxInfo.isFilled = x;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->PrintMessage("New Circle: Click at first corner");
+	pOut->PrintMessage("Drawing a New Circle : Click at first corner");
+
 
 	//Read Center and store in point P1
 	pIn->GetPointClicked(Center.x, Center.y);
 
-	pOut->PrintMessage("New Circle: Click at second corner");
+	if ((Center.y > UI.ToolBarHeight) && (Center.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(Center);
+
+	pOut->PrintMessage("Drawing a New Circle : Click at second corner");
 
 	//Read P2 on Surface and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
@@ -59,7 +62,7 @@ void AddCircAction::Execute()
 	}
 	else {
 		Output* pOut = pManager->GetOutput();
-		pOut->PrintMessage("Error ! Draw at DrawArea");
+		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	}
 }
 

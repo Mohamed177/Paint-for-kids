@@ -25,15 +25,19 @@ bool AddRectAction::ReadActionParameters()
 	RectGfxInfo.isFilled =x ;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->PrintMessage("New Rectangle: Click at first corner");
+	pOut->PrintMessage("Drawing a New Rectangle : Click at first corner");
 	
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
+	
+	if ((P1.y > UI.ToolBarHeight) && (P1.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(P1);
 
-	pOut->PrintMessage("New Rectangle: Click at second corner");
+	pOut->PrintMessage("Drawing a New Rectangle : Click at second corner");
 
 	//Read 2nd corner and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
+
+	if ((P2.y > UI.ToolBarHeight) && (P2.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(P2);
 
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
@@ -64,6 +68,6 @@ void AddRectAction::Execute()
 	 else
 	 {
 		 Output* pOut = pManager->GetOutput();
-		 pOut->PrintMessage("Error ! Draw at DrawArea");
+		 pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	 }
 }

@@ -26,6 +26,7 @@ public:
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
 	char GetType();
+	color GetColor();
 };
 
 #endif

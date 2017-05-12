@@ -204,3 +204,8 @@ char CTriangle::GetType()
 {
 	return 'T';
 }
+
+color CTriangle::GetColor()
+{
+	return FigGfxInfo.FillClr;
+}

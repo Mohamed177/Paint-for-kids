@@ -113,3 +113,23 @@ char CCircle::GetType()
 {
 	return 'C';
 }
+
+color CCircle::GetColor()
+{
+	
+	if (FigGfxInfo.FillClr == BLACK) return 0;
+	if (FigGfxInfo.FillClr == BLUE) return 1;
+	if (FigGfxInfo.FillClr == RED) return 2;
+	if (FigGfxInfo.FillClr == GREEN ) return 3;
+	if (FigGfxInfo.FillClr == BROWN) return 4;
+	if (FigGfxInfo.FillClr == BLUEVIOLET)	return 5;
+	if (FigGfxInfo.FillClr == CYAN) return 6;
+	if (FigGfxInfo.FillClr == DARKGREEN ) return 7;
+	if (FigGfxInfo.FillClr == VIOLET) return 8;
+	if (FigGfxInfo.FillClr == GRAY)	 return 9;
+	if (FigGfxInfo.FillClr == ORANGE)	return 10;
+	if (FigGfxInfo.FillClr == PINK) return 11;
+	if (FigGfxInfo.FillClr == SEAGREEN) return 12;
+	if (FigGfxInfo.FillClr == YELLOW) return 13;
+
+}
