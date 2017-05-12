@@ -68,7 +68,7 @@ void CTriangle::Zoom(float factor)
 
 void CTriangle::Save(ofstream &OutFile)
 {
-	OutFile << "TRIANG " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ' << p3.x << ' ' << p3.y << ' ';
+	OutFile << "TRIANG " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ' << p3.x << ' ' << p3.y << ' ' << FigGfxInfo.BorderWdth << ' ';
 	OutFile << (string)FigGfxInfo.DrawClr;
 	if (FigGfxInfo.isFilled)
 		OutFile << ' ' << (string)FigGfxInfo.FillClr << endl;
@@ -78,11 +78,11 @@ void CTriangle::Save(ofstream &OutFile)
 
 void CTriangle::PrintInfo(Output* pOut) 
 {
-	string info = "Rectangle of ID : " + to_string(ID) + " Point 1 : ( " + to_string(p1.x) + " , " + to_string(p1.y);
+	string info = "Triangle of ID : " + to_string(ID) + " Point 1 : ( " + to_string(p1.x) + " , " + to_string(p1.y);
 	info += " ) Point 2 : ( " + to_string(p2.x) + " , " + to_string(p2.y);
 	info += " ) Point 3 : ( " + to_string(p3.x) + " , " + to_string(p3.y) +" )  ";
 	string Color = FigGfxInfo.DrawClr;
-	if (FigGfxInfo.isFilled)
+	if (!FigGfxInfo.isFilled)
 		Color += " ,  No Fill.";
 	else 
 	{
@@ -149,10 +149,11 @@ void CTriangle::Resize(float factor, bool zoom = false)
 
 	}
 }
+
 void CTriangle::Load(ifstream &Infile) 
 {
 	string drwColor, Fcolor;
-	Infile >> ID >> p1.x >> p1.y >> p2.x >> p2.y >>p3.x>>p3.y>> drwColor >> Fcolor;
+	Infile >> ID >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y >> FigGfxInfo.BorderWdth >> drwColor >> Fcolor;
 	FigGfxInfo.DrawClr = drwColor;
 	if (Fcolor == "NO_FILL")
 		FigGfxInfo.isFilled = false;
@@ -169,7 +170,7 @@ Point CTriangle::GetCenter()
 	mid.y = (p1.y + p2.y + p3.y) / 3;
 	return mid;
 }
-bool CTriangle:: ValidMove(Point p ) 
+bool CTriangle:: ValidMove(Point p, bool scramble = 0) 
 {
 	Point v1, v2, v3;
 	v1.x = p1.x + p.x;
@@ -178,7 +179,10 @@ bool CTriangle:: ValidMove(Point p )
 	v2.y = p2.y + p.y;
 	v3.x = p3.x + p.x;
 	v3.y = p3.y + p.y;
-	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width &&v1.x >=0 &&v2.x >=0 &&v3.x >=0))
+	int left_border = 0;
+	if (scramble)
+		left_border = UI.width / 2;
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width &&v1.x >=left_border &&v2.x >=left_border &&v3.x >=left_border))
 	{
 		return true;
 	}

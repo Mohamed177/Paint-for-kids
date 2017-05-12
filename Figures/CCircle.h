@@ -13,14 +13,17 @@ public:
 	color GetColor();
 	void Resize(float K, bool zoom);
     Point GetCenter();
-	bool ValidMove(Point);
+	bool ValidMove(Point, bool srcamble);
 	void Move(Point);
 	CFigure * copy() ;
 private:
 	Point Center,P2;
-	double Raduis;
+	double Radius;
 
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
+
+	// Inherited via CFigure
+	virtual void PrintInfo(Output * pOut) override;
 };
 

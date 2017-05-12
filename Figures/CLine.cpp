@@ -49,7 +49,7 @@ bool CLine::Is_Selected(Point P) const
 
 void CLine::Save(ofstream &OutFile)
 {
-	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << " \n";
+	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << FigGfxInfo.BorderWdth << (string)FigGfxInfo.DrawClr << " \n";
 }
 
 CLine::~CLine()
@@ -58,9 +58,38 @@ CLine::~CLine()
 }
 void CLine::Zoom(float factor)
 {
+	Point wcenter, p, Center;
+	Center = GetCenter();
+	wcenter.x = UI.width / 2;
+	wcenter.y = UI.height / 2;
+	if (factor > 1)
+	{
+		p.x = Center.x - wcenter.x;
+		p.y = Center.y - wcenter.y;
+	}
+	else
+	{
+		p.x = wcenter.x - Center.x;
+		p.y = wcenter.y - Center.y;
+		p.x *= 1.0 - factor;
+		p.y *= 1.0 - factor;
+	}
+	Resize(factor, true);
+	Move(p);
+}
+void CLine::PrintInfo(Output * pOut)
+{
+	string info = "Line of ID : " + to_string(ID) + " Point 1 : ( " + to_string(p1.x) + " , " + to_string(p1.y);
+	info += " ) Point 2 : ( " + to_string(p2.x) + " , " + to_string(p2.y) + " ) ";
+	string Color = FigGfxInfo.DrawClr;
+	info += Color;
+	pOut->PrintMessage(info);
 }
 void CLine::Load(ifstream &Infile) 
 {
+	string drwColor, Fcolor;
+	Infile >> ID >> p1.x >> p1.y >> p2.x >> p2.y >> FigGfxInfo.BorderWdth >> drwColor;
+	FigGfxInfo.DrawClr = drwColor;
 }
  Point CLine::GetCenter() 
 {
@@ -73,17 +102,44 @@ void CLine::Load(ifstream &Infile)
 
 void CLine::Resize(float factor, bool zoom = false)
 {
-	return;
+	Point mid, temp1 = p1, temp2 = p2;
+	mid.x = (p1.x + p2.x) / 2;
+	mid.y = (p1.y + p2.y) / 2;
+	while (factor < 1)
+	{
+		p1.x = (p1.x + mid.x) / 2;
+		p1.y = (p1.y + mid.y) / 2;
+		p2.x = (p2.x + mid.x) / 2;
+		p2.y = (p2.y + mid.y) / 2;
+		factor *= 2;
+	}
+	while (factor > 1)
+	{
+		p1.x = p1.x * 2 - mid.x;
+		p1.y = p1.y * 2 - mid.y;
+		p2.x = p2.x * 2 - mid.x;
+		p2.y = p2.y * 2 - mid.y;
+		factor /= 2;
+	}
+	if (!zoom)
+		if (p1.x < 0 || p1.x > UI.width || p1.y < 0 || p1.y > UI.height || p2.x < 0 || p2.x > UI.width || p2.y < 0 || p2.y > UI.height)
+		{
+			p1 = temp1;
+			p2 = temp2;
+		}
 }
 
-bool CLine::ValidMove(Point p ) 
+bool CLine::ValidMove(Point p, bool scramble = 0) 
 {
 	Point v1, v2;
 	v1.x = p1.x + p.x;
 	v1.y = p1.y + p.y;
 	v2.x = p2.x + p.x;
 	v2.y = p2.y + p.y;
-	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=0 &&v2.x >=0))
+	int left_border = 0;
+	if (scramble)
+		left_border = UI.width / 2;
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=left_border &&v2.x >=left_border))
 	{
 		return true;
 	}

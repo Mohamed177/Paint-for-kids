@@ -20,7 +20,7 @@ public:
 	void Move(Point nCorner);
 	
 	Point GetCenter();
-	bool ValidMove(Point);
+	bool ValidMove(Point,bool);
 	CFigure *copy();
 
 	// Inherited via CFigure

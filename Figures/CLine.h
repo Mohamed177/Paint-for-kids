@@ -15,7 +15,7 @@ public:
 	void Load(ifstream &Infile);
 	void Resize(float factor, bool zoom);
 	 Point GetCenter();
-	 bool ValidMove(Point);
+	 bool ValidMove(Point, bool scramble);
 	 CFigure *copy();
 	 void Move(Point v);
 	 char GetType();
@@ -24,5 +24,8 @@ public:
 
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
+
+	// Inherited via CFigure
+	virtual void PrintInfo(Output * pOut) override;
 };
 

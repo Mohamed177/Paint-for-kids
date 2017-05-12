@@ -18,7 +18,7 @@ public:
 	 void Load(ifstream &Infile) ;
 	void PrintInfo(Output* pOut);
 	Point GetCenter();
-	bool ValidMove(Point);
+	bool ValidMove(Point, bool);
 	CFigure *copy();
 	void Move( Point v );
 	char GetType();

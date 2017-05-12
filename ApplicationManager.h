@@ -18,6 +18,7 @@ private:
 	int no_of_zoomed_figs;
 	CFigure*CopyList[MaxFigCount];
 	CFigure* ZoomList[MaxFigCount];
+	CFigure* ScrambleList[MaxFigCount];
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -44,8 +45,10 @@ public:
 	void LoadAll(ifstream &OutFile) ;
 	void ResizeSelected(float factor);
 	void Delete_Figs();
+	void ScrambleDelete();
 	void Copy();
 	void ZoomCopy();
+	void ScrambleCopy();
 	void Zoom(float factor);
 	void Cut();
 	bool move(Point v);
@@ -54,10 +57,16 @@ public:
 	void ChngeBrdrWdth();
 	void ChangeDrwColor();
 	void ChangeFllColor();
+	int getZ_No();
+	void RandomOrder();
+	void RandomPoint();
+	int highlight();
+	bool getScrmbleFig(Point, int z_id);
 	void PickHideCopy(CFigure** ,int &);
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);
+	
 };
 
 #endif

@@ -47,6 +47,7 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;
 		CopyList[i] = NULL;
 		ZoomList[i] = NULL;
+		ScrambleList[i] = NULL;
 	}
 }
 
@@ -203,12 +204,23 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 void ApplicationManager::UpdateInterface(ActionType act) const
 {
 	pOut->ClearDrawArea();
-	if (act == ZOOMIN || act == ZOOMOUT || act == TO_SCRAMBLE_FIND)
+	if (act == ZOOMIN || act == ZOOMOUT )
 	{
 		for (int i = 0; i < FigCount; i++)
 			ZoomList[i]->Draw(pOut);
 		pOut->CreateDrawToolBar();
 		pOut->ClearStatusBar();
+	}
+	else if (act == TO_SCRAMBLE_FIND)
+	{
+		for (int i = 0; i < no_of_zoomed_figs; i++)
+		{
+			ZoomList[i]->Draw(pOut);
+			ScrambleList[i]->Draw(pOut);
+		}
+		pOut->CreatePlayToolBar();
+		pOut->ClearStatusBar();
+		pOut->ScrambleScreen();
 	}
 	else 
 		for(int i=0; i<FigCount; i++)
@@ -318,6 +330,27 @@ void ApplicationManager::Delete_Figs()
 		}
 	}
 }
+
+void ApplicationManager::ScrambleDelete()
+{
+	delete ScrambleList[no_of_zoomed_figs - 1];
+	ScrambleList[no_of_zoomed_figs - 1] = NULL;
+	for (int i = 0; i < no_of_zoomed_figs; i++)
+	{
+		if (ZoomList[i]->IsSelected())
+		{
+			delete ZoomList[i];
+			ZoomList[i] = NULL;
+			for (int j = i; j < no_of_zoomed_figs - 1; j++)
+			{
+				swap(ZoomList[j], ZoomList[j + 1]);
+			}
+		}
+	}
+	if (no_of_zoomed_figs > 0)
+		no_of_zoomed_figs--;
+}
+
 void ApplicationManager::Copy() 
 {
 	for (int  i = 0; i < Ccount; i++)
@@ -349,6 +382,15 @@ void ApplicationManager::ZoomCopy()
 			ZoomList[i] = FigList[i]->copy();
 			no_of_zoomed_figs++;
 		}
+	}
+}
+
+void ApplicationManager::ScrambleCopy()
+{
+	for (int i = 0; i < no_of_zoomed_figs; i++)
+	{
+		ScrambleList[i] = ZoomList[i]->copy();
+		ScrambleList[i]->setID(ZoomList[i]->getID());
 	}
 }
 
@@ -440,6 +482,12 @@ void ApplicationManager::ScrambleMove()
 	for (int i = 0; i < no_of_zoomed_figs; i++)
 	{
 		ZoomList[i]->Move(v);
+	}
+	v.x = UI.width / 2;
+	v.y = 0;
+	for (int i = 0; i < no_of_zoomed_figs; i++)
+	{
+		ScrambleList[i]->Move(v);
 	}
 }
 
@@ -705,6 +753,74 @@ f:
 	}
 	if (!flag) UI.FillColor = c;
 	
+}
+
+int ApplicationManager::getZ_No()
+{
+	return no_of_zoomed_figs;
+}
+
+void ApplicationManager::RandomOrder()
+{
+	//%100 = 0 - 99
+	int i, j;
+	for (int k = 0; k < no_of_zoomed_figs; k++)
+	{
+		i = rand() % no_of_zoomed_figs;
+		j = rand() % no_of_zoomed_figs;
+		swap(ScrambleList[i], ScrambleList[j]);
+	}
+}
+
+void ApplicationManager::RandomPoint()
+{
+	// 780->1234
+	Point distance, center;
+	for (int k = 0; k < no_of_zoomed_figs; k++)
+	{
+		center = ScrambleList[k]->GetCenter();
+		do
+		{
+			distance.x = (rand() % UI.width*3.6 / 10) + UI.width*6.0 / 10;
+			distance.y = (rand() % 500) + 100;
+			distance.x -= center.x;
+			distance.y -= center.y;
+		} while (!ScrambleList[k]->ValidMove(distance, true));
+		ScrambleList[k]->Move(distance);
+	}
+}
+
+int ApplicationManager::highlight()
+{
+	int s_id = ScrambleList[no_of_zoomed_figs - 1]->getID();
+	for (int i = 0; i < no_of_zoomed_figs; i++)
+	{
+		if (ZoomList[i]->getID() == s_id)
+		{
+			ZoomList[i]->SetSelected(true);
+			swap(ZoomList[i], ZoomList[no_of_zoomed_figs - 1]);
+			return s_id;
+		}
+	}
+}
+
+bool ApplicationManager::getScrmbleFig(Point p, int z_id)
+{
+	CFigure* test = NULL;
+	for (int i = no_of_zoomed_figs - 1; i >= 0; i--)
+	{
+		if (ScrambleList[i]->Is_Selected(p))
+		{
+			test = ScrambleList[i];
+			break;
+		}
+	}
+	if (test)
+	{
+		if (test->getID() == z_id)
+			return true;
+	}
+	return false;
 }
 
 
