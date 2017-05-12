@@ -110,6 +110,12 @@ class color {
 			ucGreen = 250;
 			ucBlue = 210;
 		}
+		else if (s == "LIGHTSKYBLUE") 
+		{ 
+			ucRed = 135;
+			ucGreen = 206;
+			ucBlue = 250;
+		}
 	}
 
 	operator string()
@@ -144,6 +150,8 @@ class color {
 			return string("YELLOW");
 		else if (ucRed == 250 && ucGreen == 250 && ucBlue == 210)
 			return string("LIGHTGOLDENRODYELLOW");
+		else if (ucRed == 135 && ucGreen == 206 && ucBlue == 250)
+			return string("LIGHTSKYBLUE");
 	}
 	
 
