@@ -682,9 +682,9 @@ void PickAndHide:: PH_AreaMode()
 	}
 	else goto f;
 	pOut->PrintMessage(" plz choose a figure to start :)");
+	G:
 	Point D;
 	pIn->GetPointClicked(D.x, D.y);
-
 	if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
 	{
 		for (int i = figcount-1; i >0; i--)
@@ -706,9 +706,8 @@ void PickAndHide:: PH_AreaMode()
 				break;
 			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from max to low");
 				break;
-
 			default:
-				goto f;
+				goto G;
 			}
 		}
 		else 
@@ -724,11 +723,11 @@ void PickAndHide:: PH_AreaMode()
 			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from low to max");
 				break;
 			default:
-				goto f;
+				goto G;
 			}
 		}
 	}
-	else { goto f; } // Didn't press in Draw area
+	else { goto G; } // Didn't press in Draw area
 	int Fcount = 0; // When he clicks at a line , this will be the number of all lines , and so on
 	int Correct = 0;  // number of correct clicks
 	int Wrong = 0;   // number of wrong clicks
