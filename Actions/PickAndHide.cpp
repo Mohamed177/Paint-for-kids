@@ -107,6 +107,7 @@ void PickAndHide::update()
 
 void PickAndHide:: PH_TypeMode()
 {
+	int mssg = 0; // to print the message , look @ the end of the func.
 	char s = 'a';    // to get the type
 	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
 	Output* pOut = pManager->GetOutput();
@@ -184,7 +185,7 @@ void PickAndHide:: PH_TypeMode()
 				}
 			}
 		}
-		pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong));
+		pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 	
 	}
 
@@ -192,15 +193,41 @@ void PickAndHide:: PH_TypeMode()
 	{
 		Wrong = c;
 	}
-	if ( Correct >= Wrong ) pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	else pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	if ( Wrong == 0 ) pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	Sleep(4000);
+	if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+	}
+	else if (Correct < Wrong)
+	{
+		mssg = 2;
+	}
+	else if (Wrong == 0)
+	{
+		mssg = 3;
+	}
+	for (int i = 4; i > 0; i--)
+	{
+		switch (mssg)
+		{
+		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+
+		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		}
+		Sleep(1000);
+	}
+
 }
 
 
 void PickAndHide::PH_FillColorMode()
 {
+	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
 	int s = 700;    // to get the Color
@@ -354,7 +381,8 @@ f:
 					}
 				}
 			}
-			pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong) + " , Remaining Figures = " + to_string(c-Correct));
+			pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
+
 			// while loop so no need to goto
 		}
 
@@ -362,16 +390,41 @@ f:
 		{
 			Wrong = c;
 		}
-		if (Correct >= Wrong) pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-		else pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-		if (Wrong == 0) pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-		Sleep(1500);
+		if (Correct >= Wrong && Wrong != 0)
+		{
+			mssg = 1;
+		}
+		else if (Correct < Wrong)
+		{
+			mssg = 2;
+		}
+	    else if (Wrong == 0)
+		{
+			mssg = 3;
+		}
+		for (int i = 4; i > 0; i--)
+		{
+			switch (mssg)
+			{
+			case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+
+			default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			}
+			Sleep(1000);
+		}
 	
 }
 
 
 void PickAndHide:: PH_TypeAndFillMode()
 {
+	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
 	int s = 700;    // to get the Color
@@ -561,7 +614,8 @@ f:
 				}
 			}
 		}
-		pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong) + " , Remaining Figures = " + to_string(c - Correct));
+		pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
+
 		// while loop so no need to goto
 	}
 
@@ -569,10 +623,35 @@ f:
 	{
 		Wrong = c;
 	}
-	if (Correct >= Wrong) pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	else pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	if (Wrong == 0) pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	Sleep(1500);
+	if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+	}
+	else if (Correct < Wrong)
+	{
+		mssg = 2;
+	}
+	else if (Wrong == 0)
+	{
+		mssg = 3;
+	}
+	for (int i = 4; i > 0; i--)
+	{
+		switch (mssg)
+		{
+		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+
+		default:        pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		}
+		Sleep(1000);
+	}
+
 
 }
 
