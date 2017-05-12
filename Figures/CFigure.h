@@ -40,7 +40,7 @@ public:
 	virtual CFigure * copy() = 0;
 	virtual int getID();
 	virtual void setID(int i);
-	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+	virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
 
 #endif

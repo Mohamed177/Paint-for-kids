@@ -30,15 +30,18 @@ void Scramble::Execute()
 	pManager->RandomPoint();
 	pManager->UpdateInterface(TO_SCRAMBLE_FIND);
 	bool playing;
+	string score = "";
 	while (pManager->getZ_No() > 0)
 	{
 		int z_id = pManager->highlight();
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
+		pOut->PrintMessage(score);
 		playing = ReadActionParameters();
 		if (!playing)
 			break;
 		if (p.x < UI.width / 2 || p.y >= UI.height-UI.StatusBarHeight)
 			continue;
+		score = "";
 		if (pManager->getScrmbleFig(p,z_id))
 		{
 			pManager->ScrambleDelete();
@@ -49,6 +52,7 @@ void Scramble::Execute()
 			False_counts++;
 		}
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
+		score += "RightClicks = " + to_string(True_counts) + " WrongClicks = " + to_string(False_counts);
 		//delete
 	}
 }

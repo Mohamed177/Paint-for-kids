@@ -43,7 +43,7 @@ bool CRectangle::Is_Selected(Point P) const
 
 void CRectangle::Save(ofstream &OutFile)
 {
-	OutFile << "Rectangle " << ID << ' ' << Corner1.x << ' ' << Corner1.y << ' ' << Corner2.x << ' ' << Corner2.y << ' ';
+	OutFile << "Rectangle " << ID << ' ' << Corner1.x << ' ' << Corner1.y << ' ' << Corner2.x << ' ' << Corner2.y << ' ' << FigGfxInfo.BorderWdth << ' ';
 	OutFile << (string)FigGfxInfo.DrawClr;
 	if (FigGfxInfo.isFilled)
 		OutFile << ' ' << (string)FigGfxInfo.FillClr << endl;
@@ -133,12 +133,13 @@ void CRectangle::Resize(float factor, bool zoom = false)
 void CRectangle::PrintInfo(Output* pOut)
 {
 	string info = "Rectangle of ID : " + to_string(ID) + " Corner 1 : ( " + to_string(Corner1.x) + " , " + to_string(Corner1.y);
-	info += " ) Conrer 2 : ( " + to_string(Corner2.x) + " , " + to_string(Corner2.y);
+	info += " ) Conrer 2 : ( " + to_string(Corner2.x) + " , " + to_string(Corner2.y) + " ) ";
 	string Color = FigGfxInfo.DrawClr;
+	Color += ' ';
 	if (FigGfxInfo.isFilled)
-		Color += " No Fill.";
-	else
 		Color += FigGfxInfo.FillClr;
+	else
+		Color += "No Fill.";
 	info += Color;
 	pOut->PrintMessage(info);
 }
@@ -146,7 +147,7 @@ void CRectangle::PrintInfo(Output* pOut)
 void CRectangle::Load(ifstream &Infile)
 {
 	string drwColor, Fcolor;
-	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> drwColor >> Fcolor;
+	Infile >> ID >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> FigGfxInfo.BorderWdth >> drwColor >> Fcolor;
 	FigGfxInfo.DrawClr = drwColor;
 	if (Fcolor == "NO_FILL")
 		FigGfxInfo.isFilled = false;

@@ -23,5 +23,8 @@ public:
 
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
+
+	// Inherited via CFigure
+	virtual void PrintInfo(Output * pOut) override;
 };
 

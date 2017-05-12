@@ -34,17 +34,17 @@ bool SelectAction::ReadActionParameters()
 
 void SelectAction::Execute()
 {
- Output * pOut= pManager->GetOutput();
+	Output * pOut = pManager->GetOutput();
 	bool test=ReadActionParameters();
 	if (Counter == 1) 
 	{
-		//temp->PrintInfo(pOut);
+		temp->PrintInfo(pOut);
 	}
 	else if (Counter >1)
 	{
 		string s = "";
 		s = to_string(Counter);
-		pOut->PrintMessage( "You selected " +s + " figures");
+		pOut->PrintMessage("You selected " + s + " figures");
 	}
 	temp = NULL;
 }

@@ -17,9 +17,12 @@ public:
 	CFigure * copy() ;
 private:
 	Point Center,P2;
-	double Raduis;
+	double Radius;
 
 	// Inherited via CFigure
 	virtual void Zoom(float factor) override;
+
+	// Inherited via CFigure
+	virtual void PrintInfo(Output * pOut) override;
 };
 
