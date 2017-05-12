@@ -85,6 +85,11 @@ void CCircle::Resize(float K = 2,bool zoom = false)
 	 return v;
  }
 
+ double CCircle::GetArea()
+ {
+	 return 3.14 * Radius * Radius;
+ }
+
  void CCircle::Zoom(float factor)
  {
 	 Point wcenter, p;

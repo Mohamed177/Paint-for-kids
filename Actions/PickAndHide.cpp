@@ -120,7 +120,7 @@ void PickAndHide:: PH_TypeMode()
 
 	 if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
 	{
-		for (int i = 0; i < figcount; i++)
+		for (int i = figcount-1; i >0; i--)
 		{
 			if(figlist[i]->Is_Selected(D))
 			{
@@ -578,5 +578,182 @@ f:
 
 void PickAndHide:: PH_AreaMode()
 {
-	pManager->PickHideCopy(figlist, figcount);
+	char s = 'a';    // to get the type
+	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	//pOut->CreateToolbar
+	pOut->PrintMessage("Searching For Figures Via  ->> Area <<-  , Please Choose a to select figures 1.Area(high > low )  2. area (low > high ) .  ");
+	f:
+	int x, y;
+	bool ma = false;
+	pIn->GetPointClicked(x, y);	//Get the coordinates of the user click
+    //[1] If user clicks on the Toolbar
+	if (y >= 0 && y < UI.ToolBarHeight)
+	{
+		//Check whick Menu item was clicked
+		//==> This assumes that menu items are lined up horizontally <==
+		int ClickedItemOrder = (x / UI.MenuItemWidth);
+		//Divide x coord of the point clicked by the menu item width (int division)
+		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+		if (ClickedItemOrder == 0) ma = true;
+		else if (ClickedItemOrder == 1) ma = false;
+		else goto f;
+	}
+	else goto f;
+	pOut->PrintMessage(" plz choose a figure to start :)");
+	Point D;
+	pIn->GetPointClicked(D.x, D.y);
+
+	if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
+	{
+		for (int i = figcount-1; i >0; i--)
+		{
+			if (figlist[i]->Is_Selected(D))
+			{
+				s = figlist[i]->GetType(); // know which figure is it , line OR rect OR ...
+				break;
+			}
+		}
+		if (ma) {
+			switch (s)
+			{
+			case 'L': pOut->PrintMessage("LINE !! Pick All Lines VIA area from max to low ");
+				break;
+			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles  VIA area from max to low");
+				break;
+			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles  VIA area from max to low");
+				break;
+			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from max to low");
+				break;
+
+			default:
+				goto f;
+			}
+		}
+		else 
+		{
+			switch (s)
+			{
+			case 'L': pOut->PrintMessage("LINE !! Pick All Lines  VIA area from low to max");
+				break;
+			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles  VIA area from low to max");
+				break;
+			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles  VIA area from low to max");
+				break;
+			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from low to max");
+				break;
+			default:
+				goto f;
+			}
+		}
+	}
+	else { goto f; } // Didn't press in Draw area
+	int Fcount = 0; // When he clicks at a line , this will be the number of all lines , and so on
+	int Correct = 0;  // number of correct clicks
+	int Wrong = 0;   // number of wrong clicks
+	int c = 0;				// for loop to get that number
+	if (ma) {
+		double max = 0;
+		for (int i = 0; i < figcount; i++)
+		{
+			if (figlist[i]->GetType() == s)
+			{
+				if (figlist[i]->GetArea() > max) max = figlist[i]->GetArea();
+				Fcount++;
+			}
+		}
+
+	    c = Fcount;
+		while (Fcount != 0)
+		{
+			Point D;
+			pIn->GetPointClicked(D.x, D.y);
+			if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he's INSIDE DRAW AREA
+			{
+				for (int i = figcount - 1; i >= 0; i--) // start mn el2a5er , 3l4an lw 2 fig drawen on each other
+				{
+					if (figlist[i]->Is_Selected(D) && (int)max ==int( figlist[i]->GetArea()) && figlist[i]->GetType() == s)
+					{
+						Fcount--;
+						Correct++;
+						PH_DelFig(i);
+						update();
+						max = 0;
+						// Re-Draw after i delete a fig.
+						for (int i = 0; i < figcount; i++)
+						{
+							if (figlist[i]->GetType() == s)
+							{
+								if (figlist[i]->GetArea() > max) max = figlist[i]->GetArea();
+							}
+						}
+						break;
+					}
+					else if (figlist[i]->Is_Selected(D))
+					{
+						Wrong++;
+					}
+				}
+			}
+			pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong));
+		}
+	}
+	else 
+	{
+		double min = 100000000;
+		for (int i = 0; i < figcount; i++)
+		{
+			if (figlist[i]->GetType() == s)
+			{
+				if (figlist[i]->GetArea() < min) min = figlist[i]->GetArea();
+				Fcount++;
+			}
+		}
+
+		c = Fcount;
+		while (Fcount != 0)
+		{
+			Point D;
+			pIn->GetPointClicked(D.x, D.y);
+			if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he's INSIDE DRAW AREA
+			{
+				for (int i = figcount - 1; i >= 0; i--) // start mn el2a5er , 3l4an lw 2 fig drawen on each other
+				{
+					if (figlist[i]->Is_Selected(D) && (int)min == (int)figlist[i]->GetArea() && figlist[i]->GetType() == s)
+					{
+						Fcount--;
+						Correct++;
+						PH_DelFig(i);
+						update();
+						min= 100000000;
+						// Re-Draw after i delete a fig.
+						for (int i = 0; i < figcount; i++)
+						{
+							if (figlist[i]->GetType() == s)
+							{
+								if (figlist[i]->GetArea() < min) min = figlist[i]->GetArea();
+							}
+						}
+						break;
+					}
+					else if (figlist[i]->Is_Selected(D))
+					{
+						Wrong++;
+					}
+				}
+			}
+			pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong));
+		}
+	}
+	if (Wrong>c) // 3l4an el negative (-4/0) :D
+	{
+		Wrong = c;
+	}
+	if (Correct >= Wrong) pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
+	else pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
+	if (Wrong == 0) pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
+	Sleep(4000);
+
 }

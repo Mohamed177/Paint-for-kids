@@ -20,6 +20,7 @@ public:
 	 CFigure *copy();
 	 void Move(Point v);
 	 char GetType();
+	 double GetArea();
 
 	~CLine();
 

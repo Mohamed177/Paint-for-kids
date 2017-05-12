@@ -23,7 +23,7 @@ public:
 	CFigure *copy();
 	void Move( Point v );
 	char GetType();
-
+	double GetArea();
 	~CTriangle();
 	virtual void Zoom(float factor);
 };

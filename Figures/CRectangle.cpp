@@ -165,7 +165,12 @@ void CRectangle::Move(Point nCorner)
 	Corner1.y += nCorner.y;
 	Corner2.x += nCorner.x;
 	Corner2.y += nCorner.y;
-} 
+}
+
+double CRectangle::GetArea()
+{
+	return abs(Corner1.x - Corner2.x)*abs(Corner1.y - Corner2.y);
+}
 
 Point CRectangle::GetCenter() 
 {

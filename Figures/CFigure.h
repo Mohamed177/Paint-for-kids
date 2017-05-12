@@ -25,7 +25,10 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual void Zoom(float factor) = 0;
-	void ChngBrdWdt(int p);         //changes the figure's border width
+	void ChngBrdWdt(int p); 
+	virtual double GetArea() = 0;
+	
+	//changes the figure's border width
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

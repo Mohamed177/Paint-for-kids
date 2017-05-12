@@ -209,3 +209,12 @@ char CTriangle::GetType()
 {
 	return 'T';
 }
+
+double CTriangle::GetArea()
+{
+	double T1 = (abs(p1.x - p2.x) * abs(p1.y - p2.y)) / 2;
+	double T2 = (abs(p2.x - p3.x) * abs(p2.y - p3.y)) / 2;
+	double T3 = (abs(p3.x - p1.x) * abs(p3.y - p1.y)) / 2;
+	double R = (max(max(p1.x, p2.x), p3.x) - min(min(p1.x, p2.x), p3.x)) * (max(max(p1.y, p2.y), p3.y) - min(min(p1.y, p2.y), p3.y));
+	return R-T1-T2-T3;
+}

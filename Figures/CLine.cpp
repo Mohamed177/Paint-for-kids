@@ -170,6 +170,11 @@ char CLine::GetType()
 	return 'L';
 }
 
+double CLine::GetArea()
+{
+	return sqrt((abs(p1.x-p2.x)*abs(p1.x - p2.x)) + (abs(p1.y - p2.y)*abs(p1.y - p2.y)));
+}
+
 
 
 
