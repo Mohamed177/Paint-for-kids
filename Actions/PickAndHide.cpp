@@ -218,7 +218,7 @@ f:
 	if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he pressed in the Drawing area
 	{
 
-		for (int i = 0; i < figcount; i++)
+		for (int i = figcount - 1; i >= 0; i--)  // 3l4an e5tar elly foo2
 		{
 			if (figlist[i]->Is_Selected(D) && (figlist[i]->ISFILLED()))
 			{
@@ -237,11 +237,11 @@ f:
 					break;
 				case 4:       pOut->PrintMessage("FILLED !! Pick All BROWN-FILLED Figures To Get A Perfect Score..");
 					break;
-				case 5:  pOut->PrintMessage("FILLED !! Pick All BLUEVIOLET-FILLED Figures To Get A Perfect Score..");
+				case 5:     pOut->PrintMessage("FILLED !! Pick All BLUEVIOLET-FILLED Figures To Get A Perfect Score..");
 					break;
 				case 6:        pOut->PrintMessage("FILLED !! Pick All CYAN-FILLED Figures To Get A Perfect Score..");
 					break;
-				case 7:   pOut->PrintMessage("FILLED !! Pick All DARKGREEN-FILLED Figures To Get A Perfect Score..");
+				case 7:      pOut->PrintMessage("FILLED !! Pick All DARKGREEN-FILLED Figures To Get A Perfect Score..");
 					break;
 				case 8:      pOut->PrintMessage("FILLED !! Pick All VIOLET-FILLED Figures To Get A Perfect Score..");
 					break;
@@ -262,9 +262,10 @@ f:
 					goto f;
 					break;
 				}
+				break; // after the switch
 			}
 
-			else if (figlist[i]->Is_Selected(D) && !(figlist[i]->ISFILLED()))
+			else if (figlist[i]->Is_Selected(D) && ! (figlist[i]->ISFILLED()) )
 			{
 				selected = 1;
 				s = figlist[i]->GetFillInt(); // know which figure is it , line OR rect OR ...
@@ -300,7 +301,7 @@ f:
 		{
 			for (int i = 0; i < figcount; i++)
 			{
-				if (figlist[i]->GetFillInt() == s && !(figlist[i]->ISFILLED()))
+				if (! (figlist[i]->ISFILLED()))
 				{
 					Fcount++;
 				}
@@ -338,7 +339,7 @@ f:
 				{
 					for (int i = figcount - 1; i >= 0; i--) // start mn el2a5er , 3l4an lw 2 fig drawen on each other
 					{
-						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && !figlist[i]->ISFILLED())
+						if (figlist[i]->Is_Selected(D) && !figlist[i]->ISFILLED())
 						{
 							Fcount--;
 							Correct++;
