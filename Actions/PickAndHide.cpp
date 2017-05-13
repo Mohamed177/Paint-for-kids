@@ -657,15 +657,16 @@ f:
 
 void PickAndHide:: PH_AreaMode()
 {
+	int mssg = 0; // to print the message , look @ the end of the func.
 	char s = 'a';    // to get the type
 	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	//pOut->CreateToolbar
-	pOut->PrintMessage("Searching For Figures Via  ->> Area <<-  , Please Choose a to select figures 1.Area(high > low )  2. area (low > high ) .  ");
+	pOut->PrintMessage("Searching For Figures Via  ->> Area <<-  , Please Select The Order From The TooblBar 1. Area Order (High --> Low)  2. Area Order (Low > High).  ");
 	f:
 	int x, y;
-	bool ma = false;
+	bool ma = false; // to know if order DECEND or ACCEND
 	pIn->GetPointClicked(x, y);	//Get the coordinates of the user click
     //[1] If user clicks on the Toolbar
 	if (y >= 0 && y < UI.ToolBarHeight)
@@ -681,7 +682,7 @@ void PickAndHide:: PH_AreaMode()
 		else goto f;
 	}
 	else goto f;
-	pOut->PrintMessage(" plz choose a figure to start :)");
+	pOut->PrintMessage("Please Choose A Figure To Start :)");
 	G:
 	Point D;
 	pIn->GetPointClicked(D.x, D.y);
@@ -698,13 +699,13 @@ void PickAndHide:: PH_AreaMode()
 		if (ma) {
 			switch (s)
 			{
-			case 'L': pOut->PrintMessage("LINE !! Pick All Lines VIA area from max to low ");
+			case 'L': pOut->PrintMessage("LINE !! Pick All Lines VIA Area In Descending Order (-> From Max To Low <-) ");
 				break;
-			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles  VIA area from max to low");
+			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles VIA Area In Descending Order (-> From Max To Low <-) ");
 				break;
-			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles  VIA area from max to low");
+			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles VIA Area In Descending Order (-> From Max To Low <-) ");
 				break;
-			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from max to low");
+			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles VIA Area In Descending Order (-> From Max To Low <-) ");
 				break;
 			default:
 				goto G;
@@ -714,13 +715,13 @@ void PickAndHide:: PH_AreaMode()
 		{
 			switch (s)
 			{
-			case 'L': pOut->PrintMessage("LINE !! Pick All Lines  VIA area from low to max");
+			case 'L': pOut->PrintMessage("LINE !! Pick All Lines VIA Area In Ascending Order (-> From Low To Max <-) ");
 				break;
-			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles  VIA area from low to max");
+			case 'R':  pOut->PrintMessage("RECTANGLE !! Pick All Rectangles VIA Area In Ascending Order (-> From Low To Max <-) ");
 				break;
-			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles  VIA area from low to max");
+			case 'C': pOut->PrintMessage("CIRCLE !! Pick All Circles VIA Area In Ascending Order (-> From Low To Max <-) ");
 				break;
-			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles  VIA area from low to max");
+			case 'T': pOut->PrintMessage("TRIANGLE !! Pick All Triangles VIA Area In Ascending Order (-> From Low To Max <-) ");
 				break;
 			default:
 				goto G;
@@ -775,7 +776,7 @@ void PickAndHide:: PH_AreaMode()
 					}
 				}
 			}
-			pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong));
+			pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 		}
 	}
 	else 
@@ -822,16 +823,41 @@ void PickAndHide:: PH_AreaMode()
 					}
 				}
 			}
-			pOut->PrintMessage("RightClicks = " + to_string(Correct) + " , WrongClicks = " + to_string(Wrong));
+			pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 		}
 	}
 	if (Wrong>c) // 3l4an el negative (-4/0) :D
 	{
 		Wrong = c;
 	}
-	if (Correct >= Wrong) pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	else pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	if (Wrong == 0) pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :) ");
-	Sleep(4000);
+	if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+	}
+	else if (Correct < Wrong)
+	{
+		mssg = 2;
+	}
+	else if (Wrong == 0)
+	{
+		mssg = 3;
+	}
+	for (int i = 4; i > 0; i--)
+	{
+		switch (mssg)
+		{
+		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+
+		default:        pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		}
+		Sleep(1000);
+	}
+
 
 }
