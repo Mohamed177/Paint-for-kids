@@ -16,6 +16,7 @@ public:
 	void CreateStatusBar() const;	//create the status bar
 	void CreatePickHideToolbar() const;
 	void CreateFigMenu() const;
+	void CreatePHAreaToolbar() const;
 	void CreateResizeMenu() const;
 	void ScrambleScreen() const;
 	void ClearToolBar() const; //        E7NA ELLY 3MLNAHA.

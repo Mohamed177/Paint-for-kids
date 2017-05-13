@@ -253,6 +253,23 @@ void Output::CreateFigMenu() const
 	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
 }
 
+void Output::CreatePHAreaToolbar() const
+{
+	ClearToolBar();
+
+	string MenuItemImages[3];
+	MenuItemImages[0] = "images\\MenuItems\\DE.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\ASC.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\backk.jpg";
+	for (int i = 0; i<3; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
+
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreatePickHideToolbar() const
 {
@@ -262,7 +279,7 @@ void Output::CreatePickHideToolbar() const
 	MenuItemImages[0] = "images\\MenuItems\\PH_Figs.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\PH_FillColor.jpg";
 	MenuItemImages[2] = "images\\MenuItems\\PH_Both.jpg";
-	MenuItemImages[3] = "images\\MenuItems\\PH__Area.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\PH_Area.jpg";
 	MenuItemImages[4] = "images\\MenuItems\\backk.jpg";
 	for (int i = 0; i<5; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);

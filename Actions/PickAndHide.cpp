@@ -21,7 +21,7 @@ bool PickAndHide::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("Welcome To Pick AND Hide Game :)  ");
+	pOut->PrintMessage("Welcome To Pick AND Hide Game , Please Choose a Mode From The Toolbar :)  ");
 	pOut->CreatePickHideToolbar();
 f:
 	int x, y;
@@ -663,7 +663,8 @@ void PickAndHide:: PH_AreaMode()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	//pOut->CreateToolbar
-	pOut->PrintMessage("Searching For Figures Via  ->> Area <<-  , Please Select The Order From The TooblBar 1. Area Order (High --> Low)  2. Area Order (Low > High).  ");
+	pOut->CreatePHAreaToolbar();
+	pOut->PrintMessage("Searching For Figures Via ->> Area <<- ,  Select From The TooblBar ( Order (High --> Low) || Order (Low --> High) )  ");
 	f:
 	int x, y;
 	bool ma = false; // to know if order DECEND or ACCEND
@@ -676,7 +677,7 @@ void PickAndHide:: PH_AreaMode()
 		int ClickedItemOrder = (x / UI.MenuItemWidth);
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
-
+		if (ClickedItemOrder == 2) return;
 		if (ClickedItemOrder == 0) ma = true;
 		else if (ClickedItemOrder == 1) ma = false;
 		else goto f;
