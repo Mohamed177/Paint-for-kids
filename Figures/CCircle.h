@@ -17,6 +17,7 @@ public:
 	bool ValidMove(Point, bool srcamble);
 	void Move(Point);
 	CFigure * copy() ;
+	double GetArea();
 private:
 	Point Center,P2;
 	double Radius;

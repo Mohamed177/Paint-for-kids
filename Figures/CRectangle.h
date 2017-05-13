@@ -19,7 +19,7 @@ public:
 	virtual void Resize(float, bool zoom);
 	void PrintInfo(Output* pOut);
 	void Move(Point nCorner);
-	
+	 double GetArea();
 	Point GetCenter();
 	bool ValidMove(Point,bool);
 	CFigure *copy();
