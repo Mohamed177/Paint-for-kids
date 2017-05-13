@@ -74,7 +74,7 @@ void Output::ClearToolBar() const
 {
 	//Clear Status bar by drawing a filled white rectangle
 	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(LIGHTGOLDENRODYELLOW);
+	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, 1300, 50);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -155,7 +155,7 @@ void Output::CreateColorToolBar() const
 	MenuItemImages[11] = "images\\MenuItems\\Pink.jpg";
 	MenuItemImages[12] = "images\\MenuItems\\SeaGreen.jpg";
 	MenuItemImages[13] = "images\\MenuItems\\Yellow.jpg";
-	MenuItemImages[14] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[14] = "images\\MenuItems\\backk.jpg";
 	
 
 
@@ -189,7 +189,7 @@ void Output:: CreateBorderToolbar() const
 	MenuItemImages[8] = "images\\MenuItems\\16.jpg";
 	MenuItemImages[9] = "images\\MenuItems\\18.jpg";
 	MenuItemImages[10] = "images\\MenuItems\\20.jpg";
-	MenuItemImages[11] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[11] = "images\\MenuItems\\backk.jpg";
 	
 
 	//Draw menu item one image at a time
@@ -221,8 +221,8 @@ void Output::CreatePlayToolBar() const
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_PICK_HIDE] = "images\\MenuItems\\pick.jpg";
 	MenuItemImages[ITM_SCRAMBLE_FIND] = "images\\MenuItems\\scramble.jpg";
-	MenuItemImages[ITM_EXIT_PLAY] = "images\\MenuItems\\exit.jpg";
-	MenuItemImages[ITM_SWITCH_DRAW] = "images\\MenuItems\\to draw.jpg";
+	MenuItemImages[ITM_EXIT_PLAY] = "images\\MenuItems\\Exit.jpg";
+	MenuItemImages[ITM_SWITCH_DRAW] = "images\\MenuItems\\backk.jpg";
 
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -244,7 +244,7 @@ void Output::CreateFigMenu() const
 	string MenuItemImages[3];
 	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
-	MenuItemImages[2] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\backk.jpg";
 	for (int i = 0; i<3; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
@@ -259,11 +259,11 @@ void Output::CreatePickHideToolbar() const
 	ClearToolBar();
 
 	string MenuItemImages[5];
-	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
-	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
-	MenuItemImages[2] = "images\\MenuItems\\back.jpg";
-	MenuItemImages[3] = "images\\MenuItems\\back.jpg";
-	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[0] = "images\\MenuItems\\PH_Figs.jpg";
+	MenuItemImages[1] = "images\\MenuItems\\PH_FillColor.jpg";
+	MenuItemImages[2] = "images\\MenuItems\\PH_Both.jpg";
+	MenuItemImages[3] = "images\\MenuItems\\PH__Area.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\backk.jpg";
 	for (int i = 0; i<5; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
@@ -284,7 +284,7 @@ void Output::CreateResizeMenu() const
 	MenuItemImages[1] = "images\\MenuItems\\X2.jpg";
 	MenuItemImages[2] = "images\\MenuItems\\X0.5.jpg";
 	MenuItemImages[3] = "images\\MenuItems\\X0.25.jpg";
-	MenuItemImages[4] = "images\\MenuItems\\back.jpg";
+	MenuItemImages[4] = "images\\MenuItems\\backk.jpg";
 	for (int i = 0; i<5; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
