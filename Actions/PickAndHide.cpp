@@ -10,8 +10,8 @@ PickAndHide::PickAndHide(ApplicationManager* pApp) : Action (pApp)
 	{
 		figlist[i] = NULL;
 	}
-	mciSendString(TEXT("stop gameost.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("ph.WAV", NULL, SND_LOOP | SND_ASYNC);
 }
 
 
@@ -200,23 +200,23 @@ void PickAndHide:: PH_TypeMode()
 	{
 		Wrong = c;
 	}
-	if (Correct >= Wrong && Wrong != 0)
-	{
-		mssg = 1;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
-	}
-	else if (Correct < Wrong)
+	if (c - Wrong == 0)
 	{
 		mssg = 2;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
+		PlaySound(NULL, NULL, 0);
+		PlaySound("boo.WAV", NULL, SND_ASYNC);
+	}
+	else if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
 	}
 	else if (Wrong == 0)
 	{
 		mssg = 3;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
 	}
 
 	for (int i = 3; i > 0; i--)
@@ -237,7 +237,10 @@ void PickAndHide:: PH_TypeMode()
 		Sleep(1000);
 	}
 
-	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("ph.WAV", NULL, SND_LOOP | SND_ASYNC);
+
+
 
 
 }
@@ -412,23 +415,23 @@ f:
 		{
 			Wrong = c;
 		}
-		if (Correct >= Wrong && Wrong != 0)
-		{
-			mssg = 1;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
-		}
-		else if (Correct < Wrong)
+		if (c - Wrong == 0)
 		{
 			mssg = 2;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
+			PlaySound(NULL, NULL, 0);
+			PlaySound("boo.WAV", NULL, SND_ASYNC);
+		}
+		else if (Correct >= Wrong && Wrong != 0)
+		{
+			mssg = 1;
+			PlaySound(NULL, NULL, 0);
+			PlaySound("kids.WAV", NULL, SND_ASYNC);
 		}
 		else if (Wrong == 0)
 		{
 			mssg = 3;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
+			PlaySound(NULL, NULL, 0);
+			PlaySound("kids.WAV", NULL, SND_ASYNC);
 		}
 
 		for (int i = 3; i > 0; i--)
@@ -448,8 +451,9 @@ f:
 			}
 			Sleep(1000);
 		}
-	
-		mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+
+		PlaySound(NULL, NULL, 0);
+		PlaySound("ph.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 }
 
@@ -659,23 +663,23 @@ f:
 	{
 		Wrong = c;
 	}
-	if (Correct >= Wrong && Wrong != 0)
-	{
-		mssg = 1;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
-	}
-	else if (Correct < Wrong)
+	if (c - Wrong == 0)
 	{
 		mssg = 2;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
+		PlaySound(NULL, NULL, 0);
+		PlaySound("boo.WAV", NULL, SND_ASYNC);
+	}
+	else if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
 	}
 	else if (Wrong == 0)
 	{
 		mssg = 3;
-		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
 	}
 
 	for (int i = 3; i > 0; i--)
@@ -696,7 +700,8 @@ f:
 		Sleep(1000);
 	}
 
-	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("ph.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 
 }
@@ -881,43 +886,44 @@ void PickAndHide:: PH_AreaMode()
 	{
 		Wrong = c;
 	}
-	if (Correct >= Wrong && Wrong != 0)
-		{
-			mssg = 1;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
-		}
-		else if (Correct < Wrong)
-		{
-			mssg = 2;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
-		}
-		else if (Wrong == 0)
-		{
-			mssg = 3;
-			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
-		}
+	if (c - Wrong == 0)
+	{
+		mssg = 2;
+		PlaySound(NULL, NULL, 0);
+		PlaySound("boo.WAV", NULL, SND_ASYNC);
+	}
+	else if (Correct >= Wrong && Wrong != 0)
+	{
+		mssg = 1;
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
+	}
+	else if (Wrong == 0)
+	{
+		mssg = 3;
+		PlaySound(NULL, NULL, 0);
+		PlaySound("kids.WAV", NULL, SND_ASYNC);
+	}
 
-		for (int i = 3; i > 0; i--)
+	for (int i = 3; i > 0; i--)
+	{
+
+		switch (mssg)
 		{
+		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
+		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			break;
 
-			switch (mssg)
-			{
-			case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-				break;
-			case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-				break;
-			case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-				break;
-
-			default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
-				break;
-			}
-			Sleep(1000);
+		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+			break;
 		}
-	
-		mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+		Sleep(1000);
+	}
+
+	PlaySound(NULL, NULL, 0);
+	PlaySound("ph.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 }

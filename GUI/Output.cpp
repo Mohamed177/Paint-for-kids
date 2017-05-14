@@ -6,7 +6,7 @@ Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
-	mciSendString(TEXT("play drawost.wav"), NULL, 0, NULL);
+	PlaySound("drawost.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 	
 	UI.width = 1300;
@@ -207,9 +207,8 @@ void Output:: CreateBorderToolbar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreatePlayToolBar() const
 {
-	mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("stop drawost.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("play gameost.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("gameost.WAV", NULL, SND_LOOP | SND_ASYNC);
 	ClearToolBar();
 	PrintMessage("Welcome To Play Mode :) ..  Please Choose Your Favourite Game .");
 	UI.InterfaceMode = MODE_PLAY;

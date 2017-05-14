@@ -23,8 +23,8 @@ void SwtchTOdraw::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	pOut->ClearToolBar();
-	mciSendString(TEXT("stop gameost.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("play drawost.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("drawost.WAV", NULL, SND_LOOP | SND_ASYNC);
 	pOut->CreateDrawToolBar();
 	pOut->PrintMessage("Drawing Mode .. Enjoy Drawing :) ");
 }

@@ -8,9 +8,9 @@ ExitAction::ExitAction(ApplicationManager *pApp):Action(pApp)
 
 bool ExitAction::ReadActionParameters()
 {
-	mciSendString(TEXT("stop drawost.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("stop gameost.wav"), NULL, 0, NULL);
-	mciSendString(TEXT("play whyexit.wav"), NULL, 0, NULL);
+	PlaySound(NULL, NULL, 0);
+	PlaySound("whyexit.WAV", NULL, SND_LOOP | SND_ASYNC);
+
 	if (pManager->Saved)
 		return true;
 	Output* pOut = pManager->GetOutput();
