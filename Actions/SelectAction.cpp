@@ -14,6 +14,8 @@ bool SelectAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Any Figs. ");
 	pIn->GetPointClicked(P.x,P.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
+
 	while(P.y > UI.ToolBarHeight )
 	{
 		temp = pManager->GetFigure(P.x, P.y);
@@ -27,6 +29,7 @@ bool SelectAction::ReadActionParameters()
 		}
 		pManager->UpdateInterface(TO_SELECT);
 		pIn->GetPointClicked(P.x, P.y);
+		mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 	}
 	pOut->ClearStatusBar();
 	return  true;

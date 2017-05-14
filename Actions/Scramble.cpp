@@ -3,14 +3,17 @@
 #include "..\GUI\Output.h"
 #include "../GUI/Input.h"
 #include <system_error>
+
 Scramble::Scramble(ApplicationManager *pApp):Action(pApp)
 {
 	True_counts = 0;
 	False_counts = 0;
+	
 }
 
 bool Scramble::ReadActionParameters()
 {
+	
 	Input* pIn = pManager->GetInput();
 	pIn->GetPointClicked(p.x, p.y);
 	if (p.y > UI.ToolBarHeight)

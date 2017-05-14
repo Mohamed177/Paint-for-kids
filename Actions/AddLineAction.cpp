@@ -20,6 +20,7 @@ bool AddLineAction::ReadActionParameters()
 
 	//Read 1st point and store in point P1
 	pIn->GetPointClicked(p1.x, p1.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 
 	if ( (p1.y > UI.ToolBarHeight) && (p1.y < (UI.height - UI.StatusBarHeight)) )      pOut->DRAWPIXEL(p1);
 	
@@ -28,6 +29,7 @@ bool AddLineAction::ReadActionParameters()
 
 	//Read 2nd point and store in point P2
 	pIn->GetPointClicked(p2.x, p2.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 
 	if ((p2.y > UI.ToolBarHeight) && (p2.y < (UI.height - UI.StatusBarHeight)))        pOut->DRAWPIXEL(p2);
 

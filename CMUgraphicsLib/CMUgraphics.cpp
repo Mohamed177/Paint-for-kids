@@ -7,7 +7,7 @@ This file was last modified on 05.16.1999
 #include <iostream>
 #include <cstdio>
 #include <cmath>
-
+#include "..\GUI\Output.h"
 #include "CMUgraphics.h"
 #include "error.h"
 #include "windowinput.h"
@@ -48,7 +48,7 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		}
 		ReleaseCapture();
  		return 0;
-
+		
 	  case WM_MOUSEMOVE:
 	  
         if(wipInput != NULL) {
@@ -552,8 +552,10 @@ clicktype window::WaitMouseClick(int &iX, int &iY) {
 	        iX = mqueTmp->iX;
 		    iY = mqueTmp->iY;
             ctTmp = mqueTmp->ctInfo;
-
+			
 		    delete mqueTmp;
+			if (UI.InterfaceMode == MODE_DRAW && iY < UI.StatusBarHeight) { mciSendString(TEXT("play click.wav"), NULL, 0, NULL); return ctTmp; }
+			if (UI.InterfaceMode == MODE_PLAY && iY < UI.ToolBarHeight ) { mciSendString(TEXT("play click.wav"), NULL, 0, NULL); return ctTmp; }
 		    return ctTmp;
 		}
 	}

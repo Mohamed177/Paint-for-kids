@@ -12,6 +12,8 @@ bool PasteAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Click To paste");
 	pIn->GetPointClicked(P.x, P.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
+
 	if (P.y > UI.ToolBarHeight && P.y > UI.ToolBarHeight && P.y < (UI.height - UI.StatusBarHeight))
 	{
 		return true;

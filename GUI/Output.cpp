@@ -1,10 +1,13 @@
 #include "Output.h"
-
+#include<Windows.h>
+#include<mmsystem.h>
 
 Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
+	mciSendString(TEXT("play drawost.wav"), NULL, 0, NULL);
+
 	
 	UI.width = 1300;
 	UI.height = 700;
@@ -83,7 +86,7 @@ void Output::CreateDrawToolBar() const
 	ClearToolBar();
 	PrintMessage("Drawing Mode .. Enjoy Drawing :)");
 	UI.InterfaceMode = MODE_DRAW;
-
+	
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
 	
@@ -129,7 +132,7 @@ void Output::CreateDrawToolBar() const
 void Output::CreateColorToolBar() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_DRAW;
 	//Draw a line under the toolbar
 	pWind->SetPen(DEEPSKYBLUE, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
@@ -170,7 +173,7 @@ void Output::CreateColorToolBar() const
 void Output:: CreateBorderToolbar() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_DRAW;
 	//You can draw the tool bar icons in any way you want.
 	//Below is one possible way
 
@@ -204,10 +207,13 @@ void Output:: CreateBorderToolbar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreatePlayToolBar() const
 {
+	mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+	mciSendString(TEXT("stop drawost.wav"), NULL, 0, NULL);
+	mciSendString(TEXT("play gameost.wav"), NULL, 0, NULL);
 	ClearToolBar();
 	PrintMessage("Welcome To Play Mode :) ..  Please Choose Your Favourite Game .");
 	UI.InterfaceMode = MODE_PLAY;
-
+	
 	//Draw a line under the toolbar
 	pWind->SetPen(DEEPSKYBLUE, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
@@ -240,7 +246,7 @@ void Output::CreatePlayToolBar() const
 void Output::CreateFigMenu() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_DRAW;
 	string MenuItemImages[3];
 	MenuItemImages[0] = "images\\MenuItems\\NOT_Filled.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\Filled.jpg";
@@ -256,7 +262,7 @@ void Output::CreateFigMenu() const
 void Output::CreatePHAreaToolbar() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_PLAY;
 	string MenuItemImages[3];
 	MenuItemImages[0] = "images\\MenuItems\\DE.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\ASC.jpg";
@@ -274,7 +280,7 @@ void Output::CreatePHAreaToolbar() const
 void Output::CreatePickHideToolbar() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_PLAY;
 	string MenuItemImages[5];
 	MenuItemImages[0] = "images\\MenuItems\\PH_Figs.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\PH_FillColor.jpg";
@@ -295,7 +301,7 @@ void Output::CreatePickHideToolbar() const
 void Output::CreateResizeMenu() const
 {
 	ClearToolBar();
-
+	UI.InterfaceMode = MODE_DRAW;
 	string MenuItemImages[5];
 	MenuItemImages[0] = "images\\MenuItems\\X4.jpg";
 	MenuItemImages[1] = "images\\MenuItems\\X2.jpg";

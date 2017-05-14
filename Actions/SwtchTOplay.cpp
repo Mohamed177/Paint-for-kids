@@ -25,5 +25,6 @@ void SwtchTOplay::Execute()
 	pManager->switchtoplay(); // to Un-select any selected figs.
 	pOut->ClearToolBar();
 	pOut->CreatePlayToolBar();
+	
 	pOut->PrintMessage("Welcome To Play Mode :) ..  Please Choose Your Favourite Game .");
 }

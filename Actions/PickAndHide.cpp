@@ -10,6 +10,8 @@ PickAndHide::PickAndHide(ApplicationManager* pApp) : Action (pApp)
 	{
 		figlist[i] = NULL;
 	}
+	mciSendString(TEXT("stop gameost.wav"), NULL, 0, NULL);
+	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
 }
 
 
@@ -55,11 +57,12 @@ f:
 void PickAndHide::Execute()
 {
 f:
+	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	bool b = ReadActionParameters();
 	if (b)   // "Back Button pressed"
 	{
-		pManager->ExecuteAction(TO_PLAY);
+		pOut->CreatePlayToolBar();
 		return; 
 	}                 
 	switch (z)
@@ -163,8 +166,6 @@ void PickAndHide:: PH_TypeMode()
 	int c = Fcount; 
 	while (Fcount != 0) 
 	{
-	
-		
 		Point D;
 		pIn->GetPointClicked(D.x, D.y);
 		if (D.y > UI.ToolBarHeight && D.y < (UI.height - UI.StatusBarHeight)) // check that he's INSIDE DRAW AREA
@@ -173,6 +174,9 @@ void PickAndHide:: PH_TypeMode()
 			{
 				if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetType())
 				{
+
+					mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
+					
 					Fcount--;
 					Correct++;
 					PH_DelFig(i);
@@ -181,6 +185,9 @@ void PickAndHide:: PH_TypeMode()
 				}
 				else if (figlist[i]->Is_Selected(D)) 
 				{
+					
+					mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
+
 					Wrong++;
 				}
 			}
@@ -196,17 +203,25 @@ void PickAndHide:: PH_TypeMode()
 	if (Correct >= Wrong && Wrong != 0)
 	{
 		mssg = 1;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 	}
 	else if (Correct < Wrong)
 	{
 		mssg = 2;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
 	}
 	else if (Wrong == 0)
 	{
 		mssg = 3;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 	}
-	for (int i = 4; i > 0; i--)
+
+	for (int i = 3; i > 0; i--)
 	{
+
 		switch (mssg)
 		{
 		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
@@ -221,6 +236,9 @@ void PickAndHide:: PH_TypeMode()
 		}
 		Sleep(1000);
 	}
+
+	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+
 
 }
 
@@ -350,6 +368,7 @@ f:
 					{
 						if (figlist[i]->Is_Selected(D) && s == figlist[i]->GetFillInt() && figlist[i]->ISFILLED())
 						{
+							mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 							Fcount--;
 							Correct++;
 							PH_DelFig(i);
@@ -358,6 +377,7 @@ f:
 						}
 						else if (figlist[i]->Is_Selected(D))
 						{
+							mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 							Wrong++;
 						}
 					}
@@ -368,6 +388,7 @@ f:
 					{
 						if (figlist[i]->Is_Selected(D) && !figlist[i]->ISFILLED())
 						{
+							mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 							Fcount--;
 							Correct++;
 							PH_DelFig(i);
@@ -376,6 +397,7 @@ f:
 						}
 						else if (figlist[i]->Is_Selected(D))
 						{
+							mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 							Wrong++;
 						}
 					}
@@ -393,17 +415,25 @@ f:
 		if (Correct >= Wrong && Wrong != 0)
 		{
 			mssg = 1;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 		}
 		else if (Correct < Wrong)
 		{
 			mssg = 2;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
 		}
-	    else if (Wrong == 0)
+		else if (Wrong == 0)
 		{
 			mssg = 3;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 		}
-		for (int i = 4; i > 0; i--)
+
+		for (int i = 3; i > 0; i--)
 		{
+
 			switch (mssg)
 			{
 			case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
@@ -419,6 +449,8 @@ f:
 			Sleep(1000);
 		}
 	
+		mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
+
 }
 
 
@@ -583,6 +615,7 @@ f:
 				{
 					if (figlist[i]->Is_Selected(D) && figlist[i]->GetType() == w && figlist[i]->ISFILLED() && ( s == figlist[i]->GetFillInt() )  )
 					{
+						mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 						Fcount--;
 						Correct++;
 						PH_DelFig(i);
@@ -591,6 +624,7 @@ f:
 					}
 					else if (figlist[i]->Is_Selected(D))
 					{
+						mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 						Wrong++;
 					}
 				}
@@ -601,6 +635,7 @@ f:
 				{
 					if (figlist[i]->Is_Selected(D) && figlist[i]->GetType() == w && !figlist[i]->ISFILLED() )
 					{
+						mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 						Fcount--;
 						Correct++;
 						PH_DelFig(i);
@@ -609,6 +644,7 @@ f:
 					}
 					else if (figlist[i]->Is_Selected(D))
 					{
+						mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 						Wrong++;
 					}
 				}
@@ -626,17 +662,25 @@ f:
 	if (Correct >= Wrong && Wrong != 0)
 	{
 		mssg = 1;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 	}
 	else if (Correct < Wrong)
 	{
 		mssg = 2;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
 	}
 	else if (Wrong == 0)
 	{
 		mssg = 3;
+		mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+		mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 	}
-	for (int i = 4; i > 0; i--)
+
+	for (int i = 3; i > 0; i--)
 	{
+
 		switch (mssg)
 		{
 		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
@@ -646,11 +690,13 @@ f:
 		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
 
-		default:        pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		}
 		Sleep(1000);
 	}
+
+	mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
 
 
 }
@@ -756,6 +802,7 @@ void PickAndHide:: PH_AreaMode()
 				{
 					if (figlist[i]->Is_Selected(D) && (int)max ==int( figlist[i]->GetArea()) && figlist[i]->GetType() == s)
 					{
+						mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 						Fcount--;
 						Correct++;
 						PH_DelFig(i);
@@ -773,6 +820,7 @@ void PickAndHide:: PH_AreaMode()
 					}
 					else if (figlist[i]->Is_Selected(D))
 					{
+						mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 						Wrong++;
 					}
 				}
@@ -803,6 +851,7 @@ void PickAndHide:: PH_AreaMode()
 				{
 					if (figlist[i]->Is_Selected(D) && (int)min == (int)figlist[i]->GetArea() && figlist[i]->GetType() == s)
 					{
+						mciSendString(TEXT("play correct.wav"), NULL, 0, NULL);
 						Fcount--;
 						Correct++;
 						PH_DelFig(i);
@@ -820,6 +869,7 @@ void PickAndHide:: PH_AreaMode()
 					}
 					else if (figlist[i]->Is_Selected(D))
 					{
+						mciSendString(TEXT("play wrong.wav"), NULL, 0, NULL);
 						Wrong++;
 					}
 				}
@@ -832,33 +882,42 @@ void PickAndHide:: PH_AreaMode()
 		Wrong = c;
 	}
 	if (Correct >= Wrong && Wrong != 0)
-	{
-		mssg = 1;
-	}
-	else if (Correct < Wrong)
-	{
-		mssg = 2;
-	}
-	else if (Wrong == 0)
-	{
-		mssg = 3;
-	}
-	for (int i = 4; i > 0; i--)
-	{
-		switch (mssg)
 		{
-		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-			break;
-		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-			break;
-		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-			break;
-
-		default:        pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
-			break;
+			mssg = 1;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
 		}
-		Sleep(1000);
-	}
+		else if (Correct < Wrong)
+		{
+			mssg = 2;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play rewind.wav"), NULL, 0, NULL);
+		}
+		else if (Wrong == 0)
+		{
+			mssg = 3;
+			mciSendString(TEXT("stop ph.wav"), NULL, 0, NULL);
+			mciSendString(TEXT("play kids.wav"), NULL, 0, NULL);
+		}
 
+		for (int i = 3; i > 0; i--)
+		{
+
+			switch (mssg)
+			{
+			case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+				break;
+
+			default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
+				break;
+			}
+			Sleep(1000);
+		}
+	
+		mciSendString(TEXT("play ph.wav"), NULL, 0, NULL);
 
 }

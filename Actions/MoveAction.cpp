@@ -16,6 +16,8 @@ bool MoveAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("click at any  point to move the figures ");
 	pIn->GetPointClicked(v.x, v.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
+
 	return true;
 }
 

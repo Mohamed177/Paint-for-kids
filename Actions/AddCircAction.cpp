@@ -29,6 +29,7 @@ bool AddCircAction::ReadActionParameters()
 
 	//Read Center and store in point P1
 	pIn->GetPointClicked(Center.x, Center.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 
 	if ((Center.y > UI.ToolBarHeight) && (Center.y < (UI.height - UI.StatusBarHeight)))      pOut->DRAWPIXEL(Center);
 
@@ -36,6 +37,7 @@ bool AddCircAction::ReadActionParameters()
 
 	//Read P2 on Surface and store in point P2
 	pIn->GetPointClicked(P2.x, P2.y);
+	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 
 									//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
