@@ -25,6 +25,7 @@ void ChngBrdrWdth :: Execute()
 	pOut->PrintMessage("Choose The New Border Width. ");
 	pManager->ChngeBrdrWdth(); 
 	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
 

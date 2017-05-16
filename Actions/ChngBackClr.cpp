@@ -31,8 +31,14 @@ void ChngBackClr::Execute()
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;
+	pOut->CreateDrawToolBar();
+	//pManager->UpdateInterface(TO_DRAW);
+	pOut->Clickeffect("Background", 427, 0, 61, 50);
+	pManager->Saved = false;
+	
 }
 
 ChngBackClr::~ChngBackClr()
 {
+	
 }

@@ -30,6 +30,8 @@ void ChangeFillColor::Execute()
 		pOut->CreateZoomToolBar();
 	else
 		pOut->CreateDrawToolBar();
+	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Fill", 366, 0, 61, 50);
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;

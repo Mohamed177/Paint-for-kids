@@ -3,6 +3,7 @@
 
 DeleteAction::DeleteAction(ApplicationManager * p):Action(p)
 {
+
 }
 
 bool DeleteAction::ReadActionParameters()
@@ -26,5 +27,17 @@ void DeleteAction::Execute()
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;
 
+	
+	pManager->Saved = false;
+
+	if (1)
+	{
+		Output* pOut = pManager->GetOutput();
+		pOut->Clickeffect("Delete", 976, 0, 61, 50);
+	}
 }
 
+DeleteAction::~DeleteAction()
+{
+	
+}

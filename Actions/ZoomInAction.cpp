@@ -30,6 +30,7 @@ void ZoomIn::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
+	pOut->Clickeffect("Zoom In", 854, 0, 61, 50);
 }
 
 

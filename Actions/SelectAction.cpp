@@ -11,12 +11,13 @@ SelectAction::SelectAction(ApplicationManager * pApp):Action(pApp)
 bool SelectAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
+	pOut->DrawIMAGE("SelectCE",244, 0, 61, 50);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Any Figs. ");
 	pIn->GetPointClicked(P.x,P.y);
 	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 
-	while (P.y > UI.ToolBarHeight)
+	while(P.y > UI.ToolBarHeight )
 	{
 		if (UI.InterfaceMode == MODE_ZOOM)
 		{
@@ -50,6 +51,7 @@ bool SelectAction::ReadActionParameters()
 		pIn->GetPointClicked(P.x, P.y);
 		mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 	}
+	pOut->DrawIMAGE("Select", 244, 0, 61, 50);
 	pOut->ClearStatusBar();
 	return  true;
 }

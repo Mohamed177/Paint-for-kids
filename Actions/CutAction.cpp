@@ -21,6 +21,8 @@ void CutAction::Execute()
 	pManager->Saved = false;
 	pManager->first_zoom = true;
 
+	Output* pOut = pManager->GetOutput();
+	pOut->Clickeffect("Cut", 732, 0, 61, 50);
 }
 
 

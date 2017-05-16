@@ -16,8 +16,11 @@ bool CopyAction::ReadActionParameters()
 
 void CopyAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	bool t = ReadActionParameters();
 	pManager->Copy();
+	pOut->Clickeffect("copy", 671, 0, 61, 50);
 }
 
 

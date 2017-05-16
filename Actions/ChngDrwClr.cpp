@@ -34,4 +34,7 @@ void ChangeDrawColor::Execute()
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;
 
+	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("colors", 305, 0, 61, 50);
+	//pManager->Saved = false;
 }

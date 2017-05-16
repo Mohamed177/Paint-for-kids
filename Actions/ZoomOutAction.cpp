@@ -34,4 +34,6 @@ void ZoomOutAction::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
+	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Zoom Out", 915, 0, 61, 50);
 }

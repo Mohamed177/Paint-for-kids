@@ -331,6 +331,8 @@ void ApplicationManager::Delete_Figs()
 			i++;
 		}
 	}
+
+	
 }
 
 void ApplicationManager::ScrambleDelete()
@@ -368,6 +370,7 @@ void ApplicationManager::Copy()
 			CopyList[Ccount++] = FigList[i]->copy();
 		}
 	}
+	
 }
 void ApplicationManager::ZoomCopy()
 {
@@ -464,6 +467,7 @@ bool  ApplicationManager::move( Point v )
 	{
 		return false;
 	}
+	
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
@@ -864,6 +868,7 @@ void ApplicationManager::PickHideCopy(CFigure** cpylist,int& figcount)
 
 void ApplicationManager::printselected(int counter) const
 {
+	pOut->DrawIMAGE("Select", 244, 0, 61, 50);
 	if (counter == 1)
 	{
 		for (int i = 0; i < FigCount; i++)
