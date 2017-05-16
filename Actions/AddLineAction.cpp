@@ -15,6 +15,7 @@ bool AddLineAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	
+	pOut->DrawIMAGE("LineCE", 0, 0, 61, 50);
 
 	pOut->PrintMessage("Drawing a New Line : Click at first point");
 
@@ -59,10 +60,13 @@ void AddLineAction::Execute()
 		
 		//Add the Line to the list of figures
 		pManager->AddFigure(L);
+		Output* pOut = pManager->GetOutput();
+		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
 	}
 	else
 	{
 		Output* pOut = pManager->GetOutput();
+		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	}
 }

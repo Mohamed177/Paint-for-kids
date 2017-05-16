@@ -24,6 +24,9 @@ bool AddTriAction::ReadActionParameters()
 	triGfxInfo.isFilled = x;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+
+	pOut->DrawIMAGE("TriangleCE", 122	, 0, 61, 50);
+
 	pOut->PrintMessage("Drawing a New Triangle : Click at first point");
 
 	//Read 1st point and store in point P1
@@ -74,11 +77,14 @@ void AddTriAction::Execute()
 
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(T);
+		Output* pOut = pManager->GetOutput();
+		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
 	}
 	else
 	{
 		Output* pOut = pManager->GetOutput();
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
+		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
 	}
 }
 

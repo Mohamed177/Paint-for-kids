@@ -18,6 +18,8 @@ void CutAction::Execute()
 {
 	bool t = ReadActionParameters();
 	pManager->Cut();
+	Output* pOut = pManager->GetOutput();
+	pOut->Clickeffect("Cut", 732, 0, 61, 50);
 }
 
 

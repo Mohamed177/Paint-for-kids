@@ -6,14 +6,14 @@ Output::Output()
 {
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
-	PlaySound("drawost.WAV", NULL, SND_LOOP | SND_ASYNC);
+	
 
 	
 	UI.width = 1300;
 	UI.height = 700;
 	UI.wx = 5;
 	UI.wy =5;
-
+	
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
@@ -22,19 +22,36 @@ Output::Output()
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = LIGHTSKYBLUE;	//Filling color
 	UI.MsgColor = RED;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
+	UI.BkGrndColor = DODGERBLUE;	//Background color
+	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlighting only
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 4;	//width of the figures frames
 
-	
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 	
+	PlaySound("loadfx.WAV", NULL, SND_LOOP | SND_ASYNC);
+	DrawIMAGE("Welcome", 0, 0, 1300, 500);
+	DrawIMAGE("loading0", 0, 500, 1300, 200);
+	Sleep(250);
+	int j = 0;
+	for (int i = 0; i < 145; i++)
+	{
+		DrawIMAGE("loadD", 177+j, 500, 18, 112);
+		Sleep(20);
+		j += 6;
+	}
+
+	PlaySound(NULL, NULL,0);
+	
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;
+	ClearDrawArea();
 	CreateDrawToolBar();
 	CreateStatusBar();
+	Sleep(500);
+	PlaySound("drawost.WAV", NULL, SND_LOOP | SND_ASYNC);
 }
 
 
@@ -344,6 +361,23 @@ void Output::DRAWPIXEL(Point P1) const
 
 }
 
+void Output::DrawIMAGE(string s,int x, int y, int wid, int hyt) const
+{
+	if ( s == "no") pWind->DrawImage("images\\cc.jpg", x, y, wid, hyt);
+	else  pWind->DrawImage("images\\MenuItems\\" + s + ".jpg", x, y, wid, hyt);
+}
+
+void Output::Clickeffect(string s, int x, int y, int wid, int hyt) const
+{
+	pWind->DrawImage("images\\MenuItems\\"+s+"CE1.jpg", x, y, wid, hyt);
+	Sleep(70);
+	pWind->DrawImage("images\\MenuItems\\" + s + "CE2.jpg", x, y, wid, hyt);
+	Sleep(50);
+	pWind->DrawImage("images\\MenuItems\\" + s + "CE3.jpg", x, y, wid, hyt);
+	Sleep(50);
+	pWind->DrawImage("images\\MenuItems\\" + s + ".jpg", x, y, wid, hyt);
+}
+
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
@@ -375,6 +409,14 @@ void Output::setCrntPenWidth(int p)
 void Output::setBackColor(color k)
 {
 	UI.BkGrndColor = k;
+}
+int Output::getdrawint()
+{
+	return drawint;
+}
+void Output::setdrawint(int x)
+{
+	drawint = x;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

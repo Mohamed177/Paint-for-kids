@@ -9,6 +9,7 @@ public:
 	DeleteAction(ApplicationManager* p);
 	bool ReadActionParameters();
 	void Execute();
+	~DeleteAction();
 private:
 	
 

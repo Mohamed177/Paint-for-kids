@@ -25,5 +25,6 @@ void ChangeFillColor::Execute()
 	pOut->PrintMessage("Choose The New Fill Color. ");
 	pManager->ChangeFllColor();
 	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Fill", 366, 0, 61, 50);
 	pManager->Saved = false;
 }

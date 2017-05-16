@@ -329,6 +329,8 @@ void ApplicationManager::Delete_Figs()
 			i++;
 		}
 	}
+
+	
 }
 
 void ApplicationManager::ScrambleDelete()
@@ -366,6 +368,7 @@ void ApplicationManager::Copy()
 			CopyList[Ccount++] = FigList[i]->copy();
 		}
 	}
+	
 }
 void ApplicationManager::ZoomCopy()
 {
@@ -462,6 +465,7 @@ bool  ApplicationManager::move( Point v )
 	{
 		return false;
 	}
+	
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())

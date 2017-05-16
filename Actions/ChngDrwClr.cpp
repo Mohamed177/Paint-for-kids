@@ -25,5 +25,6 @@ void ChangeDrawColor::Execute()
 	pOut->PrintMessage("Choose The New Draw Color. ");
 	pManager->ChangeDrwColor();
 	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("colors", 305, 0, 61, 50);
 	//pManager->Saved = false;
 }

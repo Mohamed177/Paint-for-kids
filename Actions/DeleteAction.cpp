@@ -2,6 +2,7 @@
 
 DeleteAction::DeleteAction(ApplicationManager * p):Action(p)
 {
+
 }
 
 bool DeleteAction::ReadActionParameters()
@@ -14,6 +15,17 @@ bool DeleteAction::ReadActionParameters()
 void DeleteAction::Execute()
 {
 	pManager->Delete_Figs();
+	
 	pManager->Saved = false;
+
+	if (1)
+	{
+		Output* pOut = pManager->GetOutput();
+		pOut->Clickeffect("Delete", 976, 0, 61, 50);
+	}
 }
 
+DeleteAction::~DeleteAction()
+{
+	
+}

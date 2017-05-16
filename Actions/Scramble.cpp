@@ -8,7 +8,7 @@ Scramble::Scramble(ApplicationManager *pApp):Action(pApp)
 {
 	True_counts = 0;
 	False_counts = 0;
-	
+
 }
 
 bool Scramble::ReadActionParameters()
@@ -32,12 +32,14 @@ void Scramble::Execute()
 	pManager->RandomOrder();
 	pManager->RandomPoint();
 	pManager->UpdateInterface(TO_SCRAMBLE_FIND);
+	pOut->DrawIMAGE("scrambleCE", 61, 0, 61, 50);
 	bool playing;
 	string score = "";
 	while (pManager->getZ_No() > 0)
 	{
 		int z_id = pManager->highlight();
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
+		pOut->DrawIMAGE("scrambleCE", 61, 0, 61, 50);
 		pOut->PrintMessage(score);
 		playing = ReadActionParameters();
 		if (!playing)
@@ -47,15 +49,18 @@ void Scramble::Execute()
 		score = "";
 		if (pManager->getScrmbleFig(p,z_id))
 		{
+			mciSendString("play correct.wav", NULL, 0, NULL);
 			pManager->ScrambleDelete();
 			True_counts++;
 		}
 		else
 		{
+			mciSendString("play wrong.wav", NULL, 0, NULL);
 			False_counts++;
 		}
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
 		score += "RightClicks = " + to_string(True_counts) + " WrongClicks = " + to_string(False_counts);
 		//delete
 	}
+	pOut->DrawIMAGE("scramble", 61, 0, 61, 50);
 }

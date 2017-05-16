@@ -20,6 +20,7 @@ void ZoomIn::Execute()
 	pManager->ZoomCopy();
 	pManager->Zoom(2.0);
 	pManager->Zcount++;
+	pOut->Clickeffect("Zoom In", 854, 0, 61, 50);
 }
 
 

@@ -26,4 +26,5 @@ void ZoomOutAction::Execute()
 	pManager->Zcount--;
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Zoom Out", 915, 0, 61, 50);
 }

@@ -36,6 +36,7 @@ bool ResizeAction::ReadActionParameters()
 	}
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+	pOut->Clickeffect("Resize", 549, 0, 61, 50);
 	pOut->ClearStatusBar();
 	return true;
 }

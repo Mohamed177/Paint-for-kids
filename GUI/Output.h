@@ -6,6 +6,7 @@ class Output	//The application manager should have a pointer to this class
 {
 private:	
 	window* pWind;	//Pointer to the Graphics Window
+	int drawint = 0;
 public:
 	Output();		
 	void Output::CreateColorToolBar() const;
@@ -29,9 +30,10 @@ public:
 	void DrawTRI(Point P1, Point P2,Point P3, GfxInfo RectGfxInfo, bool selected=false) const;	
 	void DrawLINE(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected=false) const;
 	void DrawCIRC(Point P1, double r, GfxInfo RectGfxInfo, bool selected) const;
-	///Make similar functions for drawing all other figures.
-	
 	void DRAWPIXEL(Point P1) const;
+	void DrawIMAGE(string s,int x, int y, int wid, int hyt) const;
+	void Clickeffect(string s, int x, int y, int wid, int hyt) const;
+	
 
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
@@ -40,7 +42,8 @@ public:
 	int getCrntPenWidth() const;		//get current pen width
 	void setCrntPenWidth(int p); // hand-made 
 	void setBackColor(color k);
-
+	int getdrawint(); // for the click effect
+	void setdrawint(int x);
 	void StoreImage(image &imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight); // momken tt3'yr lw 3'alt
 
 	void DrawImage(image &imgThis, const int iX, const int iY, const int iWidth, const int iHeight);

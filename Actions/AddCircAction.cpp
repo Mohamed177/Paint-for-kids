@@ -24,6 +24,9 @@ bool AddCircAction::ReadActionParameters()
 	RectGfxInfo.isFilled = x;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+
+	pOut->DrawIMAGE("CircleCE",61, 0, 61, 50);
+
 	pOut->PrintMessage("Drawing a New Circle : Click at first corner");
 
 
@@ -64,7 +67,10 @@ void AddCircAction::Execute()
 	}
 	else {
 		Output* pOut = pManager->GetOutput();
+		pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	}
+	Output* pOut = pManager->GetOutput();
+	pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
 }
 

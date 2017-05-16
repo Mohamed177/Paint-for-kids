@@ -67,13 +67,13 @@ f:
 	}                 
 	switch (z)
 	{
-	case  0: PH_TypeMode();
+	case  0:  PH_TypeMode();
 		break;
-	case 1: PH_FillColorMode();
+	case 1: PH_FillColorMode(); 
 		break;
-	case 2: PH_TypeAndFillMode();
+	case 2:  PH_TypeAndFillMode(); 
 		break;
-	case 3: PH_AreaMode();
+	case 3:  PH_AreaMode(); 
 		break;
 	default:
 		goto f;
@@ -110,10 +110,11 @@ void PickAndHide::update()
 
 void PickAndHide:: PH_TypeMode()
 {
+	Output* pOut = pManager->GetOutput();
+	pOut->DrawIMAGE("PH_FigsCE", 0, 0, 61, 50);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	char s = 'a';    // to get the type
-	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
-	Output* pOut = pManager->GetOutput();
+	pManager->PickHideCopy(figlist, figcount);   // creating a new figlist. to not affect the main one
 	Input* pIn = pManager->GetInput();
 
 	//pOut->CreateToolbar
@@ -195,7 +196,7 @@ void PickAndHide:: PH_TypeMode()
 		pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 	
 	}
-
+	//pOut->DrawIMAGE("PH_Figs", 0, 0, 61, 50);
 	if (Wrong>c) // 3l4an el negative (-4/0) :D
 	{
 		Wrong = c;
@@ -248,12 +249,13 @@ void PickAndHide:: PH_TypeMode()
 
 void PickAndHide::PH_FillColorMode()
 {
+	Output* pOut = pManager->GetOutput();
+	pOut->DrawIMAGE("PH_FillColorCE", 61, 0, 61, 50);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
 	int s = 700;    // to get the Color
 	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
-	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	//pOut->CreateToolbar
@@ -411,6 +413,8 @@ f:
 			// while loop so no need to goto
 		}
 
+		//pOut->DrawIMAGE("PH_FillColor", 61, 0, 61, 50);
+
 		if (Wrong>c) // 3l4an el negative (-4/0) :D
 		{
 			Wrong = c;
@@ -460,6 +464,8 @@ f:
 
 void PickAndHide:: PH_TypeAndFillMode()
 {
+	Output* pOut = pManager->GetOutput();
+	pOut->DrawIMAGE("PH_BothCE", 122, 0, 61, 50);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
@@ -467,7 +473,6 @@ void PickAndHide:: PH_TypeAndFillMode()
 	char w = 'a';    // to get the type
 	string q; // to rename the type 
 	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
-	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	//pOut->CreateToolbar
@@ -659,6 +664,7 @@ f:
 		// while loop so no need to goto
 	}
 
+	//pOut->DrawIMAGE("PH_Both", 122, 0, 61, 50);
 	if (Wrong>c) // 3l4an el negative (-4/0) :D
 	{
 		Wrong = c;
@@ -708,10 +714,11 @@ f:
 
 void PickAndHide:: PH_AreaMode()
 {
+	Output* pOut = pManager->GetOutput();
+	
 	int mssg = 0; // to print the message , look @ the end of the func.
 	char s = 'a';    // to get the type
 	pManager->PickHideCopy(figlist, figcount);   // creating a new fig. to not affect the main one
-	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	//pOut->CreateToolbar
 	pOut->CreatePHAreaToolbar();
@@ -729,8 +736,8 @@ void PickAndHide:: PH_AreaMode()
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 		if (ClickedItemOrder == 2) return;
-		if (ClickedItemOrder == 0) ma = true;
-		else if (ClickedItemOrder == 1) ma = false;
+		if (ClickedItemOrder == 0) { ma = true;    pOut->DrawIMAGE("DECE", 0, 0, 61, 50); }
+		else if (ClickedItemOrder == 1) { ma = false;  pOut->DrawIMAGE("ASCCE", 61, 0, 61, 50); }
 		else goto f;
 	}
 	else goto f;
@@ -832,6 +839,7 @@ void PickAndHide:: PH_AreaMode()
 			}
 			pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 		}
+		//pOut->DrawIMAGE("DE", 0, 0, 61, 50);
 	}
 	else 
 	{
@@ -881,7 +889,10 @@ void PickAndHide:: PH_AreaMode()
 			}
 			pOut->PrintMessage("RightClicks = " + to_string(Correct) + "                   WrongClicks = " + to_string(Wrong) + "                   Remaining Figures = " + to_string(c - Correct));
 		}
+		//pOut->DrawIMAGE("ASC", 61, 0, 61, 50);
 	}
+	
+
 	if (Wrong>c) // 3l4an el negative (-4/0) :D
 	{
 		Wrong = c;

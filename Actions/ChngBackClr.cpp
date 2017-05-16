@@ -23,10 +23,13 @@ void ChngBackClr::Execute()
 	pOut->setBackColor(pIn->ChangeBackColor());
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+	//pManager->UpdateInterface(TO_DRAW);
+	pOut->Clickeffect("Background", 427, 0, 61, 50);
 	pManager->Saved = false;
-
+	
 }
 
 ChngBackClr::~ChngBackClr()
 {
+	
 }

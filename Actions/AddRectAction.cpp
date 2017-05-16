@@ -25,6 +25,9 @@ bool AddRectAction::ReadActionParameters()
 	RectGfxInfo.isFilled =x ;	//default is not filled
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
+
+	pOut->DrawIMAGE("RectangleCE", 183, 0, 61, 50);
+
 	pOut->PrintMessage("Drawing a New Rectangle : Click at first corner");
 	
 	//Read 1st corner and store in point P1
@@ -66,10 +69,13 @@ void AddRectAction::Execute()
 
 		 //Add the rectangle to the list of figures
 		 pManager->AddFigure(R);
+		 Output* pOut = pManager->GetOutput();
+		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
 	 }
 	 else
 	 {
 		 Output* pOut = pManager->GetOutput();
+		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
 		 pOut->PrintMessage("Error ! Please Draw at DrawArea");
 	 }
 }
