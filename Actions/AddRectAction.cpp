@@ -58,7 +58,6 @@ void AddRectAction::Execute()
 	 bool t = ReadActionParameters();
 	 if (!t)
 		 return;
-	 pManager->Saved = false;
 	//Create a rectangle with the parameters read from the user
 	 if (P1.y > UI.ToolBarHeight && P2.y > UI.ToolBarHeight && P1.y < (UI.height - UI.StatusBarHeight) && P2.y < (UI.height - UI.StatusBarHeight))
 	 {
@@ -66,6 +65,9 @@ void AddRectAction::Execute()
 
 		 //Add the rectangle to the list of figures
 		 pManager->AddFigure(R);
+		 pManager->Saved = false;
+		 pManager->first_zoom = true;
+
 	 }
 	 else
 	 {

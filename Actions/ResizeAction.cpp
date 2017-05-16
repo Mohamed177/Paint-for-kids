@@ -47,6 +47,7 @@ void ResizeAction::Execute()
 		return;
 	pManager->ResizeSelected(factor);
 	pManager->Saved = false;
+	pManager->first_zoom = true;
 }
 
 ResizeAction::~ResizeAction()

@@ -31,6 +31,7 @@ void SaveAction::Execute()
 	if (!t)
 		return;
 	pManager->Saved = true;
+	pManager->first_zoom = true;
 	OutFile.open(FileName);
 	pManager->SaveAll(OutFile);
 	OutFile.close();

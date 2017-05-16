@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include "SelectAction.h"
 
 ChangeDrawColor::ChangeDrawColor(ApplicationManager *pApp) : Action(pApp)
 {
@@ -24,6 +24,14 @@ void ChangeDrawColor::Execute()
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Draw Color. ");
 	pManager->ChangeDrwColor();
-	pOut->CreateDrawToolBar();
-	//pManager->Saved = false;
+	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
+		pOut->CreateSelcted_ZoomToolBar();
+	else if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->CreateZoomToolBar();
+	else
+		pOut->CreateDrawToolBar();
+	pManager->Saved = false;
+	if (UI.InterfaceMode == MODE_DRAW)
+		pManager->first_zoom = true;
+
 }

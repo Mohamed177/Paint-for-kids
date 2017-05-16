@@ -132,7 +132,6 @@ void Output::CreateDrawToolBar() const
 void Output::CreateColorToolBar() const
 {
 	ClearToolBar();
-	UI.InterfaceMode = MODE_DRAW;
 	//Draw a line under the toolbar
 	pWind->SetPen(DEEPSKYBLUE, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
@@ -241,6 +240,88 @@ void Output::CreatePlayToolBar() const
 	
 
 }
+void Output::CreateZoomToolBar() const
+{
+	ClearToolBar();
+	PrintMessage("Zooming Mode .. Enjoy :)");
+	UI.InterfaceMode = MODE_ZOOM;
+
+	
+	string MenuItemImages[ZOOM_COUNT];
+	MenuItemImages[ZOOM_LINE] = "images\\MenuItems\\dimmed-Line.jpg";
+	MenuItemImages[ZOOM_RECT] = "images\\MenuItems\\dimmed-rec.jpg";
+	MenuItemImages[ZOOM_CIRC] = "images\\MenuItems\\dimmed-circle.jpg";
+	MenuItemImages[ZOOM_TRI] = "images\\MenuItems\\dimmed-tri.jpg";
+	MenuItemImages[ZOOM_CHNG_DRAW_CLR] = "images\\MenuItems\\dimmed-colors.jpg";
+	MenuItemImages[ZOOM_CHNG_FILL_CLR] = "images\\MenuItems\\dimmed-Fill.jpg";
+	MenuItemImages[ZOOM_CHNG_BK_CLR] = "images\\MenuItems\\Background.jpg";
+	MenuItemImages[ZOOM_DEL] = "images\\MenuItems\\Delete.jpg";
+	MenuItemImages[ZOOM_SAVE] = "images\\MenuItems\\save.jpg";
+	MenuItemImages[ZOOM_LOAD] = "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ZOOM_EXIT] = "images\\MenuItems\\exit.jpg";
+	MenuItemImages[ZOOM_SWITCH_PLAY] = "images\\MenuItems\\dimmed-to play.jpg";
+	MenuItemImages[ZOOM_SELECT] = "images\\MenuItems\\Select.jpg";
+	MenuItemImages[ZOOM_COPY] = "images\\MenuItems\\dimmed-Copy.jpg";
+	MenuItemImages[ZOOM_CUT] = "images\\MenuItems\\dimmed-Cut.jpg";
+	MenuItemImages[ZOOM_RESIZE] = "images\\MenuItems\\dimmed-Resize.jpg";
+	MenuItemImages[ZOOM_MOVE] = "images\\MenuItems\\dimmed-Move.jpg";
+	MenuItemImages[ZOOM_PASTE] = "images\\MenuItems\\dimmed-Paste.jpg";
+	MenuItemImages[ZOOM_ZOOMOUT] = "images\\MenuItems\\Zoom Out.jpg";
+	MenuItemImages[ZOOM_ZOOMIN] = "images\\MenuItems\\Zoom In.jpg";
+	MenuItemImages[ZOOM_CHNG_BRDR_WDTH] = "images\\MenuItems\\dimmed-Line Width.jpg";
+	MenuItemImages[ZOOM_BACK_DRAW] = "images\\MenuItems\\Backk.jpg";
+
+	int menuitmwidth = UI.MenuItemWidth - 3;
+	for (int i = 0; i < ZOOM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i*menuitmwidth, 0, menuitmwidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
+
+}
+void Output::CreateSelcted_ZoomToolBar() const
+{
+	ClearToolBar();
+	UI.InterfaceMode = MODE_ZOOM;
+
+
+	string MenuItemImages[ZOOM_COUNT];
+	MenuItemImages[ZOOM_LINE] = "images\\MenuItems\\dimmed-Line.jpg";
+	MenuItemImages[ZOOM_RECT] = "images\\MenuItems\\dimmed-rec.jpg";
+	MenuItemImages[ZOOM_CIRC] = "images\\MenuItems\\dimmed-circle.jpg";
+	MenuItemImages[ZOOM_TRI] = "images\\MenuItems\\dimmed-tri.jpg";
+	MenuItemImages[ZOOM_CHNG_DRAW_CLR] = "images\\MenuItems\\colors.jpg";
+	MenuItemImages[ZOOM_CHNG_FILL_CLR] = "images\\MenuItems\\Fill.jpg";
+	MenuItemImages[ZOOM_CHNG_BK_CLR] = "images\\MenuItems\\Background.jpg";
+	MenuItemImages[ZOOM_DEL] = "images\\MenuItems\\Delete.jpg";
+	MenuItemImages[ZOOM_SAVE] = "images\\MenuItems\\save.jpg";
+	MenuItemImages[ZOOM_LOAD] = "images\\MenuItems\\Load.jpg";
+	MenuItemImages[ZOOM_EXIT] = "images\\MenuItems\\exit.jpg";
+	MenuItemImages[ZOOM_SWITCH_PLAY] = "images\\MenuItems\\dimmed-to play.jpg";
+	MenuItemImages[ZOOM_SELECT] = "images\\MenuItems\\Select.jpg";
+	MenuItemImages[ZOOM_COPY] = "images\\MenuItems\\dimmed-Copy.jpg";
+	MenuItemImages[ZOOM_CUT] = "images\\MenuItems\\dimmed-Cut.jpg";
+	MenuItemImages[ZOOM_RESIZE] = "images\\MenuItems\\dimmed-Resize.jpg";
+	MenuItemImages[ZOOM_MOVE] = "images\\MenuItems\\dimmed-Move.jpg";
+	MenuItemImages[ZOOM_PASTE] = "images\\MenuItems\\dimmed-Paste.jpg";
+	MenuItemImages[ZOOM_ZOOMOUT] = "images\\MenuItems\\Zoom Out.jpg";
+	MenuItemImages[ZOOM_ZOOMIN] = "images\\MenuItems\\Zoom In.jpg";
+	MenuItemImages[ZOOM_CHNG_BRDR_WDTH] = "images\\MenuItems\\dimmed-Line Width.jpg";
+	MenuItemImages[ZOOM_BACK_DRAW] = "images\\MenuItems\\Backk.jpg";
+
+	int menuitmwidth = UI.MenuItemWidth - 3;
+	for (int i = 0; i < ZOOM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i*menuitmwidth, 0, menuitmwidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DEEPSKYBLUE, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight + 3, UI.width, UI.ToolBarHeight + 3);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateFigMenu() const
 {
@@ -319,7 +400,6 @@ void Output::ScrambleScreen() const
 {
 	pWind->SetPen(DEEPSKYBLUE, 4);
 	pWind->DrawLine(UI.width / 2, UI.ToolBarHeight, UI.width / 2, UI.height - UI.StatusBarHeight);
-	PrintMessage("Choose the highlighted figures.");
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
 #include "../ApplicationManager.h"
 #include "..\GUI\Output.h"
 #include "../GUI/Input.h"
-
+#include "SelectAction.h"
 
 ZoomOutAction::ZoomOutAction(ApplicationManager *pApp):Action(pApp)
 {
@@ -21,9 +21,17 @@ void ZoomOutAction::Execute()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
-	pManager->ZoomCopy();
+	if (pManager->Zcount == 0 && pManager->first_zoom)
+	{
+		pManager->ZoomCopy();
+		pManager->first_zoom = false;
+	}
 	pManager->Zoom(1.0/2);
 	pManager->Zcount--;
 	pOut->ClearToolBar();
-	pOut->CreateDrawToolBar();
+	if (pManager->Zcount != 0 && SelectAction::getZoomSlctCount() > 0)
+		pOut->CreateSelcted_ZoomToolBar();
+	else if (pManager->Zcount != 0)
+		pOut->CreateZoomToolBar();
+	
 }

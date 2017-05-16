@@ -51,7 +51,6 @@ void AddLineAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return; // incase of false-painting trial
-	pManager->Saved = false;
 	//Create a Line with the parameters read from the user
 	if (p1.y > UI.ToolBarHeight && p2.y > UI.ToolBarHeight && p1.y < (UI.height - UI.StatusBarHeight) && p2.y < (UI.height - UI.StatusBarHeight))
 	{
@@ -59,6 +58,9 @@ void AddLineAction::Execute()
 		
 		//Add the Line to the list of figures
 		pManager->AddFigure(L);
+		pManager->Saved = false;
+		pManager->first_zoom = true;
+
 	}
 	else
 	{

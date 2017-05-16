@@ -26,6 +26,8 @@ void LoadAction::Execute()
 	pManager->LoadAll(LoadFile);
 	LoadFile.close();
 	pManager->Saved = true;
+	if (UI.InterfaceMode == MODE_DRAW)
+		pManager->first_zoom = true;
 }
 
 LoadAction::~LoadAction()

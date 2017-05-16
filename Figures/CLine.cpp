@@ -51,7 +51,7 @@ bool CLine::Is_Selected(Point P) const
 
 void CLine::Save(ofstream &OutFile)
 {
-	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << FigGfxInfo.BorderWdth << (string)FigGfxInfo.DrawClr << " \n";
+	OutFile << "Line " << ID << ' ' << p1.x << ' ' << p1.y << ' ' << p2.x << ' ' << p2.y << ' ' << FigGfxInfo.BorderWdth << ' ' << (string)FigGfxInfo.DrawClr << " \n";
 }
 
 CLine::~CLine()
@@ -76,6 +76,7 @@ void CLine::Zoom(float factor)
 		p.x *= 1.0 - factor;
 		p.y *= 1.0 - factor;
 	}
+	ChngBrdWdt(ceil(FigGfxInfo.BorderWdth*factor));
 	Resize(factor, true);
 	Move(p);
 }
@@ -89,7 +90,7 @@ void CLine::PrintInfo(Output * pOut)
 }
 void CLine::Load(ifstream &Infile) 
 {
-	string drwColor, Fcolor;
+	string drwColor;
 	Infile >> ID >> p1.x >> p1.y >> p2.x >> p2.y >> FigGfxInfo.BorderWdth >> drwColor;
 	FigGfxInfo.DrawClr = drwColor;
 }

@@ -25,7 +25,7 @@ private:
 
 public:	
 	int Zcount; /// public or private(setter and getter) 
-	bool Saved;
+	bool Saved, first_zoom;
 	ApplicationManager(); 
 	~ApplicationManager();
 	
@@ -63,6 +63,8 @@ public:
 	int highlight();
 	bool getScrmbleFig(Point, int z_id);
 	void PickHideCopy(CFigure** ,int &);
+	void printselected(int)const;
+	CFigure* getzoomfig(int x, int y) const;
 	// -- Get Fig Counter Management
 	int GetFig_Counter();
 	bool paste(Point p);

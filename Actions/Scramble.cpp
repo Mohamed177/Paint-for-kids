@@ -34,11 +34,11 @@ void Scramble::Execute()
 	pManager->UpdateInterface(TO_SCRAMBLE_FIND);
 	bool playing;
 	string score = "";
+	pOut->PrintMessage("Choose the highlighted figures.");
 	while (pManager->getZ_No() > 0)
 	{
 		int z_id = pManager->highlight();
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
-		pOut->PrintMessage(score);
 		playing = ReadActionParameters();
 		if (!playing)
 			break;
@@ -54,8 +54,8 @@ void Scramble::Execute()
 		{
 			False_counts++;
 		}
-		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
 		score += "RightClicks = " + to_string(True_counts) + " WrongClicks = " + to_string(False_counts);
+		pOut->PrintMessage(score);
 		//delete
 	}
 }

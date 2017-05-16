@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include "SelectAction.h"
 
 ChangeFillColor::ChangeFillColor(ApplicationManager *pApp) : Action(pApp)
 {
@@ -24,6 +24,13 @@ void ChangeFillColor::Execute()
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Fill Color. ");
 	pManager->ChangeFllColor();
-	pOut->CreateDrawToolBar();
+	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
+		pOut->CreateSelcted_ZoomToolBar();
+	else if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->CreateZoomToolBar();
+	else
+		pOut->CreateDrawToolBar();
 	pManager->Saved = false;
+	if (UI.InterfaceMode == MODE_DRAW)
+		pManager->first_zoom = true;
 }

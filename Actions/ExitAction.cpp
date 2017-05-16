@@ -12,7 +12,7 @@ bool ExitAction::ReadActionParameters()
 	PlaySound("whyexit.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 	if (pManager->Saved)
-		return true;
+		return false;
 	Output* pOut = pManager->GetOutput();
 	Input *pIn = pManager->GetInput();
 	pOut->PrintMessage("Your graph is not saved, enter y to save and n to exit without saving.");

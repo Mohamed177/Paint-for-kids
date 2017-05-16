@@ -18,6 +18,9 @@ void CutAction::Execute()
 {
 	bool t = ReadActionParameters();
 	pManager->Cut();
+	pManager->Saved = false;
+	pManager->first_zoom = true;
+
 }
 
 

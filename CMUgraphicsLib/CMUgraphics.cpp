@@ -556,6 +556,7 @@ clicktype window::WaitMouseClick(int &iX, int &iY) {
 		    delete mqueTmp;
 			if (UI.InterfaceMode == MODE_DRAW && iY < UI.StatusBarHeight) { mciSendString(TEXT("play click.wav"), NULL, 0, NULL); return ctTmp; }
 			if (UI.InterfaceMode == MODE_PLAY && iY < UI.ToolBarHeight ) { mciSendString(TEXT("play click.wav"), NULL, 0, NULL); return ctTmp; }
+			if (UI.InterfaceMode == MODE_ZOOM && iY < UI.ToolBarHeight) { mciSendString(TEXT("play click.wav"), NULL, 0, NULL); return ctTmp; }
 		    return ctTmp;
 		}
 	}

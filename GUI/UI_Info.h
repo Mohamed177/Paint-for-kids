@@ -10,7 +10,8 @@
 enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,	//Drawing mode (startup mode)
-	MODE_PLAY//Playing mode
+	MODE_PLAY,	//Playing mode
+	MODE_ZOOM
 };
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
@@ -60,6 +61,7 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	
 };
+
 enum ColorMenu 
 {
 	ITM_BLACK,
@@ -81,7 +83,37 @@ enum ColorMenu
 	ITM_COLOR_COUNT
 };
 
+enum ZoomMenuItemy //The items of the Draw menu (you should add more items)
+{
+	//Note: Items are ordered here as they appear in menu
+	//If you want to change the menu items order, change the order here
+	ZOOM_LINE,
+	ZOOM_CIRC,		//Circle item in menu
+	ZOOM_TRI,
+	ZOOM_RECT,		//Recangle item in menu
+	ZOOM_SELECT,
+	ZOOM_CHNG_DRAW_CLR,
+	ZOOM_CHNG_FILL_CLR,
+	ZOOM_CHNG_BK_CLR,
+	ZOOM_CHNG_BRDR_WDTH,
+	ZOOM_RESIZE,
+	ZOOM_MOVE,
+	ZOOM_COPY,
+	ZOOM_CUT,
+	ZOOM_PASTE,
+	ZOOM_ZOOMIN,
+	ZOOM_ZOOMOUT,
+	ZOOM_DEL,
+	ZOOM_SAVE,
+	ZOOM_LOAD,
+	ZOOM_SWITCH_PLAY,
+	ZOOM_BACK_DRAW,
 
+	ZOOM_EXIT,		//Exit item
+
+	ZOOM_COUNT
+
+};
 
 
 

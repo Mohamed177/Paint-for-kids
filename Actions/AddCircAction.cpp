@@ -53,7 +53,6 @@ void AddCircAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return;
-	pManager->Saved = false;
 	double Radius = sqrt(((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x)));
 	if ((Center.y-Radius) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius) && Center.x - Radius > 0 && Center.x + Radius < UI.width)
 	{
@@ -61,6 +60,9 @@ void AddCircAction::Execute()
 		CCircle *C = new CCircle(Center, Radius, RectGfxInfo);
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(C);
+		pManager->Saved = false;
+		pManager->first_zoom = true;
+
 	}
 	else {
 		Output* pOut = pManager->GetOutput();
