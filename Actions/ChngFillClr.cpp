@@ -25,13 +25,20 @@ void ChangeFillColor::Execute()
 	pOut->PrintMessage("Choose The New Fill Color. ");
 	pManager->ChangeFllColor();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
+	{
 		pOut->CreateSelcted_ZoomToolBar();
+		pOut->Clickeffect("Fill", 348, 0, 58, 50);
+	}
 	else if (UI.InterfaceMode == MODE_ZOOM)
+	{
 		pOut->CreateZoomToolBar();
+		pOut->Clickeffect("Fill", 348, 0, 58, 50);
+	}
 	else
+	{
 		pOut->CreateDrawToolBar();
-	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("Fill", 366, 0, 61, 50);
+		pOut->Clickeffect("Fill", 366, 0, 61, 50);
+	}
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;

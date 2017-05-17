@@ -14,7 +14,10 @@ LoadAction::LoadAction(ApplicationManager* pApp) :Action(pApp)
 bool LoadAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("LoadCE", 1101, 0, 61, 50);
+	if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->DrawIMAGE("LoadCE", 1044, 0, 58, 50);
+	else
+		pOut->DrawIMAGE("LoadCE", 1101, 0, 61, 50);
 	pOut->setdrawint(1);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the name of the text folder to load from : ");

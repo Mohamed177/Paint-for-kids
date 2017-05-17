@@ -261,7 +261,7 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 	p.y = 0;
 	GfxInfo Gfx;
 	Gfx.BorderWdth = 1; Gfx.DrawClr = BLACK; Gfx.FillClr = BLACK; Gfx.isFilled = false;
-	if (FigCount != 0) 
+	if (!Saved) 
 	{
 		Action* pAct = new SaveAction(this);
 		pAct->Execute();

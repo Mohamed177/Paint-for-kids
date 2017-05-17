@@ -8,6 +8,8 @@ Scramble::Scramble(ApplicationManager *pApp):Action(pApp)
 {
 	True_counts = 0;
 	False_counts = 0;
+	PlaySound(NULL, NULL, 0);
+	PlaySound("sc.WAV", NULL, SND_LOOP | SND_ASYNC);
 
 }
 

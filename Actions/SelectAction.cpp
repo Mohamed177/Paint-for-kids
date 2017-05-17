@@ -11,7 +11,10 @@ SelectAction::SelectAction(ApplicationManager * pApp):Action(pApp)
 bool SelectAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("SelectCE",244, 0, 61, 50);
+	if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->DrawIMAGE("SelectCE", 232, 0, 58, 50);
+	else
+		pOut->DrawIMAGE("SelectCE", 244, 0, 61, 50);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Any Figs. ");
 	pIn->GetPointClicked(P.x,P.y);
@@ -51,7 +54,10 @@ bool SelectAction::ReadActionParameters()
 		pIn->GetPointClicked(P.x, P.y);
 		mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 	}
-	pOut->DrawIMAGE("Select", 244, 0, 61, 50);
+	if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->DrawIMAGE("SelectCE", 232, 0, 58, 50);
+	else
+		pOut->DrawIMAGE("SelectCE", 244, 0, 61, 50);
 	pOut->ClearStatusBar();
 	return  true;
 }
@@ -71,4 +77,9 @@ void SelectAction::Execute()
 int SelectAction::getZoomSlctCount()
 {
 	return ZCounter;
+}
+
+void SelectAction::ResetZoomSlctCount()
+{
+	ZCounter = 0;
 }

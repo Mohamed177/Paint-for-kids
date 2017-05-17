@@ -21,10 +21,12 @@ void ZoomOutAction::Execute()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
+	pOut->setdrawint(0);
 	if (pManager->Zcount == 0 && pManager->first_zoom)
 	{
 		pManager->ZoomCopy();
 		pManager->first_zoom = false;
+		SelectAction::ResetZoomSlctCount();
 	}
 	pManager->Zoom(1.0/2);
 	pManager->Zcount--;
@@ -34,6 +36,5 @@ void ZoomOutAction::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
-	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("Zoom Out", 915, 0, 61, 50);
+	pOut->Clickeffect("Zoom Out", 870, 0, 58, 50);
 }

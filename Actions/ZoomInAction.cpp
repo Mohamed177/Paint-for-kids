@@ -18,10 +18,12 @@ void ZoomIn::Execute()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
+	pOut->setdrawint(0);
 	if (pManager->Zcount == 0 && pManager->first_zoom)
 	{
 		pManager->ZoomCopy();
 		pManager->first_zoom = false;
+		SelectAction::ResetZoomSlctCount();
 	}
 	pManager->Zoom(2.0);
 	pManager->Zcount++;
@@ -30,7 +32,7 @@ void ZoomIn::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
-	pOut->Clickeffect("Zoom In", 854, 0, 61, 50);
+	pOut->Clickeffect("Zoom In", 812, 0, 58, 50);
 }
 
 

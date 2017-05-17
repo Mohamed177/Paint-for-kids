@@ -10,6 +10,7 @@ public:
 	bool ReadActionParameters();
 	void Execute();
 	static int getZoomSlctCount();
+	static void ResetZoomSlctCount();
 	~SelectAction();
 private:
 	static int SCounter, ZCounter;

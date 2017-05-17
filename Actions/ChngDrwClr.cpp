@@ -25,16 +25,20 @@ void ChangeDrawColor::Execute()
 	pOut->PrintMessage("Choose The New Draw Color. ");
 	pManager->ChangeDrwColor();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
+	{
 		pOut->CreateSelcted_ZoomToolBar();
+		pOut->Clickeffect("colors", 290, 0, 58, 50);
+	}
 	else if (UI.InterfaceMode == MODE_ZOOM)
+	{
 		pOut->CreateZoomToolBar();
+		pOut->Clickeffect("colors", 290, 0, 58, 50);
+	}
 	else
+	{
 		pOut->CreateDrawToolBar();
-	pManager->Saved = false;
-	if (UI.InterfaceMode == MODE_DRAW)
+		pOut->Clickeffect("colors", 305, 0, 61, 50);
 		pManager->first_zoom = true;
-
-	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("colors", 305, 0, 61, 50);
-	//pManager->Saved = false;
+	}
+	pManager->Saved = false;
 }
