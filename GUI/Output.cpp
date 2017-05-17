@@ -40,7 +40,7 @@ Output::Output()
 	for (int i = 0; i < 145; i++)
 	{
 		DrawIMAGE("loadD", 177+j, 500, 18, 112);
-		Sleep(20);
+		Sleep(10);
 		j += 6;
 	}
 
