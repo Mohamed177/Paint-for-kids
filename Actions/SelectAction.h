@@ -9,10 +9,11 @@ public:
 	SelectAction(ApplicationManager *pApp);
 	bool ReadActionParameters();
 	void Execute();
+	static int getZoomSlctCount();
+	static void ResetZoomSlctCount();
 	~SelectAction();
-
 private:
-	int Counter;
+	static int SCounter, ZCounter;
 	CFigure* temp;
 	Point P;
 };

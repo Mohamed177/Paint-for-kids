@@ -33,6 +33,9 @@ void MoveAction::Execute()
 		 pOut->PrintMessage("you can't move figures here try somewhere else :)");
 	 }
 	 pOut->ClearStatusBar();
+	 pManager->Saved = false;
+	 pManager->first_zoom = true;
+
 	 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
 }
 

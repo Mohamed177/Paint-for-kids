@@ -19,7 +19,12 @@ bool SaveAction::ReadActionParameters()
 {
 	
 	Output* pOut = pManager->GetOutput();
-	if (pOut->getdrawint() == 0 ) pOut->DrawIMAGE("saveCE", 1037, 0, 61, 50);
+	if (pOut->getdrawint() == 0)
+	{
+		if (UI.InterfaceMode == MODE_ZOOM)
+			pOut->DrawIMAGE("saveCE", 986, 0, 58, 50);
+		else pOut->DrawIMAGE("saveCE", 1037, 0, 61, 50);
+	}
 	pOut->setdrawint(0);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the save's file name");
@@ -35,6 +40,7 @@ void SaveAction::Execute()
 	if (!t)
 		return;
 	pManager->Saved = true;
+	pManager->first_zoom = true;
 	OutFile.open(FileName);
 	pManager->SaveAll(OutFile);
 	OutFile.close();

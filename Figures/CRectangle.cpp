@@ -221,6 +221,7 @@ void CRectangle::Zoom(float factor)
 		p.x *= 1.0 - factor;
 		p.y *= 1.0 - factor;
 	}
+	ChngBrdWdt(ceil(FigGfxInfo.BorderWdth*factor));
 	Resize(factor,true);
 	Move(p);
 }

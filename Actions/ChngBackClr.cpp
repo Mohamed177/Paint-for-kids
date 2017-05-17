@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include "SelectAction.h"
 
 ChngBackClr::ChngBackClr(ApplicationManager *pApp):Action(pApp)
 {
@@ -22,9 +22,25 @@ void ChngBackClr::Execute()
 	pOut->PrintMessage("Choose The New Back Ground Color. ");
 	pOut->setBackColor(pIn->ChangeBackColor());
 	pOut->ClearToolBar();
-	pOut->CreateDrawToolBar();
+	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
+	{
+		pOut->CreateSelcted_ZoomToolBar();
+		pOut->Clickeffect("Background", 406, 0, 58, 50);
+	}
+	else if (UI.InterfaceMode == MODE_ZOOM)
+	{
+		pOut->CreateZoomToolBar();
+		pOut->Clickeffect("Background", 406, 0, 58, 50);
+	}
+	else
+	{
+		pOut->CreateDrawToolBar();
+		pOut->Clickeffect("Background", 427, 0, 61, 50);
+	}
+	pManager->Saved = false;
+	if (UI.InterfaceMode == MODE_DRAW)
+		pManager->first_zoom = true;
 	//pManager->UpdateInterface(TO_DRAW);
-	pOut->Clickeffect("Background", 427, 0, 61, 50);
 	pManager->Saved = false;
 	
 }

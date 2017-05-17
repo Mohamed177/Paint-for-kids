@@ -69,7 +69,6 @@ void AddTriAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return;
-	pManager->Saved = false;
 	//Create a Triangle with the parameters read from the user
 	if (p1.y > UI.ToolBarHeight && p2.y > UI.ToolBarHeight && p3.y > UI.ToolBarHeight&& p1.y < (UI.height - UI.StatusBarHeight) && p2.y < (UI.height - UI.StatusBarHeight) && p3.y < (UI.height - UI.StatusBarHeight))
 	{
@@ -77,6 +76,9 @@ void AddTriAction::Execute()
 
 		//Add the rectangle to the list of figures
 		pManager->AddFigure(T);
+		pManager->Saved = false;
+		pManager->first_zoom = true;
+
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
 	}

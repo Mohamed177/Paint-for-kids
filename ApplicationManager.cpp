@@ -36,11 +36,12 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	Saved = false;
+	Saved = true;
 	FigCount = 0;
 	Ccount = 0;
 	Zcount = 0;
 	no_of_zoomed_figs = 0;
+	first_zoom = true;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 	{
@@ -204,12 +205,15 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const   //by: Riad Adel
 void ApplicationManager::UpdateInterface(ActionType act) const
 {
 	pOut->ClearDrawArea();
-	if (act == ZOOMIN || act == ZOOMOUT )
+	if (UI.InterfaceMode == MODE_ZOOM)
 	{
-		for (int i = 0; i < FigCount; i++)
+		for (int i = 0; i < no_of_zoomed_figs; i++)
 			ZoomList[i]->Draw(pOut);
-		pOut->CreateDrawToolBar();
 		pOut->ClearStatusBar();
+		if (SelectAction::getZoomSlctCount() > 0)
+			pOut->CreateSelcted_ZoomToolBar();
+		else if (SelectAction::getZoomSlctCount() == 0)
+			pOut->CreateZoomToolBar();
 	}
 	else if (act == TO_SCRAMBLE_FIND)
 	{
@@ -218,8 +222,6 @@ void ApplicationManager::UpdateInterface(ActionType act) const
 			ZoomList[i]->Draw(pOut);
 			ScrambleList[i]->Draw(pOut);
 		}
-		pOut->CreatePlayToolBar();
-		pOut->ClearStatusBar();
 		pOut->ScrambleScreen();
 	}
 	else 
@@ -259,7 +261,7 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 	p.y = 0;
 	GfxInfo Gfx;
 	Gfx.BorderWdth = 1; Gfx.DrawClr = BLACK; Gfx.FillClr = BLACK; Gfx.isFilled = false;
-	if (FigCount != 0) 
+	if (!Saved) 
 	{
 		Action* pAct = new SaveAction(this);
 		pAct->Execute();
@@ -670,16 +672,24 @@ f:
 		goto f;
 	}
 
-
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
+	if (UI.InterfaceMode == MODE_ZOOM)
+		for (int i = 0; i < no_of_zoomed_figs; i++)
 		{
-			flag = true;
-			FigList[i]->ChngDrawClr(c);
-			FigList[i]->SetSelected(false);
+			if (ZoomList[i]->IsSelected())
+			{
+				flag = true;
+				ZoomList[i]->ChngDrawClr(c);
+			}
 		}
-	}
+	else
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngDrawClr(c);
+			}
+		}
 	if (!flag) UI.DrawColor = c;
 	
 }
@@ -746,15 +756,24 @@ f:
 		goto f;
 	}
 
-	for (int i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
+	if (UI.InterfaceMode == MODE_ZOOM)
+		for (int i = 0; i < no_of_zoomed_figs; i++)
 		{
-			flag = true;
-			FigList[i]->ChngFillClr(c);
-			FigList[i]->SetSelected(false);
+			if (ZoomList[i]->IsSelected())
+			{
+				flag = true;
+				ZoomList[i]->ChngFillClr(c);
+			}
 		}
-	}
+	else
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngFillClr(c);
+			}
+		}
 	if (!flag) UI.FillColor = c;
 	
 }
@@ -845,4 +864,39 @@ void ApplicationManager::PickHideCopy(CFigure** cpylist,int& figcount)
 		cpylist[figcount++] = FigList[i]->copy();
 		
 	}
+}
+
+void ApplicationManager::printselected(int counter) const
+{
+	pOut->DrawIMAGE("Select", 244, 0, 61, 50);
+	if (counter == 1)
+	{
+		for (int i = 0; i < FigCount; i++)
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->PrintInfo(pOut);
+				break;
+			}
+	}
+	else if (counter > 1)
+	{
+		string info = "You selected " + to_string(counter) +" Figs.";
+		pOut->PrintMessage(info);
+	}
+}
+
+CFigure * ApplicationManager::getzoomfig(int x, int y) const
+{
+	Point P;
+	P.x = x;
+	P.y = y;
+	for (int i = no_of_zoomed_figs - 1; i >= 0; i--)
+	{
+		if (ZoomList[i]->Is_Selected(P))
+		{
+
+			return ZoomList[i];
+		}
+	}
+	return NULL;
 }

@@ -125,7 +125,47 @@ ActionType Input::GetUserAction() const
 		}
 
 	}
+	else if (UI.InterfaceMode == MODE_ZOOM)	//GUI is in PLAY mode
+	{
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / (UI.MenuItemWidth - 3));
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
+			switch (ClickedItemOrder)
+			{
+			case ZOOM_CHNG_DRAW_CLR:			{ return	CHNG_DRAW_CLR;}
+			case ZOOM_CHNG_FILL_CLR:			{ return	CHNG_FILL_CLR;}	//Change the filling color
+			case ZOOM_CHNG_BK_CLR:				{ return	CHNG_BK_CLR;} //Change background color
+			case ZOOM_DEL:						{ return	DEL;	}	//Delete a figure(s)
+			case ZOOM_SAVE:						{ return	SAVE;	}	//Save the whole graph to a file
+			case ZOOM_LOAD:						{ return	LOAD;	}	//Load a graph from a file
+			case ZOOM_SWITCH_PLAY:				{ return	TO_PLAY; } // SWITCHES FROM DRAW MODE TO PLAY MODE YA RIAD YA 312
+			case ZOOM_SELECT:					{ return	TO_SELECT;}
+			case ZOOM_ZOOMIN:					{ return	ZOOMIN; }
+			case ZOOM_ZOOMOUT:					{ return	ZOOMOUT; }
+			case ZOOM_EXIT:						{ return	EXIT;}
+			case ZOOM_BACK_DRAW:				{ return	TO_DRAW; }
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+			//[2] User clicks on the drawing area
+			if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+			{
+				return DRAWING_AREA;
+			}
+
+			//[3] User clicks on the status bar
+			return STATUS;
+			///TODO:
+			//perform checks similar to Draw mode checks above
+			//and return the correspoding action
+
+		}
+	}
 }
 /////////////////////////////////
 color Input::ChangeBackColor() 

@@ -39,7 +39,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	TO_PLAY	,		//Switch interface to Play mode
 	TO_SELECT,   // ADDED BY US 34AN LW EL TRTEEB RAA7.
 	TO_PICK_HIDE,
-	TO_SCRAMBLE_FIND
+	TO_SCRAMBLE_FIND,
 	///TODO: Add more action types (if needed)
 };
 

@@ -2,7 +2,7 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-
+#include "SelectAction.h"
 ChngBrdrWdth::ChngBrdrWdth(ApplicationManager *pApp) : Action(pApp)
 
 {
@@ -24,6 +24,9 @@ void ChngBrdrWdth :: Execute()
 	pOut->CreateBorderToolbar();
 	pOut->PrintMessage("Choose The New Border Width. ");
 	pManager->ChngeBrdrWdth(); 
+	pOut->CreateDrawToolBar();
 	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
 	pManager->Saved = false;
+	pManager->first_zoom = true;
+
 }

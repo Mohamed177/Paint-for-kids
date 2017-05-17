@@ -27,6 +27,8 @@ void PasteAction::Execute()
 	if (ReadActionParameters())
 	{
 		pManager->paste(P);
+		pManager->Saved = false;
+		pManager->first_zoom = true;
 	}
 	
 	pManager->GetOutput()->ClearStatusBar();
