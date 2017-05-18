@@ -19,6 +19,7 @@ bool ChangeDrawColor::ReadActionParameters()
 
 void ChangeDrawColor::Execute()
 {
+	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() <= 0) return;
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->CreateColorToolBar();

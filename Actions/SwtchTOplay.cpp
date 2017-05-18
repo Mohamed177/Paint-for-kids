@@ -21,6 +21,9 @@ bool SwtchTOplay::ReadActionParameters()
 
 void SwtchTOplay::Execute()
 {
+	if (pManager->GetFig_Counter() <= 0) {
+		return;
+	}
 	Output* pOut = pManager->GetOutput();
 	pManager->switchtoplay(); // to Un-select any selected figs.
 	pOut->ClearToolBar();

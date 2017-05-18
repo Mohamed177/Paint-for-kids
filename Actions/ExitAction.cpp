@@ -10,7 +10,7 @@ bool ExitAction::ReadActionParameters()
 {
 	PlaySound(NULL, NULL, 0);
 	PlaySound("whyexit.WAV", NULL, SND_LOOP | SND_ASYNC);
-	
+	int x, y;
 	if (pManager->Saved)
 		return false;
 	Output* pOut = pManager->GetOutput();
@@ -19,12 +19,18 @@ bool ExitAction::ReadActionParameters()
 	else if (UI.InterfaceMode == MODE_ZOOM)
 		pOut->DrawIMAGE("exitCE", 1217, 0, 58, 50);
 	else pOut->DrawIMAGE("exitCE", 183, 0, 61, 50);
+
 	Input *pIn = pManager->GetInput();
-	pOut->PrintMessage("Your graph is not saved, enter y to save and n to exit without saving.");
-	string answer = pIn->GetSrting(pOut);
-	if (answer == "y" || answer == "Y")
+	pOut->DrawIMAGE("exitwind", 380, 231, 833-380, 429-231);
+	f:
+	pIn->GetPointClicked(x, y);	//Get the coordinates of the user click
+	if (435 <= x && x <= 569 && y >= 355 && y <= 387) 
+		return false;
+	else if ( (664 <= x && x <= 797) && (y >= 366 && y <= 395))
 		return true;
-	return false;
+	else
+		goto f;
+	
 }
 
 void ExitAction::Execute()
