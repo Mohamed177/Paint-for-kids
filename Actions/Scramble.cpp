@@ -38,6 +38,7 @@ void Scramble::Execute()
 	bool playing;
 	string score = "";
 	pOut->PrintMessage("Choose the highlighted figures.");
+	int z = pManager->getZ_No();
 	while (pManager->getZ_No() > 0)
 	{
 		int z_id = pManager->highlight();
@@ -65,5 +66,15 @@ void Scramble::Execute()
 		pOut->PrintMessage(score);
 		//delete
 	}
+	PlaySound(NULL, NULL, 0);
+	PlaySound("kids.WAV", NULL, SND_ASYNC);
+	if (False_counts >= z) False_counts = z;
+	for (int  i = 3; i >0; i--)
+	{
+		pOut->PrintMessage("Your Score Is = " + to_string(z - False_counts) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+		Sleep(1000);
+	}
 	pOut->DrawIMAGE("scramble", 61, 0, 61, 50);
+	pOut->ClearStatusBar();
+
 }
