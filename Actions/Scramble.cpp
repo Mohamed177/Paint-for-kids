@@ -72,7 +72,11 @@ void Scramble::Execute()
 	for (int  i = 3; i >0; i--)
 	{
 		pOut->PrintMessage("Your Score Is = " + to_string(z - False_counts) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
-		Sleep(1000);
+		for (int i = 0; i < 10; i++)
+		{
+			pOut->DrawIMAGE("1frame_" + to_string(i) + "_delay-0.1s", 0, 55, 1300, 595);
+			Sleep(100);
+		}
 	}
 	pOut->DrawIMAGE("scramble", 61, 0, 61, 50);
 	pOut->ClearStatusBar();

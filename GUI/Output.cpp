@@ -443,7 +443,7 @@ void Output::DRAWPIXEL(Point P1) const
 
 void Output::DrawIMAGE(string s,int x, int y, int wid, int hyt) const
 {
-	if ( s == "no") pWind->DrawImage("images\\cc.jpg", x, y, wid, hyt);
+	if (s.at(0) == '1') pWind->DrawImage("images\\WellDoneWindow\\" + s.erase(0, 1) + ".jpg", x, y, wid, hyt);
 	else  pWind->DrawImage("images\\MenuItems\\" + s + ".jpg", x, y, wid, hyt);
 }
 
