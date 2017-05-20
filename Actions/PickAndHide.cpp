@@ -232,7 +232,7 @@ void PickAndHide:: PH_TypeMode()
 		{
 		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
-		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , You LOSE :'(                 Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
@@ -240,7 +240,16 @@ void PickAndHide:: PH_TypeMode()
 		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		}
-		Sleep(1000);
+
+		if (mssg != 2)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				pOut->DrawIMAGE("1frame_" + to_string(i) + "_delay-0.1s", 0, 55, 1300, 595);
+				Sleep(100);
+			}
+		}
+		else Sleep(1000);
 	}
 
 	PlaySound(NULL, NULL, 0);
@@ -450,7 +459,7 @@ f:
 			{
 			case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 				break;
-			case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+			case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , You LOSE :'(                  Restarting in " + to_string(i) + " Seconds ...");
 				break;
 			case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 				break;
@@ -458,7 +467,11 @@ f:
 			default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
 				break;
 			}
-			Sleep(1000);
+			for (int i = 0; i < 10; i++)
+			{
+				pOut->DrawIMAGE("1frame_" + to_string(i) + "_delay-0.1s", 0, 55, 1300, 595);
+				Sleep(100);
+			}
 		}
 
 		PlaySound(NULL, NULL, 0);
@@ -700,7 +713,7 @@ f:
 		{
 		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
-		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , You LOSE :'(                    Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
@@ -708,7 +721,11 @@ f:
 		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		}
-		Sleep(1000);
+		for (int i = 0; i < 10; i++)
+		{
+			pOut->DrawIMAGE("1frame_" + to_string(i) + "_delay-0.1s", 0, 55, 1300, 595);
+			Sleep(100);
+		}
 	}
 
 	PlaySound(NULL, NULL, 0);
@@ -928,7 +945,7 @@ void PickAndHide:: PH_AreaMode()
 		{
 		case 1:     pOut->PrintMessage("Congratulations , Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
-		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
+		case 2:     pOut->PrintMessage("Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , You LOSE :'(                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		case 3:     pOut->PrintMessage("PERFECT SCORE !! Your Score Is " + to_string(c - Wrong) + "/" + to_string(c) + " , Thanks For Playing :)                   Restarting in " + to_string(i) + " Seconds ...");
 			break;
@@ -936,7 +953,11 @@ void PickAndHide:: PH_AreaMode()
 		default:  pOut->PrintMessage("                                 Restarting in " + to_string(i) + " Seconds ...");
 			break;
 		}
-		Sleep(1000);
+		for (int i = 0; i < 10; i++)
+		{
+			pOut->DrawIMAGE("1frame_" + to_string(i) + "_delay-0.1s", 0, 55, 1300, 595);
+			Sleep(100);
+		}
 	}
 
 	PlaySound(NULL, NULL, 0);

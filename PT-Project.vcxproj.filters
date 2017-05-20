@@ -70,7 +70,10 @@
     <ClCompile Include="GUI\Output.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
     <ClCompile Include="main.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Actions\UndoAction.cpp" />
+=======
+>>>>>>> be9ea8a3d9c7e1a55957d2c309c72ffcad74942f
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -128,7 +131,10 @@
     <ClInclude Include="GUI\UI_Info.h" />
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
+<<<<<<< HEAD
     <ClInclude Include="Actions\UndoAction.h" />
+=======
+>>>>>>> be9ea8a3d9c7e1a55957d2c309c72ffcad74942f
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

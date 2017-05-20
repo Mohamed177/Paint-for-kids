@@ -231,9 +231,11 @@ void ApplicationManager::UpdateInterface(ActionType act) const
 		}
 		pOut->ScrambleScreen();
 	}
-	else 
-		for(int i=0; i<FigCount; i++)
+	else {
+		for (int i = 0; i < FigCount; i++)
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		if ((FigCount > 0) && (UI.InterfaceMode == MODE_DRAW)) pOut->DrawIMAGE("to play", 1160, 0, 58, 50); 
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
