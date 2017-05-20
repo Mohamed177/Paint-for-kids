@@ -41,12 +41,12 @@ bool ChangeFillColor::Execute()
 		pOut->CreateDrawToolBar();
 		pOut->Clickeffect("Fill", 366, 0, 61, 50);
 	}
-	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
+	{
 		pManager->first_zoom = true;
-	if (crntfllclr == UI.FillColor)
-		return false;
-	return true;
+		pManager->Saved = false;
+		return true;
+	}
 }
 
 void ChangeFillColor::Undo()

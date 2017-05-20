@@ -29,8 +29,6 @@ bool ChngBrdrWdth :: Execute()
 	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
-	if (crntbrdr == UI.PenWidth)
-		return false;
 	return true;
 }
 

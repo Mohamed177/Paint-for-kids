@@ -40,12 +40,13 @@ bool ChngBackClr::Execute()
 	}
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
+	{
 		pManager->first_zoom = true;
+		pManager->Saved = false;
+		return true;
+	}
 	//pManager->UpdateInterface(TO_DRAW);
-	pManager->Saved = false;
-	if (crntbkgrnd == UI.BkGrndColor)
-		return false;
-	return true;
+	
 }
 
 ChngBackClr::~ChngBackClr()

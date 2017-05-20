@@ -60,7 +60,7 @@ bool SelectAction::ReadActionParameters()
 	else
 		pOut->DrawIMAGE("SelectCE", 244, 0, 61, 50);
 	pOut->ClearStatusBar();
-	if (SCounter > 0)
+	if (selected_IDs.size() > 0)
 		return true;
 	return false;
 }

@@ -600,6 +600,7 @@ void ApplicationManager::Undo(ActionType actype, color prev, int brdr)
 		}
 		if (!flag) UI.FillColor = prev;
 		break;
+
 	case CHNG_BRDR_WDTH:
 		for (int i = 0; i < FigCount; i++)
 		{
@@ -610,8 +611,6 @@ void ApplicationManager::Undo(ActionType actype, color prev, int brdr)
 			}
 		}
 		if (!flag) pOut->setCrntPenWidth(brdr);
-		break;
-	case ROTATE:
 		break;
 
 	case DEL:

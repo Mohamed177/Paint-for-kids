@@ -41,11 +41,10 @@ bool ChangeDrawColor::Execute()
 		pOut->CreateDrawToolBar();
 		pOut->Clickeffect("colors", 305, 0, 61, 50);
 		pManager->first_zoom = true;
+		pManager->Saved = false;
+		return true;
 	}
-	pManager->Saved = false;
-	if (crntdrwclr == UI.DrawColor)
-		return false;
-	return true;
+	return false; 
 }
 
 void ChangeDrawColor::Undo()
