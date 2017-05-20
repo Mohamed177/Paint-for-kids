@@ -19,7 +19,7 @@ bool SwtchTOplay::ReadActionParameters()
 	return true;
 }
 
-void SwtchTOplay::Execute()
+bool SwtchTOplay::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	pManager->switchtoplay(); // to Un-select any selected figs.
@@ -27,4 +27,9 @@ void SwtchTOplay::Execute()
 	pOut->CreatePlayToolBar();
 	
 	pOut->PrintMessage("Welcome To Play Mode :) ..  Please Choose Your Favourite Game .");
+	return false;
+}
+
+void SwtchTOplay::Undo()
+{
 }

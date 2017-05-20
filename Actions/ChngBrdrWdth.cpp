@@ -17,16 +17,24 @@ bool ChngBrdrWdth ::  ReadActionParameters()
 	return true;
 }
 
-void ChngBrdrWdth :: Execute()
+bool ChngBrdrWdth :: Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->CreateBorderToolbar();
 	pOut->PrintMessage("Choose The New Border Width. ");
+	crntbrdr = UI.PenWidth;
 	pManager->ChngeBrdrWdth(); 
 	pOut->CreateDrawToolBar();
 	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
+	if (crntbrdr == UI.PenWidth)
+		return false;
+	return true;
+}
 
+void ChngBrdrWdth::Undo()
+{
+	pManager->Undo(CHNG_BRDR_WDTH, BLACK, crntbrdr);
 }

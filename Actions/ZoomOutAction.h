@@ -10,7 +10,10 @@ public:
 
 	virtual bool ReadActionParameters();
 
-	virtual void Execute();
+	virtual bool Execute();
 	~ZoomOutAction();
+
+	// Inherited via Action
+	virtual void Undo();
 };
 

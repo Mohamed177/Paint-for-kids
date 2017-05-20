@@ -50,12 +50,12 @@ bool AddCircAction::ReadActionParameters()
 	return true;
 }
 
-void AddCircAction::Execute()
+bool AddCircAction::Execute()
 {
 	//This action needs to read some parameters first
 	bool t = ReadActionParameters();
 	if (!t)
-		return;
+		return false;
 	double Radius = sqrt(((P2.y - Center.y) *(P2.y - Center.y)) + ((P2.x - Center.x)*(P2.x - Center.x)));
 	if ((Center.y-Radius) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius) && Center.x - Radius > 0 && Center.x + Radius < UI.width)
 	{
@@ -65,14 +65,20 @@ void AddCircAction::Execute()
 		pManager->AddFigure(C);
 		pManager->Saved = false;
 		pManager->first_zoom = true;
-
+		return true;
 	}
 	else {
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
+		return false;
 	}
 	Output* pOut = pManager->GetOutput();
 	pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
+}
+
+void AddCircAction::Undo()
+{
+	pManager->Undo(DRAW_CIRC);
 }
 

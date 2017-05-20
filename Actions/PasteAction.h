@@ -10,10 +10,14 @@ public:
 
 private:
 	Point P;
-
+	int count;
 	// Inherited via Action
 	virtual bool ReadActionParameters() override;
 
-	virtual void Execute() override;
+	virtual bool Execute() override;
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };

@@ -7,6 +7,9 @@ public:
 	CopyAction(ApplicationManager * pApp);
 	~CopyAction();
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

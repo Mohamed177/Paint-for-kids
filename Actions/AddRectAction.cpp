@@ -55,12 +55,12 @@ bool AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute() 
+bool AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	 bool t = ReadActionParameters();
 	 if (!t)
-		 return;
+		 return false;
 	//Create a rectangle with the parameters read from the user
 	 if (P1.y > UI.ToolBarHeight && P2.y > UI.ToolBarHeight && P1.y < (UI.height - UI.StatusBarHeight) && P2.y < (UI.height - UI.StatusBarHeight))
 	 {
@@ -73,11 +73,18 @@ void AddRectAction::Execute()
 
 		 Output* pOut = pManager->GetOutput();
 		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
+		 return true;
 	 }
 	 else
 	 {
 		 Output* pOut = pManager->GetOutput();
 		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
 		 pOut->PrintMessage("Error ! Please Draw at DrawArea");
+		 return false;
 	 }
+}
+
+void AddRectAction::Undo()
+{
+	pManager->Undo(DRAW_RECT);
 }

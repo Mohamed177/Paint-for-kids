@@ -54,13 +54,13 @@ ActionType Input::GetUserAction() const
 			case ITM_CIRC:						{ return DRAW_CIRC;}
 			case ITM_LINE:						{ return DRAW_LINE;}
 			case ITM_TRI:						{ return DRAW_TRI;}
-			case ITM_CHNG_DRAW_CLR:				{ return	CHNG_DRAW_CLR;}
-			case ITM_CHNG_FILL_CLR:				{ return	CHNG_FILL_CLR;}	//Change the filling color
-			case ITM_CHNG_BK_CLR:				{ return	CHNG_BK_CLR;} //Change background color
+			case ITM_CHNG_DRAW_CLR:				{ return CHNG_DRAW_CLR;}
+			case ITM_CHNG_FILL_CLR:				{ return CHNG_FILL_CLR;}	//Change the filling color
+			case ITM_CHNG_BK_CLR:				{ return CHNG_BK_CLR;} //Change background color
 			case ITM_CHNG_BRDR_WDTH:			{ return CHNG_BRDR_WDTH; }
-			case ITM_DEL:						{ return	DEL;	}	//Delete a figure(s)
-			case ITM_SAVE:						{ return	SAVE;	}	//Save the whole graph to a file
-			case ITM_LOAD:						{ return	LOAD;	}	//Load a graph from a file
+			case ITM_DEL:						{ return DEL;	}	//Delete a figure(s)
+			case ITM_SAVE:						{ return SAVE;	}	//Save the whole graph to a file
+			case ITM_LOAD:						{ return LOAD;	}	//Load a graph from a file
 			case ITM_SWITCH_PLAY:				{ return TO_PLAY; } // SWITCHES FROM DRAW MODE TO PLAY MODE YA RIAD YA 312
 			case ITM_SELECT:					{ return TO_SELECT;}
 			case ITM_CUT:						{ return CUT; }
@@ -71,7 +71,7 @@ ActionType Input::GetUserAction() const
 			case ITM_ZOOMOUT:					{ return ZOOMOUT; }
 			case ITM_PASTE:						{ return PASTE; }
 			case ITM_EXIT:						{ return EXIT;}
-
+			case ITM_UNDO:						{ return UNDO; }
 
 				/*	//	case ITM_MOVE:  return	MOVE,			//Move a figure(s)
 						//   case ITM_RESIZE:  return	RESIZE,			//Resize a figure(s)

@@ -23,7 +23,7 @@ bool Scramble::ReadActionParameters()
 	return false;
 }
 
-void Scramble::Execute()
+bool Scramble::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	pManager->Zcount = 0;
@@ -66,4 +66,9 @@ void Scramble::Execute()
 		//delete
 	}
 	pOut->DrawIMAGE("scramble", 61, 0, 61, 50);
+	return false;
+}
+
+void Scramble::Undo()
+{
 }

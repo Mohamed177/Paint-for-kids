@@ -7,5 +7,8 @@ class Scramble:public Action
 public:
 	Scramble(ApplicationManager *pApp);
 	virtual bool ReadActionParameters();
-	virtual void Execute();
+	virtual bool Execute();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };

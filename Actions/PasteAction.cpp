@@ -1,5 +1,5 @@
 #include "PasteAction.h"
-
+#include "SelectAction.h"
 PasteAction::PasteAction(ApplicationManager * pApp):Action(pApp)
 {
 
@@ -22,14 +22,24 @@ bool PasteAction::ReadActionParameters()
 	return false;
 }
 
-void PasteAction::Execute()
+bool PasteAction::Execute()
 {
 	if (ReadActionParameters())
 	{
-		pManager->paste(P);
-		pManager->Saved = false;
-		pManager->first_zoom = true;
+		if (pManager->paste(P))
+		{
+			count = pManager->Ccount;
+			pManager->Saved = false;
+			pManager->first_zoom = true;
+			pManager->GetOutput()->ClearStatusBar();
+			return true;
+		}
+		pManager->GetOutput()->ClearStatusBar();
+		return false;
 	}
-	
-	pManager->GetOutput()->ClearStatusBar();
+}
+
+void PasteAction::Undo()
+{
+	pManager->Undo(PASTE, BLACK, count);
 }

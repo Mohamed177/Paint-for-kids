@@ -28,8 +28,8 @@
 #include"Actions\CutAction.h"
 #include"Actions\PasteAction.h"
 #include "Actions\Scramble.h"
+#include "Actions\UndoAction.h"
 #include <fstream>
-
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -42,6 +42,7 @@ ApplicationManager::ApplicationManager()
 	Zcount = 0;
 	no_of_zoomed_figs = 0;
 	first_zoom = true;
+	UndoCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 	{
@@ -153,7 +154,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		case CHNG_FILL_CLR:
 			pAct = new ChangeFillColor(this);
 			break;
-		
+
+		case UNDO:
+			pAct = new UndoAction(this);
+			break;
+
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -161,8 +166,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//Execute the created action
 	if(pAct != NULL)
 	{
-		pAct->Execute();//Execute
-		delete pAct;	//Action is not needed any more ==> delete it
+		if (pAct->Execute())
+			UndoList.push(pAct);
+		else
+			delete pAct;
 		pAct = NULL;
 	}
 }
@@ -266,6 +273,7 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 		Action* pAct = new SaveAction(this);
 		pAct->Execute();
 		delete pAct;
+		pAct = NULL;
 	}
 	FigCount = 0;
 	int x = 0;
@@ -311,28 +319,36 @@ void ApplicationManager::ResizeSelected(float factor)
 	}
 }
 
-void ApplicationManager::Delete_Figs()
+bool ApplicationManager::Delete_Figs()
 {
+	bool deleted1 = false;
 	int i = 0;
+	vector<CFigure*> temp;
+	for (int j = 0; j < FigCount; j++)
+	{
+		temp.push_back(FigList[j]->copy());
+		temp[j]->setID(FigList[j]->getID());
+	}
+	UndoFigList.push(temp);
 	while (i < FigCount)
 	{
 		if (FigList[i]->IsSelected())
 		{
-			delete FigList[i];
 			FigList[i] = NULL;
 			for (int j = i; j < FigCount-1; j++)
 			{
 				swap(FigList[j], FigList[j+1]);
 			}
 			FigCount--;
+			deleted1 = true;
+			SelectAction::setSCounter(0);
 		}
 		else
 		{
 			i++;
 		}
 	}
-
-	
+	return deleted1;
 }
 
 void ApplicationManager::ScrambleDelete()
@@ -415,40 +431,32 @@ void ApplicationManager::Cut()
 		CopyList[i] = NULL;
 	}
 	Ccount = 0;
+	vector<CFigure*> temp;
+	for (int j = 0; j < FigCount; j++)
+	{
+		temp.push_back(FigList[j]->copy());
+		temp[j]->setID(FigList[j]->getID());
+	}
+	UndoFigList.push(temp);
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
 			CopyList[Ccount++] = FigList[i]->copy();
-			delete FigList[i];
 			FigList[i] = NULL;
 			for (int j = i; j < FigCount - 1; j++)
 			{
 				swap(FigList[j], FigList[j + 1]);
 			}
 			FigCount--;
+			SelectAction::setSCounter(0);
 			i--;
 		}
 	}
 }
 bool  ApplicationManager::move( Point v ) 
 {
-	Point Center;
-	int count = 0;
-	for (int  i = 0; i < FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
-		{
-			Point p = FigList[i]->GetCenter();
-			Center.x += p.x;
-			Center.y += p.y;
-			count++;
-		}
-	}
-	if (count != 0) {
-		Center.x = (Center.x) / count;
-		Center.y = (Center.y) / count;
-	}
+	Point Center = GetFigCenter();
 	v.x = (-Center.x + v.x);
 	v.y = (-Center.y + v.y);
 	bool t = true;
@@ -516,10 +524,10 @@ bool ApplicationManager::paste(Point v)
 	}
 	for (int i = 0; i < Ccount; i++)
 	{
-			Point p = CopyList[i]->GetCenter();
-			Center.x += p.x;
-			Center.y += p.y;
-			count++;
+		Point p = CopyList[i]->GetCenter();
+		Center.x += p.x;
+		Center.y += p.y;
+		count++;
 	}
 	if (count != 0) {
 		Center.x = (Center.x) / count;
@@ -551,6 +559,104 @@ bool ApplicationManager::paste(Point v)
 		FigList[i]->Move(v);
 	}
 
+}
+
+void ApplicationManager::Undo(ActionType actype, color prev, int brdr)
+{
+	bool flag = false;
+	vector <CFigure* > temp;
+	switch (actype)
+	{
+	case DRAW_LINE:
+	case DRAW_RECT:
+	case DRAW_TRI:
+	case DRAW_CIRC:
+		delete FigList[--FigCount];
+		break;
+	case CHNG_BK_CLR:
+		pOut->setBackColor(prev);
+		break;
+	case CHNG_DRAW_CLR:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngDrawClr(prev);
+			}
+		}
+		if (!flag) UI.DrawColor = prev;
+		break;
+	case CHNG_FILL_CLR:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngFillClr(prev);
+			}
+		}
+		if (!flag) UI.FillColor = prev;
+		break;
+	case CHNG_BRDR_WDTH:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngBrdWdt(brdr);
+			}
+		}
+		if (!flag) pOut->setCrntPenWidth(brdr);
+		break;
+	case ROTATE:
+		break;
+
+	case DEL:
+	case CUT:
+		FigCount = 0;
+		temp = UndoFigList.top();
+		for (int j = 0;j<temp.size();j++)
+		{
+			AddFigure(temp[j]);
+		}
+		UndoFigList.pop();
+		break;
+	case PASTE:
+		for (int j = 0; j < brdr; j++)
+		{
+			delete FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+		}
+		break;
+	case BRNG_FRNT:
+		break;
+	default:
+		break;
+	}
+	pOut->ClearStatusBar();
+}
+
+Point ApplicationManager::GetFigCenter()
+{
+	Point Center;
+	int count = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			Point p = FigList[i]->GetCenter();
+			Center.x += p.x;
+			Center.y += p.y;
+			count++;
+		}
+	}
+	if (count != 0) {
+		Center.x = (Center.x) / count;
+		Center.y = (Center.y) / count;
+	}
+	return Center;
 }
 
 //-------------------- Switch To Play Mode Function
@@ -598,7 +704,6 @@ f:
 				{
 					flag = true;
 					FigList[i]->ChngBrdWdt(brdr[ClickedItemOrder]);
-					FigList[i]->SetSelected(false);
 				}
 			}
 			if (!flag) pOut->setCrntPenWidth(brdr[ClickedItemOrder]);

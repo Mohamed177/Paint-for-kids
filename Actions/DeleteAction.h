@@ -8,10 +8,14 @@ class DeleteAction:public Action
 public:
 	DeleteAction(ApplicationManager* p);
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
 	~DeleteAction();
 private:
 	
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };
 

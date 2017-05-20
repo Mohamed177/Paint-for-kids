@@ -13,8 +13,11 @@ public:
 	virtual bool ReadActionParameters();
 
 	//Add triangle to the ApplicationManager
-	virtual void Execute();
+	virtual bool Execute();
 
 	~AddTriAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

@@ -63,12 +63,12 @@ bool AddTriAction::ReadActionParameters()
 }
 
 
-void AddTriAction::Execute()
+bool AddTriAction::Execute()
 {
 	//This action needs to read some parameters first
 	bool t = ReadActionParameters();
 	if (!t)
-		return;
+		return false;
 	//Create a Triangle with the parameters read from the user
 	if (p1.y > UI.ToolBarHeight && p2.y > UI.ToolBarHeight && p3.y > UI.ToolBarHeight&& p1.y < (UI.height - UI.StatusBarHeight) && p2.y < (UI.height - UI.StatusBarHeight) && p3.y < (UI.height - UI.StatusBarHeight))
 	{
@@ -81,15 +81,22 @@ void AddTriAction::Execute()
 
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
+		return true;
 	}
 	else
 	{
 		Output* pOut = pManager->GetOutput();
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
+		return false;
 	}
 }
 
 AddTriAction::~AddTriAction()
 {
+}
+
+void AddTriAction::Undo()
+{
+	pManager->Undo(DRAW_TRI);
 }

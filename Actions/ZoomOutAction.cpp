@@ -12,12 +12,15 @@ ZoomOutAction::ZoomOutAction(ApplicationManager *pApp):Action(pApp)
 ZoomOutAction::~ZoomOutAction()
 {
 }
+void ZoomOutAction::Undo()
+{
+}
 bool ZoomOutAction::ReadActionParameters()
 {
 	return true;
 }
 
-void ZoomOutAction::Execute()
+bool ZoomOutAction::Execute()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
@@ -37,4 +40,5 @@ void ZoomOutAction::Execute()
 		pOut->CreateZoomToolBar();
 	
 	pOut->Clickeffect("Zoom Out", 870, 0, 58, 50);
+	return false;
 }

@@ -3,11 +3,14 @@
 class MoveAction :
 	public Action
 {
-	Point v;
+	Point v, Center;
 public:
 	MoveAction(ApplicationManager * pApp);
 	~MoveAction();
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

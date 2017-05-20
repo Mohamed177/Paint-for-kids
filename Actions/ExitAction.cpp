@@ -27,13 +27,17 @@ bool ExitAction::ReadActionParameters()
 	return false;
 }
 
-void ExitAction::Execute()
+bool ExitAction::Execute()
 {
 	bool t = ReadActionParameters();
 	if (t)
 		pManager->ExecuteAction(SAVE);
-	
+	return false;
 }
 
 ExitAction::~ExitAction()
 {}
+
+void ExitAction::Undo()
+{
+}

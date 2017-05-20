@@ -41,16 +41,22 @@ bool ResizeAction::ReadActionParameters()
 	return true;
 }
 
-void ResizeAction::Execute()
+bool ResizeAction::Execute()
 {
 	bool t = ReadActionParameters();
 	if (!t)
-		return;
+		return false;
 	pManager->ResizeSelected(factor);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
+	return true;
 }
 
 ResizeAction::~ResizeAction()
 {
+}
+
+void ResizeAction::Undo()
+{
+	pManager->ResizeSelected(1.0/factor);
 }

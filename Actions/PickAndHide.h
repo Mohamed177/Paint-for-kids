@@ -20,7 +20,7 @@ public:
 
 	bool ReadActionParameters();
 
-	void Execute();
+	bool Execute();
 	
 	void PH_TypeMode();
 
@@ -33,6 +33,10 @@ public:
 	void PH_DelFig(int index);
 
 	void update();
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };
 

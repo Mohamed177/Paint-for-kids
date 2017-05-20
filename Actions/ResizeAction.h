@@ -8,9 +8,12 @@ public:
 
 	virtual bool ReadActionParameters();
 
-	virtual void Execute();
+	virtual bool Execute();
 
 	ResizeAction(ApplicationManager *pApp);
 	~ResizeAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

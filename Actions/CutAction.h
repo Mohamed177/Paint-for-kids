@@ -7,6 +7,9 @@ public:
 	CutAction(ApplicationManager * pApp);
 	~CutAction();
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

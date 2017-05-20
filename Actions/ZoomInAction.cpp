@@ -14,7 +14,7 @@ bool ZoomIn::ReadActionParameters()
 }
 
 //Execute the action
-void ZoomIn::Execute()
+bool ZoomIn::Execute()
 {
 	Input* pIn = pManager->GetInput();
 	Output* pOut = pManager->GetOutput();
@@ -33,9 +33,14 @@ void ZoomIn::Execute()
 		pOut->CreateZoomToolBar();
 	
 	pOut->Clickeffect("Zoom In", 812, 0, 58, 50);
+	return false;
 }
 
 
 ZoomIn::~ZoomIn()
+{
+}
+
+void ZoomIn::Undo()
 {
 }

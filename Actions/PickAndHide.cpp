@@ -54,7 +54,7 @@ f:
 	return false;
 }
 
-void PickAndHide::Execute()
+bool PickAndHide::Execute()
 {
 f:
 	Output* pOut = pManager->GetOutput();
@@ -63,7 +63,7 @@ f:
 	if (b)   // "Back Button pressed"
 	{
 		pOut->CreatePlayToolBar();
-		return; 
+		return false; 
 	}                 
 	switch (z)
 	{
@@ -81,6 +81,7 @@ f:
 	}
 	pManager->UpdateInterface(TO_PLAY);
 	goto f;
+	return false;
 }
 
 void PickAndHide::PH_DelFig(int index)
@@ -105,6 +106,10 @@ void PickAndHide::update()
 	{
 		figlist[i]->Draw(pOut);
 	}
+}
+
+void PickAndHide::Undo()
+{
 }
 
 

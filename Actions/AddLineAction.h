@@ -13,8 +13,11 @@ public:
 	virtual bool ReadActionParameters();
 
 	//Add Line to the ApplicationManager
-	virtual void Execute();
+	virtual bool Execute();
 
 	~AddLineAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

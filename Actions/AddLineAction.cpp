@@ -46,12 +46,12 @@ bool AddLineAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddLineAction::Execute()
+bool AddLineAction::Execute()
 {
 	//This action needs to read some parameters first
 	bool t = ReadActionParameters();
 	if (!t)
-		return; // incase of false-painting trial
+		return false; // incase of false-painting trial
 	//Create a Line with the parameters read from the user
 	if (p1.y > UI.ToolBarHeight && p2.y > UI.ToolBarHeight && p1.y < (UI.height - UI.StatusBarHeight) && p2.y < (UI.height - UI.StatusBarHeight))
 	{
@@ -64,15 +64,22 @@ void AddLineAction::Execute()
 
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
+		return true;
 	}
 	else
 	{
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
+		return false;
 	}
 }
 
 AddLineAction::~AddLineAction()
 {
+}
+
+void AddLineAction::Undo()
+{
+	pManager->Undo(DRAW_LINE);
 }

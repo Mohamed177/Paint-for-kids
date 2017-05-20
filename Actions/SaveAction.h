@@ -7,8 +7,11 @@ class SaveAction : public Action
 	string FileName;
 public:
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
 	SaveAction(ApplicationManager* pApp);
 	~SaveAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

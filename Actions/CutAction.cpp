@@ -14,7 +14,7 @@ bool CutAction::ReadActionParameters()
 	return true;
 }
 
-void CutAction::Execute()
+bool CutAction::Execute()
 {
 	bool t = ReadActionParameters();
 	pManager->Cut();
@@ -23,6 +23,14 @@ void CutAction::Execute()
 
 	Output* pOut = pManager->GetOutput();
 	pOut->Clickeffect("Cut", 732, 0, 61, 50);
+	if (pManager->Ccount >= 0)
+		return true;
+	else return false;
+}
+
+void CutAction::Undo()
+{
+	pManager->Undo(CUT);
 }
 
 

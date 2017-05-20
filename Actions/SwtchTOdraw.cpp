@@ -19,7 +19,7 @@ bool SwtchTOdraw::ReadActionParameters()
 	return true;
 }
 
-void SwtchTOdraw::Execute()
+bool SwtchTOdraw::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	pOut->ClearToolBar();
@@ -27,4 +27,9 @@ void SwtchTOdraw::Execute()
 	PlaySound("drawost.WAV", NULL, SND_LOOP | SND_ASYNC);
 	pOut->CreateDrawToolBar();
 	pOut->PrintMessage("Drawing Mode .. Enjoy Drawing :) ");
+	return false;
+}
+
+void SwtchTOdraw::Undo()
+{
 }

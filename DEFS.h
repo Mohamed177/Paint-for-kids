@@ -19,6 +19,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
 	ROTATE,			//Rotate a figure(s)
+	UNDO,
+	REDO,
 	CUT,
 	COPY,
 	// clear

@@ -8,8 +8,11 @@ class LoadAction :
 	string FileName;
 public:
 	bool ReadActionParameters();
-	void Execute();
+	bool Execute();
 	LoadAction(ApplicationManager* pApp);
 	~LoadAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

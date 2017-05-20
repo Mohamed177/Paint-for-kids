@@ -14,13 +14,18 @@ bool CopyAction::ReadActionParameters()
 	return true;
 }
 
-void CopyAction::Execute()
+bool CopyAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 
 	bool t = ReadActionParameters();
 	pManager->Copy();
 	pOut->Clickeffect("copy", 671, 0, 61, 50);
+	return false;
+}
+
+void CopyAction::Undo()
+{
 }
 
 

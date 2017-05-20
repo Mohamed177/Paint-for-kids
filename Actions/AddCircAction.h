@@ -10,11 +10,15 @@ public:
 	virtual bool ReadActionParameters();
 
 	//Add rectangle to the ApplicationManager
-	virtual void Execute();
+	virtual bool Execute();
 	
 
 private:
 	Point Center, P2;
 	GfxInfo RectGfxInfo;
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };

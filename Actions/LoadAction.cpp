@@ -25,7 +25,7 @@ bool LoadAction::ReadActionParameters()
 	pOut->ClearStatusBar();
 	return true;
 }
-void LoadAction::Execute()
+bool LoadAction::Execute()
 {
 	bool t = ReadActionParameters();
 	LoadFile.open(FileName);
@@ -36,9 +36,13 @@ void LoadAction::Execute()
 	pManager->Saved = true;
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;
-	
+	return false;
 }
 
 LoadAction::~LoadAction()
+{
+}
+
+void LoadAction::Undo()
 {
 }

@@ -22,21 +22,29 @@ bool MoveAction::ReadActionParameters()
 	return true;
 }
 
-void MoveAction::Execute()
+bool MoveAction::Execute()
 {
 	 bool t = ReadActionParameters();
+	 Center = pManager->GetFigCenter();
 	 t = pManager->move(v);
 	 Output* pOut = pManager->GetOutput();
 	 if (!t)
 	 {
 		 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
 		 pOut->PrintMessage("you can't move figures here try somewhere else :)");
+		 return false;
 	 }
 	 pOut->ClearStatusBar();
 	 pManager->Saved = false;
 	 pManager->first_zoom = true;
 
 	 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
+	 return true;
+}
+
+void MoveAction::Undo()
+{
+	pManager->move(Center);
 }
 
 

@@ -8,7 +8,10 @@ public:
 
 	virtual bool ReadActionParameters();
 
-	virtual void Execute();
+	virtual bool Execute();
 	~ExitAction();
+
+	// Inherited via Action
+	virtual void Undo() override;
 };
 

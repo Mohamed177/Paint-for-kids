@@ -16,8 +16,12 @@ public:
 	virtual bool ReadActionParameters();
 	
 	//Add rectangle to the ApplicationManager
-	virtual void Execute() ;
+	virtual bool Execute() ;
 	
+
+	// Inherited via Action
+	virtual void Undo() override;
+
 };
 
 #endif

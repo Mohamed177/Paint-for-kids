@@ -15,6 +15,10 @@ SaveAction::~SaveAction()
 {
 }
 
+void SaveAction::Undo()
+{
+}
+
 bool SaveAction::ReadActionParameters()
 {
 	
@@ -34,14 +38,15 @@ bool SaveAction::ReadActionParameters()
 	return true;
 }
 
-void SaveAction::Execute()
+bool SaveAction::Execute()
 {
 	bool t = ReadActionParameters();
 	if (!t)
-		return;
+		return false;
 	pManager->Saved = true;
 	pManager->first_zoom = true;
 	OutFile.open(FileName);
 	pManager->SaveAll(OutFile);
 	OutFile.close();
+	return false;
 }

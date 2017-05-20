@@ -13,9 +13,9 @@ bool DeleteAction::ReadActionParameters()
 	return 1;
 }
 
-void DeleteAction::Execute()
+bool DeleteAction::Execute()
 {
-	pManager->Delete_Figs();
+	bool done = pManager->Delete_Figs();
 	Output* pOut = pManager->GetOutput();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 		pOut->CreateZoomToolBar();
@@ -35,9 +35,15 @@ void DeleteAction::Execute()
 		Output* pOut = pManager->GetOutput();
 		pOut->Clickeffect("Delete", 976, 0, 61, 50);
 	}
+	return done;
 }
 
 DeleteAction::~DeleteAction()
 {
 	
+}
+
+void DeleteAction::Undo()
+{
+	pManager->Undo(DEL);
 }

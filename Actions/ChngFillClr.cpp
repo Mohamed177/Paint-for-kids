@@ -17,12 +17,13 @@ bool ChangeFillColor::ReadActionParameters()
 	return true;
 }
 
-void ChangeFillColor::Execute()
+bool ChangeFillColor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Fill Color. ");
+	crntfllclr = UI.FillColor;
 	pManager->ChangeFllColor();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
@@ -42,4 +43,12 @@ void ChangeFillColor::Execute()
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
 		pManager->first_zoom = true;
+	if (crntfllclr == UI.FillColor)
+		return false;
+	return true;
+}
+
+void ChangeFillColor::Undo()
+{
+	pManager->Undo(CHNG_FILL_CLR, crntfllclr);
 }

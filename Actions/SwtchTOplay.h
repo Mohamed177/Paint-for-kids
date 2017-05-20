@@ -11,7 +11,11 @@ public:
 
 	 bool ReadActionParameters() ;
 
-	 void Execute() ;
+	 bool Execute() ;
+
+
+	 // Inherited via Action
+	 virtual void Undo() override;
 
 };
 

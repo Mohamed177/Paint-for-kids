@@ -17,12 +17,13 @@ bool ChangeDrawColor::ReadActionParameters()
 	return true;
 }
 
-void ChangeDrawColor::Execute()
+bool ChangeDrawColor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Draw Color. ");
+	crntdrwclr = UI.DrawColor;
 	pManager->ChangeDrwColor();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
@@ -41,4 +42,12 @@ void ChangeDrawColor::Execute()
 		pManager->first_zoom = true;
 	}
 	pManager->Saved = false;
+	if (crntdrwclr == UI.DrawColor)
+		return false;
+	return true;
+}
+
+void ChangeDrawColor::Undo()
+{
+	pManager->Undo(CHNG_DRAW_CLR, crntdrwclr);
 }

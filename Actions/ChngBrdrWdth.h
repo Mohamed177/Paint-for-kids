@@ -3,7 +3,7 @@
 
 class ChngBrdrWdth : public Action
 {
-
+	int crntbrdr;
 public:
 	ChngBrdrWdth(ApplicationManager *pApp);
 	
@@ -11,7 +11,11 @@ public:
 	 
 	bool ReadActionParameters();
 
-	void Execute();
+	bool Execute();
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };
 

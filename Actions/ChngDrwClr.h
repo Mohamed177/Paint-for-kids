@@ -3,6 +3,7 @@
 
 class ChangeDrawColor : public Action
 {
+	color crntdrwclr;
 public:
 	ChangeDrawColor(ApplicationManager *pApp);
 
@@ -11,7 +12,11 @@ public:
 
 	bool ReadActionParameters();
 
-	void Execute();
+	bool Execute();
+
+
+	// Inherited via Action
+	virtual void Undo() override;
 
 };
 
