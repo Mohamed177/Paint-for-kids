@@ -65,6 +65,8 @@ bool AddCircAction::Execute()
 		pManager->AddFigure(C);
 		pManager->Saved = false;
 		pManager->first_zoom = true;
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 		return true;
 	}
 	else {
@@ -80,5 +82,10 @@ bool AddCircAction::Execute()
 void AddCircAction::Undo()
 {
 	pManager->Undo(DRAW_CIRC);
+}
+
+void AddCircAction::Redo()
+{
+	pManager->Redo(DRAW_CIRC);
 }
 

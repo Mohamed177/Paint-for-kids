@@ -16,4 +16,7 @@ private:
 	virtual bool Execute();
 
 	virtual void Undo();
+
+	// Inherited via Action
+	virtual void Redo() override;
 };

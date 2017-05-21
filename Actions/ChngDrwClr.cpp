@@ -25,7 +25,7 @@ bool ChangeDrawColor::Execute()
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Draw Color. ");
 	crntdrwclr = UI.DrawColor;
-	pManager->ChangeDrwColor();
+	newclr = pManager->ChangeDrwColor();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
 		pOut->CreateSelcted_ZoomToolBar();
@@ -38,6 +38,9 @@ bool ChangeDrawColor::Execute()
 	}
 	else
 	{
+		if (newclr == crntdrwclr)
+			while (!pManager->RedoList.empty())
+				pManager->RedoList.pop();
 		pOut->CreateDrawToolBar();
 		pOut->Clickeffect("colors", 305, 0, 61, 50);
 		pManager->first_zoom = true;
@@ -50,4 +53,9 @@ bool ChangeDrawColor::Execute()
 void ChangeDrawColor::Undo()
 {
 	pManager->Undo(CHNG_DRAW_CLR, crntdrwclr);
+}
+
+void ChangeDrawColor::Redo()
+{
+	pManager->Redo(CHNG_DRAW_CLR, newclr);
 }

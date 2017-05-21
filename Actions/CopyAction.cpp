@@ -28,6 +28,10 @@ void CopyAction::Undo()
 {
 }
 
+void CopyAction::Redo()
+{
+}
+
 
 
 

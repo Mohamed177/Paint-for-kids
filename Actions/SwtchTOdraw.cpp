@@ -33,3 +33,7 @@ bool SwtchTOdraw::Execute()
 void SwtchTOdraw::Undo()
 {
 }
+
+void SwtchTOdraw::Redo()
+{
+}

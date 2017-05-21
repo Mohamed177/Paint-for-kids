@@ -36,3 +36,7 @@ bool SwtchTOplay::Execute()
 void SwtchTOplay::Undo()
 {
 }
+
+void SwtchTOplay::Redo()
+{
+}

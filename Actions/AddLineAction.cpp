@@ -64,6 +64,8 @@ bool AddLineAction::Execute()
 
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 		return true;
 	}
 	else
@@ -82,4 +84,9 @@ AddLineAction::~AddLineAction()
 void AddLineAction::Undo()
 {
 	pManager->Undo(DRAW_LINE);
+}
+
+void AddLineAction::Redo()
+{
+	pManager->Redo(DRAW_LINE);
 }

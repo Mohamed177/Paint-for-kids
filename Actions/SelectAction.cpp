@@ -75,6 +75,9 @@ bool SelectAction::Execute()
 	else if (UI.InterfaceMode == MODE_ZOOM)
 		pOut->CreateZoomToolBar();
 	temp = NULL;
+	if (test)
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 	return test;
 }
 
@@ -112,7 +115,28 @@ void SelectAction::Undo()
 			else
 				SCounter--;
 		}
+		redo.push(P);
 		selected_IDs.pop();
+		pManager->UpdateInterface(TO_SELECT);
+	}
+}
+
+void SelectAction::Redo()
+{
+	while (redo.size() > 0)
+	{
+		P = redo.top();
+		temp = pManager->GetFigure(P.x, P.y);
+		if (temp)
+		{
+			temp->SetSelected(!(temp->IsSelected()));
+			if (temp->IsSelected())
+				SCounter++;
+			else
+				SCounter--;
+		}
+		redo.pop();
+		selected_IDs.push(P);
 		pManager->UpdateInterface(TO_SELECT);
 	}
 }

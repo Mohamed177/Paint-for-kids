@@ -15,5 +15,8 @@ public:
 
 	// Inherited via Action
 	virtual void Undo() override;
+
+	// Inherited via Action
+	virtual void Redo() override;
 };
 

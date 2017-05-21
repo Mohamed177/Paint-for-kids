@@ -21,7 +21,8 @@ bool ChngBackClr::Execute()
 	pOut->CreateColorToolBar();
 	pOut->PrintMessage("Choose The New Back Ground Color. ");
 	crntbkgrnd = UI.BkGrndColor;
-	pOut->setBackColor(pIn->ChangeBackColor());
+	newclr = pIn->ChangeBackColor();
+	pOut->setBackColor(newclr);
 	pOut->ClearToolBar();
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
@@ -41,6 +42,9 @@ bool ChngBackClr::Execute()
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)
 	{
+		if (newclr != crntbkgrnd)
+			while (!pManager->RedoList.empty())
+				pManager->RedoList.pop();
 		pManager->first_zoom = true;
 		pManager->Saved = false;
 		return true;
@@ -57,4 +61,9 @@ ChngBackClr::~ChngBackClr()
 void ChngBackClr::Undo()
 {
 	pManager->Undo(CHNG_BK_CLR, crntbkgrnd);
+}
+
+void ChngBackClr::Redo()
+{
+	pManager->Redo(CHNG_BK_CLR, newclr);
 }

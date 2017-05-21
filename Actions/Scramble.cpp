@@ -85,3 +85,7 @@ bool Scramble::Execute()
 void Scramble::Undo()
 {
 }
+
+void Scramble::Redo()
+{
+}

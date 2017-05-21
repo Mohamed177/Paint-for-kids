@@ -73,6 +73,8 @@ bool AddRectAction::Execute()
 
 		 Output* pOut = pManager->GetOutput();
 		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
+		 while (!pManager->RedoList.empty())
+			 pManager->RedoList.pop();
 		 return true;
 	 }
 	 else
@@ -87,4 +89,9 @@ bool AddRectAction::Execute()
 void AddRectAction::Undo()
 {
 	pManager->Undo(DRAW_RECT);
+}
+
+void AddRectAction::Redo()
+{
+	pManager->Redo(DRAW_RECT);
 }

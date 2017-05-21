@@ -3,7 +3,7 @@
 
 class ChngBackClr : public Action
 {
-	color crntbkgrnd;
+	color crntbkgrnd, newclr;
 public:
 
 	ChngBackClr(ApplicationManager *pApp);
@@ -16,5 +16,8 @@ public:
 
 	// Inherited via Action
 	virtual void Undo() override;
+
+	// Inherited via Action
+	virtual void Redo() override;
 };
 

@@ -133,6 +133,7 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_ZOOMIN]		   = "images\\MenuItems\\Zoom In.jpg";
 	MenuItemImages[ITM_CHNG_BRDR_WDTH] = "images\\MenuItems\\Line Width.jpg";
 	MenuItemImages[ITM_UNDO]		   = "images\\MenuItems\\Undo.jpg";
+	MenuItemImages[ITM_REDO]		   = "images\\MenuItems\\Redo.jpg";
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time

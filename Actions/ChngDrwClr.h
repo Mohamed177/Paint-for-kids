@@ -3,7 +3,7 @@
 
 class ChangeDrawColor : public Action
 {
-	color crntdrwclr;
+	color crntdrwclr, newclr;
 public:
 	ChangeDrawColor(ApplicationManager *pApp);
 
@@ -17,6 +17,10 @@ public:
 
 	// Inherited via Action
 	virtual void Undo() override;
+
+
+	// Inherited via Action
+	virtual void Redo() override;
 
 };
 

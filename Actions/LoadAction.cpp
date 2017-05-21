@@ -46,3 +46,7 @@ LoadAction::~LoadAction()
 void LoadAction::Undo()
 {
 }
+
+void LoadAction::Redo()
+{
+}

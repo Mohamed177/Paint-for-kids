@@ -39,12 +39,19 @@ bool MoveAction::Execute()
 	 pManager->first_zoom = true;
 
 	 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
+	 while (!pManager->RedoList.empty())
+		 pManager->RedoList.pop();
 	 return true;
 }
 
 void MoveAction::Undo()
 {
 	pManager->move(Center);
+}
+
+void MoveAction::Redo()
+{
+	pManager->move(v);
 }
 
 

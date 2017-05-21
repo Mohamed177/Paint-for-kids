@@ -3,7 +3,7 @@
 
 class ChangeFillColor : public Action
 {
-	color crntfllclr;
+	color crntfllclr, newclr;
 public:
 	ChangeFillColor(ApplicationManager *pApp);
 
@@ -17,6 +17,10 @@ public:
 
 	// Inherited via Action
 	virtual void Undo() override;
+
+
+	// Inherited via Action
+	virtual void Redo() override;
 
 };
 

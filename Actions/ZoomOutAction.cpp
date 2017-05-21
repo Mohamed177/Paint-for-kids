@@ -15,6 +15,9 @@ ZoomOutAction::~ZoomOutAction()
 void ZoomOutAction::Undo()
 {
 }
+void ZoomOutAction::Redo()
+{
+}
 bool ZoomOutAction::ReadActionParameters()
 {
 	return true;

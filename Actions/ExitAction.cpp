@@ -47,3 +47,7 @@ ExitAction::~ExitAction()
 void ExitAction::Undo()
 {
 }
+
+void ExitAction::Redo()
+{
+}

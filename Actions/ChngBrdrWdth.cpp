@@ -24,7 +24,10 @@ bool ChngBrdrWdth :: Execute()
 	pOut->CreateBorderToolbar();
 	pOut->PrintMessage("Choose The New Border Width. ");
 	crntbrdr = UI.PenWidth;
-	pManager->ChngeBrdrWdth(); 
+	newbrdr = pManager->ChngeBrdrWdth();
+	if (newbrdr == crntbrdr)
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 	pOut->CreateDrawToolBar();
 	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
 	pManager->Saved = false;
@@ -35,4 +38,9 @@ bool ChngBrdrWdth :: Execute()
 void ChngBrdrWdth::Undo()
 {
 	pManager->Undo(CHNG_BRDR_WDTH, BLACK, crntbrdr);
+}
+
+void ChngBrdrWdth::Redo()
+{
+	pManager->Redo(CHNG_BRDR_WDTH, BLACK, newbrdr);
 }

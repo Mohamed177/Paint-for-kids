@@ -17,11 +17,14 @@ public:
 	~SelectAction();
 private:
 	static int SCounter, ZCounter;
-	stack<Point> selected_IDs;
+	stack<Point> selected_IDs, redo;
 	CFigure* temp;
 	Point P;
 
 	// Inherited via Action
 	virtual void Undo() override;
+
+	// Inherited via Action
+	virtual void Redo() override;
 };
 

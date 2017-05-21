@@ -44,3 +44,7 @@ ZoomIn::~ZoomIn()
 void ZoomIn::Undo()
 {
 }
+
+void ZoomIn::Redo()
+{
+}

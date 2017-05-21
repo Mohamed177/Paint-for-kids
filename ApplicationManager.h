@@ -24,6 +24,7 @@ private:
 	CFigure* ZoomList[MaxFigCount];
 	CFigure* ScrambleList[MaxFigCount];
 	stack<vector<CFigure*>> UndoFigList;
+	stack<CFigure*>RedoFig;
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -32,6 +33,7 @@ public:
 	int Ccount, Zcount,UndoCount; /// public or private(setter and getter) 
 	bool Saved, first_zoom;
 	stack<Action*> UndoList;
+	stack<Action*> RedoList;
 	ApplicationManager(); 
 	~ApplicationManager();
 	// -- Action-Related Functions
@@ -59,9 +61,9 @@ public:
 	bool move(Point v);
 	void ScrambleMove();
 	void switchtoplay();
-	void ChngeBrdrWdth();
-	void ChangeDrwColor();
-	void ChangeFllColor();
+	int ChngeBrdrWdth();
+	color ChangeDrwColor();
+	color ChangeFllColor();
 	int getZ_No();
 	void RandomOrder();
 	void RandomPoint();
@@ -74,6 +76,7 @@ public:
 	int GetFig_Counter();
 	bool paste(Point p);
 	void Undo(ActionType, color prev = BLACK, int brdr = 4);
+	void Redo(ActionType, color prev = BLACK, int brdr = 4);
 	Point GetFigCenter();
 };
 

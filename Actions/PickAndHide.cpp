@@ -112,6 +112,10 @@ void PickAndHide::Undo()
 {
 }
 
+void PickAndHide::Redo()
+{
+}
+
 
 void PickAndHide:: PH_TypeMode()
 {

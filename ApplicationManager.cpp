@@ -29,6 +29,7 @@
 #include"Actions\PasteAction.h"
 #include "Actions\Scramble.h"
 #include "Actions\UndoAction.h"
+#include "Actions\RedoAction.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -159,6 +160,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 			pAct = new UndoAction(this);
 			break;
 
+		case REDO:
+			pAct = new RedoAction(this);
+			break;
+
 		case STATUS:	//a click on the status bar ==> no action
 			return;
 	}
@@ -250,9 +255,25 @@ ApplicationManager::~ApplicationManager()
 {
 	for(int i=0; i<FigCount; i++)
 		delete FigList[i];
+	for (int i = 0; i<no_of_zoomed_figs; i++)
+		delete ZoomList[i];
+	for (int i = 0; i<Ccount; i++)
+		delete CopyList[i];
+	Action* tact;
+	while (!RedoList.empty())
+	{
+		tact = RedoList.top();
+		RedoList.pop();
+		delete tact;
+	}
+	while (!UndoList.empty())
+	{
+		tact = UndoList.top();
+		UndoList.pop();
+		delete tact;
+	}
 	delete pIn;
 	delete pOut;
-	
 }
 
 
@@ -330,6 +351,7 @@ bool ApplicationManager::Delete_Figs()
 	{
 		temp.push_back(FigList[j]->copy());
 		temp[j]->setID(FigList[j]->getID());
+		temp[j]->SetSelected(FigList[j]->IsSelected());
 	}
 	UndoFigList.push(temp);
 	while (i < FigCount)
@@ -438,6 +460,7 @@ void ApplicationManager::Cut()
 	{
 		temp.push_back(FigList[j]->copy());
 		temp[j]->setID(FigList[j]->getID());
+		temp[j]->SetSelected(FigList[j]->IsSelected());
 	}
 	UndoFigList.push(temp);
 	for (int i = 0; i < FigCount; i++)
@@ -573,7 +596,8 @@ void ApplicationManager::Undo(ActionType actype, color prev, int brdr)
 	case DRAW_RECT:
 	case DRAW_TRI:
 	case DRAW_CIRC:
-		delete FigList[--FigCount];
+		RedoFig.push(FigList[FigCount - 1]);
+		FigList[--FigCount] = NULL;
 		break;
 	case CHNG_BK_CLR:
 		pOut->setBackColor(prev);
@@ -623,6 +647,70 @@ void ApplicationManager::Undo(ActionType actype, color prev, int brdr)
 		}
 		UndoFigList.pop();
 		break;
+	
+	case BRNG_FRNT:
+		break;
+	default:
+		break;
+	}
+	pOut->ClearStatusBar();
+}
+
+void ApplicationManager::Redo(ActionType actype, color prev, int brdr)
+{
+	bool flag = false;
+	vector <CFigure* > temp;
+	switch (actype)
+	{
+	case DRAW_LINE:
+	case DRAW_RECT:
+	case DRAW_TRI:
+	case DRAW_CIRC:
+		AddFigure(RedoFig.top());
+		RedoFig.pop();
+		break;
+	case CHNG_BK_CLR:
+		pOut->setBackColor(prev);
+		break;
+	case CHNG_DRAW_CLR:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngDrawClr(prev);
+			}
+		}
+		if (!flag) UI.DrawColor = prev;
+		break;
+	case CHNG_FILL_CLR:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngFillClr(prev);
+			}
+		}
+		if (!flag) UI.FillColor = prev;
+		break;
+
+	case CHNG_BRDR_WDTH:
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				flag = true;
+				FigList[i]->ChngBrdWdt(brdr);
+			}
+		}
+		if (!flag) pOut->setCrntPenWidth(brdr);
+		break;
+
+	case DEL:
+	case CUT:
+		Delete_Figs();
+		break;
 	case PASTE:
 		for (int j = 0; j < brdr; j++)
 		{
@@ -671,12 +759,13 @@ void ApplicationManager::switchtoplay()
 
 
 //-------------------- Change Border Width Function
-void ApplicationManager::ChngeBrdrWdth()
+int ApplicationManager::ChngeBrdrWdth()
 {
+	int ClickedItemOrder;
+	int brdr[11] = { 1,2,4,6,8,10,12,14,16,18,20 };
 f:
 	int x, y;
 	pIn->GetPointClicked(x, y);	//Get the coordinates of the user click
-
 	if (UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
 		//[1] If user clicks on the Toolbar
@@ -684,7 +773,7 @@ f:
 		{
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
-			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			ClickedItemOrder = (x / UI.MenuItemWidth);
 			//Divide x coord of the point clicked by the menu item width (int division)
 			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
@@ -693,10 +782,8 @@ f:
 			{
 				pOut->ClearToolBar();
 				pOut->CreateDrawToolBar();
-				return;
+				return 0;
 			}
-
-			int brdr[11] = { 1,2,4,6,8,10,12,14,16,18,20 };
 
 			bool flag = false;
 			for (int i = 0; i < FigCount; i++)
@@ -715,11 +802,12 @@ f:
 		
 
 	}
+	return brdr[ClickedItemOrder];
 }
 
 
 //-------------------- Change Draw Color Function
-void ApplicationManager:: ChangeDrwColor()
+color ApplicationManager:: ChangeDrwColor()
 {
 	bool flag = false; // to check if ther is any selected figs.
 	color c;
@@ -735,7 +823,7 @@ f:
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
-		if (ClickedItemOrder == 14) return; // back button pressed.
+		if (ClickedItemOrder == 14) return 0; // back button pressed.
 		
 		// else , getting the pressed color.
 	    c = SNOW;
@@ -797,12 +885,12 @@ f:
 			}
 		}
 	if (!flag) UI.DrawColor = c;
-	
+	return c;
 }
 
 
 //-------------------- Change Fill Color Function
-void ApplicationManager::ChangeFllColor()
+color ApplicationManager::ChangeFllColor()
 {
 	bool flag = false; // to check if there is any selected figs.
 	color c;
@@ -818,7 +906,7 @@ f:
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 
-		if (ClickedItemOrder == 14) return; // back button pressed.
+		if (ClickedItemOrder == 14) return 0; // back button pressed.
 
 											
 							// else , getting the pressed color.
@@ -881,7 +969,7 @@ f:
 			}
 		}
 	if (!flag) UI.FillColor = c;
-	
+	return c;
 }
 
 int ApplicationManager::getZ_No()

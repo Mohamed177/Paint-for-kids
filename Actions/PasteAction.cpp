@@ -32,6 +32,8 @@ bool PasteAction::Execute()
 			pManager->Saved = false;
 			pManager->first_zoom = true;
 			pManager->GetOutput()->ClearStatusBar();
+			while (!pManager->RedoList.empty())
+				pManager->RedoList.pop(); 
 			return true;
 		}
 		pManager->GetOutput()->ClearStatusBar();
@@ -42,4 +44,9 @@ bool PasteAction::Execute()
 void PasteAction::Undo()
 {
 	pManager->Undo(PASTE, BLACK, count);
+}
+
+void PasteAction::Redo()
+{
+	pManager->paste(P);
 }

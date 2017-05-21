@@ -81,6 +81,8 @@ bool AddTriAction::Execute()
 
 		Output* pOut = pManager->GetOutput();
 		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 		return true;
 	}
 	else
@@ -99,4 +101,9 @@ AddTriAction::~AddTriAction()
 void AddTriAction::Undo()
 {
 	pManager->Undo(DRAW_TRI);
+}
+
+void AddTriAction::Redo()
+{
+	pManager->Redo(DRAW_TRI);
 }

@@ -19,6 +19,10 @@ void SaveAction::Undo()
 {
 }
 
+void SaveAction::Redo()
+{
+}
+
 bool SaveAction::ReadActionParameters()
 {
 	

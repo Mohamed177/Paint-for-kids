@@ -1,6 +1,4 @@
 #include "UndoAction.h"
-
-#include "UndoAction.h"
 #include "..\ApplicationManager.h"
 
 UndoAction::UndoAction(ApplicationManager* pApp):Action(pApp)
@@ -23,7 +21,7 @@ bool UndoAction::Execute()
 		Action* ptr = pManager->UndoList.top();
 		ptr->Undo();
 		pManager->UndoList.pop();
-		delete ptr;
+		pManager->RedoList.push(ptr);
 	}
 	return false;
 	pManager->Saved = false;
@@ -31,5 +29,9 @@ bool UndoAction::Execute()
 }
 
 void UndoAction::Undo()
+{
+}
+
+void UndoAction::Redo()
 {
 }

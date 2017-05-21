@@ -24,13 +24,22 @@ bool CutAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	pOut->Clickeffect("Cut", 732, 0, 61, 50);
 	if (pManager->Ccount >= 0)
+	{
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 		return true;
+	}
 	else return false;
 }
 
 void CutAction::Undo()
 {
 	pManager->Undo(CUT);
+}
+
+void CutAction::Redo()
+{
+	pManager->Redo(CUT);
 }
 
 

@@ -35,6 +35,9 @@ bool DeleteAction::Execute()
 		Output* pOut = pManager->GetOutput();
 		pOut->Clickeffect("Delete", 976, 0, 61, 50);
 	}
+	if (done)
+		while (!pManager->RedoList.empty())
+			pManager->RedoList.pop();
 	return done;
 }
 
@@ -46,4 +49,9 @@ DeleteAction::~DeleteAction()
 void DeleteAction::Undo()
 {
 	pManager->Undo(DEL);
+}
+
+void DeleteAction::Redo()
+{
+	pManager->Redo(DEL);
 }

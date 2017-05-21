@@ -72,6 +72,7 @@ ActionType Input::GetUserAction() const
 			case ITM_PASTE:						{ return PASTE; }
 			case ITM_EXIT:						{ return EXIT;}
 			case ITM_UNDO:						{ return UNDO; }
+			case ITM_REDO:						{ return REDO; }
 
 				/*	//	case ITM_MOVE:  return	MOVE,			//Move a figure(s)
 						//   case ITM_RESIZE:  return	RESIZE,			//Resize a figure(s)

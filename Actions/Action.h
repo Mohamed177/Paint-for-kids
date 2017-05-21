@@ -26,7 +26,7 @@ public:
 	virtual void Undo()=0;
 
 	//To redo this action (code depends on action type)
-	//virtual void Redo()=0;
+	virtual void Redo()=0;
 
 };
 
