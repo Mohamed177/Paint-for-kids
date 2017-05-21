@@ -78,6 +78,7 @@ public:
 	void Undo(ActionType, color prev = BLACK, int brdr = 4);
 	void Redo(ActionType, color prev = BLACK, int brdr = 4);
 	Point GetFigCenter();
+	bool Send( int x );
 };
 
 #endif

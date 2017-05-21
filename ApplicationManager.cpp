@@ -748,6 +748,48 @@ Point ApplicationManager::GetFigCenter()
 	return Center;
 }
 
+bool ApplicationManager::Send( int x )
+{
+	int count = 0;
+	// send front 
+	if (x = 0) 
+	{
+		for (int  i = FigCount-1; i >=0; i--)
+		{
+			if (FigList[i]->ISFILLED())
+			{
+				for (int  j = i; j < FigCount-1-count; j++)
+				{
+					swap(FigList[j], FigList[j + 1]);
+				}
+				count++;
+			}
+		}
+		if (count == 0)
+			return false;
+		return true;
+	
+	}
+	// send back 
+	else 
+	{
+		for (int i =  0 ; i <FigCount; i++)
+		{
+			if (FigList[i]->ISFILLED())
+			{
+				for (int j = i; j >0+count; j--)
+				{
+					swap(FigList[j], FigList[j - 1]);
+				}
+				count++;
+			}
+		}
+		if (count == 0)
+			return false;
+		return true;
+	}
+}
+
 //-------------------- Switch To Play Mode Function
 void ApplicationManager::switchtoplay()
 {
