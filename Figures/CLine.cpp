@@ -129,9 +129,9 @@ bool CLine::Resize(float factor, bool zoom = false)
 		{
 			p1 = temp1;
 			p2 = temp2;
-			return true;
+			return false;
 		}
-	return false;
+	return true;
 }
 
 bool CLine::ValidMove(Point p, bool scramble = 0) 

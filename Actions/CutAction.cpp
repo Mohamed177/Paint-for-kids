@@ -22,7 +22,7 @@ bool CutAction::Execute()
 	pManager->first_zoom = true;
 
 	Output* pOut = pManager->GetOutput();
-	pOut->Clickeffect("Cut", 732, 0, 61, 50);
+	pOut->Clickeffect("Cut", ITM_CUT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	if (pManager->Ccount >= 0)
 	{
 		while (!pManager->RedoList.empty())

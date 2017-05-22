@@ -26,7 +26,7 @@ bool AddRectAction::ReadActionParameters()
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
 
-	pOut->DrawIMAGE("RectangleCE", 183, 0, 61, 50);
+	pOut->DrawIMAGE("RectangleCE", ITM_RECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	pOut->PrintMessage("Drawing a New Rectangle : Click at first corner");
 	
@@ -72,7 +72,7 @@ bool AddRectAction::Execute()
 		 pManager->first_zoom = true;
 
 		 Output* pOut = pManager->GetOutput();
-		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
+		 pOut->DrawIMAGE("Rectangle", ITM_RECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		 while (!pManager->RedoList.empty())
 			 pManager->RedoList.pop();
 		 return true;
@@ -80,7 +80,7 @@ bool AddRectAction::Execute()
 	 else
 	 {
 		 Output* pOut = pManager->GetOutput();
-		 pOut->DrawIMAGE("Rectangle", 183, 0, 61, 50);
+		 pOut->DrawIMAGE("Rectangle", ITM_RECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		 pOut->PrintMessage("Error ! Please Draw at DrawArea");
 		 return false;
 	 }

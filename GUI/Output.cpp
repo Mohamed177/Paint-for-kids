@@ -18,7 +18,7 @@ Output::Output()
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
 	UI.MenuItemWidth = 55;
-	
+	UI.MenuItemWidth = 51;	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = LIGHTSKYBLUE;	//Filling color
 	UI.MsgColor = RED;		//Messages color
@@ -134,12 +134,13 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_CHNG_BRDR_WDTH] = "images\\MenuItems\\Line Width.jpg";
 	MenuItemImages[ITM_UNDO]		   = "images\\MenuItems\\Undo.jpg";
 	MenuItemImages[ITM_REDO]		   = "images\\MenuItems\\Redo.jpg";
+	MenuItemImages[ITM_SBACK] = "images\\MenuItems\\Send To Back.jpg";
+	MenuItemImages[ITM_SFRONT] = "images\\MenuItems\\Bring To Front.jpg";
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//Draw menu item one image at a time
 	for(int i=0; i<DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0,UI.MenuItemWidth, UI.ToolBarHeight);
-
 
 
 	//Draw a line under the toolbar
@@ -290,7 +291,7 @@ void Output::CreateZoomToolBar() const
 	MenuItemImages[ZOOM_CHNG_BRDR_WDTH] = "images\\MenuItems\\dimmed-Line Width.jpg";
 	MenuItemImages[ZOOM_BACK_DRAW] = "images\\MenuItems\\Backk.jpg";
 
-	int menuitmwidth = UI.MenuItemWidth - 3;
+	int menuitmwidth = UI.MenuItemWidth;
 	for (int i = 0; i < ZOOM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*menuitmwidth, 0, menuitmwidth, UI.ToolBarHeight);
 
@@ -331,7 +332,7 @@ void Output::CreateSelcted_ZoomToolBar() const
 	MenuItemImages[ZOOM_CHNG_BRDR_WDTH] = "images\\MenuItems\\dimmed-Line Width.jpg";
 	MenuItemImages[ZOOM_BACK_DRAW] = "images\\MenuItems\\Backk.jpg";
 
-	int menuitmwidth = UI.MenuItemWidth - 3;
+	int menuitmwidth = UI.MenuItemWidth;
 	for (int i = 0; i < ZOOM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*menuitmwidth, 0, menuitmwidth, UI.ToolBarHeight);
 

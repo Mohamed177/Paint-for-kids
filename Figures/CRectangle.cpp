@@ -74,8 +74,8 @@ bool CRectangle::Resize(float factor, bool zoom = false)
 	bool chk1, chk2, chk3, chk4;
 	chk1 = (mid13.x - side13 >= 0);
 	chk2 = (mid13.x + side13 <= UI.width);
-	chk3 = (mid14.y - side14 >= 0);
-	chk4 = (mid14.y + side14 <= (UI.height - UI.StatusBarHeight - UI.ToolBarHeight));
+	chk3 = (mid14.y - side14 >=UI.ToolBarHeight);
+	chk4 = (mid14.y + side14 <= (UI.height - UI.StatusBarHeight ));
 	if (!zoom)
 	{
 		if (chk1 && chk2 && chk3 && chk4)

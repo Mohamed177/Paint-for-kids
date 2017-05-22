@@ -25,7 +25,7 @@ bool AddTriAction::ReadActionParameters()
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
 
-	pOut->DrawIMAGE("TriangleCE", 122	, 0, 61, 50);
+	pOut->DrawIMAGE("TriangleCE", ITM_TRI * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	pOut->PrintMessage("Drawing a New Triangle : Click at first point");
 
@@ -80,7 +80,7 @@ bool AddTriAction::Execute()
 		pManager->first_zoom = true;
 
 		Output* pOut = pManager->GetOutput();
-		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
+		pOut->DrawIMAGE("Triangle", ITM_TRI * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		while (!pManager->RedoList.empty())
 			pManager->RedoList.pop();
 		return true;
@@ -89,7 +89,7 @@ bool AddTriAction::Execute()
 	{
 		Output* pOut = pManager->GetOutput();
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
-		pOut->DrawIMAGE("Triangle", 122, 0, 61, 50);
+		pOut->DrawIMAGE("Triangle", ITM_TRI * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		return false;
 	}
 }

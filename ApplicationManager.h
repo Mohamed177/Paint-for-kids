@@ -50,7 +50,7 @@ public:
 	void UpdateInterface(ActionType act) const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
 	void LoadAll(ifstream &OutFile) ;
-	void ResizeSelected(float factor);
+	bool ResizeSelected(float factor);
 	bool Delete_Figs();
 	void ScrambleDelete();
 	void Copy();
@@ -78,6 +78,7 @@ public:
 	void Undo(ActionType, color prev = BLACK, int brdr = 4);
 	void Redo(ActionType, color prev = BLACK, int brdr = 4);
 	Point GetFigCenter();
+	bool Send( int x );
 };
 
 #endif

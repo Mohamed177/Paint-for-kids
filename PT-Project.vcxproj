@@ -152,6 +152,8 @@
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\Scramble.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
+    <ClCompile Include="Actions\SendBack.cpp" />
+    <ClCompile Include="Actions\SendFront.cpp" />
     <ClCompile Include="Actions\SwtchTOdraw.cpp" />
     <ClCompile Include="Actions\SwtchTOplay.cpp" />
     <ClCompile Include="Actions\UndoAction.cpp" />
@@ -225,6 +227,8 @@
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\Scramble.h" />
     <ClInclude Include="Actions\SelectAction.h" />
+    <ClInclude Include="Actions\SendBack.h" />
+    <ClInclude Include="Actions\SendFront.h" />
     <ClInclude Include="Actions\SwtchTOdraw.h" />
     <ClInclude Include="Actions\SwtchTOplay.h" />
     <ClInclude Include="Actions\UndoAction.h" />

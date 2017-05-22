@@ -32,7 +32,7 @@ bool ZoomIn::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
-	pOut->Clickeffect("Zoom In", 812, 0, 58, 50);
+	pOut->Clickeffect("Zoom In", ZOOM_ZOOMIN* UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	return false;
 }
 

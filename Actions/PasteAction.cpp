@@ -10,11 +10,11 @@ bool PasteAction::ReadActionParameters()
 	
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->DrawIMAGE("PasteCE", 793, 0, 61, 50);
+	pOut->DrawIMAGE("PasteCE", ITM_PASTE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->PrintMessage("Click To paste");
 	pIn->GetPointClicked(P.x, P.y);
 	mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
-	pOut->DrawIMAGE("Paste", 793, 0, 61, 50);
+	pOut->DrawIMAGE("Paste", ITM_PASTE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	if (P.y > UI.ToolBarHeight && P.y > UI.ToolBarHeight && P.y < (UI.height - UI.StatusBarHeight))
 	{
 		return true;

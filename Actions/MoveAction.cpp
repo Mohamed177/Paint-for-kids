@@ -14,7 +14,7 @@ bool MoveAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->DrawIMAGE("MoveCE", 610, 0, 61, 50);
+	pOut->DrawIMAGE("MoveCE", ITM_MOVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->PrintMessage("click at any  point to move the figures ");
 	pIn->GetPointClicked(v.x, v.y);
 	
@@ -30,7 +30,7 @@ bool MoveAction::Execute()
 	 Output* pOut = pManager->GetOutput();
 	 if (!t)
 	 {
-		 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
+		 pOut->DrawIMAGE("Move", ITM_MOVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		 pOut->PrintMessage("you can't move figures here try somewhere else :)");
 		 return false;
 	 }
@@ -38,7 +38,7 @@ bool MoveAction::Execute()
 	 pManager->Saved = false;
 	 pManager->first_zoom = true;
 
-	 pOut->DrawIMAGE("Move", 610, 0, 61, 50);
+	 pOut->DrawIMAGE("Move", ITM_MOVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	 while (!pManager->RedoList.empty())
 		 pManager->RedoList.pop();
 	 return true;

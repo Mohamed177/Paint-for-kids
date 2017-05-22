@@ -25,7 +25,7 @@ bool AddCircAction::ReadActionParameters()
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
 
-	pOut->DrawIMAGE("CircleCE",61, 0, 61, 50);
+	pOut->DrawIMAGE("CircleCE", ITM_CIRC * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	pOut->PrintMessage("Drawing a New Circle : Click at first corner");
 
@@ -67,16 +67,17 @@ bool AddCircAction::Execute()
 		pManager->first_zoom = true;
 		while (!pManager->RedoList.empty())
 			pManager->RedoList.pop();
+		Output* pOut = pManager->GetOutput();
+		pOut->DrawIMAGE("Circle", ITM_CIRC * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		return true;
 	}
 	else {
 		Output* pOut = pManager->GetOutput();
-		pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
+		pOut->DrawIMAGE("Circle", ITM_CIRC * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 		return false;
 	}
-	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("Circle", 61, 0, 61, 50);
+	
 }
 
 void AddCircAction::Undo()

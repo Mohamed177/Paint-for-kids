@@ -29,12 +29,12 @@ bool ChangeDrawColor::Execute()
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
 		pOut->CreateSelcted_ZoomToolBar();
-		pOut->Clickeffect("colors", 290, 0, 58, 50);
+		pOut->Clickeffect("colors", ZOOM_CHNG_DRAW_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else if (UI.InterfaceMode == MODE_ZOOM)
 	{
 		pOut->CreateZoomToolBar();
-		pOut->Clickeffect("colors", 290, 0, 58, 50);
+		pOut->Clickeffect("colors", ZOOM_CHNG_DRAW_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else
 	{
@@ -42,7 +42,7 @@ bool ChangeDrawColor::Execute()
 			while (!pManager->RedoList.empty())
 				pManager->RedoList.pop();
 		pOut->CreateDrawToolBar();
-		pOut->Clickeffect("colors", 305, 0, 61, 50);
+		pOut->Clickeffect("colors", ITM_CHNG_DRAW_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		pManager->first_zoom = true;
 		pManager->Saved = false;
 		return true;

@@ -29,7 +29,7 @@ bool ChngBrdrWdth :: Execute()
 		while (!pManager->RedoList.empty())
 			pManager->RedoList.pop();
 	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("Line Width", 488, 0, 61, 50);
+	pOut->Clickeffect("Line Width", ITM_CHNG_BRDR_WDTH * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
 	return true;

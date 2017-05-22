@@ -30,15 +30,17 @@ bool SaveAction::ReadActionParameters()
 	if (pOut->getdrawint() == 0)
 	{
 		if (UI.InterfaceMode == MODE_ZOOM)
-			pOut->DrawIMAGE("saveCE", 986, 0, 58, 50);
-		else pOut->DrawIMAGE("saveCE", 1037, 0, 61, 50);
+			pOut->DrawIMAGE("saveCE", ZOOM_SAVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		else pOut->DrawIMAGE("saveCE", ITM_SAVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	pOut->setdrawint(0);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the save's file name");
 	FileName = pIn->GetSrting(pOut);
 	pOut->ClearStatusBar();
-	pOut->DrawIMAGE("save", 1037, 0, 61, 50);
+	if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->DrawIMAGE("save", ZOOM_SAVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	else pOut->DrawIMAGE("save", ITM_SAVE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	return true;
 }
 

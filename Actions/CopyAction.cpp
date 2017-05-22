@@ -20,7 +20,7 @@ bool CopyAction::Execute()
 
 	bool t = ReadActionParameters();
 	pManager->Copy();
-	pOut->Clickeffect("copy", 671, 0, 61, 50);
+	pOut->Clickeffect("copy", ITM_COPY * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	return false;
 }
 

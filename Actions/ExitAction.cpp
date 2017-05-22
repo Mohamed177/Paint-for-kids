@@ -15,10 +15,10 @@ bool ExitAction::ReadActionParameters()
 		return false;
 	Output* pOut = pManager->GetOutput();
 	if ( UI.InterfaceMode == MODE_DRAW )
-		pOut->DrawIMAGE("exitCE", 1220, 0, 61, 50);
+		pOut->DrawIMAGE("exitCE", ITM_EXIT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	else if (UI.InterfaceMode == MODE_ZOOM)
-		pOut->DrawIMAGE("exitCE", 1217, 0, 58, 50);
-	else pOut->DrawIMAGE("exitCE", 183, 0, 61, 50);
+		pOut->DrawIMAGE("exitCE", ZOOM_EXIT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	else pOut->DrawIMAGE("exitCE", 3* UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	Input *pIn = pManager->GetInput();
 	pOut->DrawIMAGE("exitwind", 380, 231, 833-380, 429-231);

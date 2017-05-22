@@ -42,6 +42,6 @@ bool ZoomOutAction::Execute()
 	else if (pManager->Zcount != 0)
 		pOut->CreateZoomToolBar();
 	
-	pOut->Clickeffect("Zoom Out", 870, 0, 58, 50);
+	pOut->Clickeffect("Zoom Out", ZOOM_ZOOMOUT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	return false;
 }

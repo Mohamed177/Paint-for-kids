@@ -12,9 +12,9 @@ bool SelectAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	if (UI.InterfaceMode == MODE_ZOOM)
-		pOut->DrawIMAGE("SelectCE", 232, 0, 58, 50);
+		pOut->DrawIMAGE("SelectCE", ZOOM_SELECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	else
-		pOut->DrawIMAGE("SelectCE", 244, 0, 61, 50);
+		pOut->DrawIMAGE("SelectCE", ITM_SELECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Select Any Figs. ");
 	pIn->GetPointClicked(P.x,P.y);
@@ -56,9 +56,9 @@ bool SelectAction::ReadActionParameters()
 		mciSendString(TEXT("play click.wav"), NULL, 0, NULL);
 	}
 	if (UI.InterfaceMode == MODE_ZOOM)
-		pOut->DrawIMAGE("SelectCE", 232, 0, 58, 50);
+		pOut->DrawIMAGE("Select", ZOOM_SELECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	else
-		pOut->DrawIMAGE("SelectCE", 244, 0, 61, 50);
+		pOut->DrawIMAGE("Select", ITM_SELECT * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->ClearStatusBar();
 	if (selected_IDs.size() > 0)
 		return true;

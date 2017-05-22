@@ -36,7 +36,7 @@ bool ResizeAction::ReadActionParameters()
 	}
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("Resize", 549, 0, 61, 50);
+	pOut->Clickeffect("Resize", ITM_RESIZE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->ClearStatusBar();
 	return true;
 }
@@ -46,12 +46,12 @@ bool ResizeAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return false;
-	pManager->ResizeSelected(factor);
+	bool done = pManager->ResizeSelected(factor);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
 	while (!pManager->RedoList.empty())
 		pManager->RedoList.pop();
-	return true;
+	return done;
 }
 
 ResizeAction::~ResizeAction()
