@@ -1,11 +1,13 @@
 #include "CCircle.h"
 #include <cmath>
+
 CCircle::CCircle(Point P1, double R, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	Center = P1;
 	Radius = R;
 
 }
+
 void CCircle::Draw(Output *pOut) const
 {
 	pOut->DrawCIRC(Center, Radius, FigGfxInfo, Selected);
@@ -22,9 +24,6 @@ bool CCircle::Is_Selected(Point P) const
 	return false;
 }
 
-
-
-
 void CCircle::Save(ofstream & OutFile) 
 {
 	OutFile << "Circle " << ID << ' ' << Center.x << ' ' << Center.y << ' ' << Radius << ' ' << FigGfxInfo.BorderWdth << ' ';
@@ -40,23 +39,25 @@ void CCircle::Save(ofstream & OutFile)
 	OutFile << endl;
 }
 
-void CCircle::Resize(float K = 2,bool zoom = false)
+bool CCircle::Resize(float K = 2,bool zoom = false)
 {
 	double Radius2 = K * Radius;
 	if (zoom)
 		Radius = Radius2;
-	else 
-		if ((Center.y - Radius2) >= UI.ToolBarHeight   && Center.y>UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius2))
+	else
+		if ((Center.y - Radius2) >= UI.ToolBarHeight   && Center.y > UI.ToolBarHeight && Center.y<(UI.height - UI.StatusBarHeight) && (UI.height - UI.StatusBarHeight)>(Center.y + Radius2))
 		{
 			Radius = Radius2;
+			return true;
 		}
-	return;
-
+	return false;
 }
+
  Point CCircle::GetCenter() 
 {
 	 return Center;
 }
+
  bool  CCircle::ValidMove(Point p, bool scramble = 0)
  {
 	 Point v1, v2;

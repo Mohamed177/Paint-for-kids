@@ -335,10 +335,22 @@ void ApplicationManager::LoadAll(ifstream &LoadFile)
 
 void ApplicationManager::ResizeSelected(float factor)
 {
-	for (int i = 0; i < FigCount; i++)
+	bool done = true;
+	int i = 0;
+	while( i < FigCount && done)
 	{
 		if (FigList[i]->IsSelected())
-			FigList[i]->Resize(factor);
+			done = FigList[i]->Resize(factor);
+		i++;
+	}
+	if (!done)
+	{
+		i--;
+		while (i >= 0)
+		{
+			if (FigList[i]->IsSelected())
+				done = FigList[i]->Resize(1.0 / factor);
+		}
 	}
 }
 

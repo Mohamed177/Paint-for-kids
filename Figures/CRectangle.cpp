@@ -52,7 +52,7 @@ void CRectangle::Save(ofstream &OutFile)
 		OutFile << " NO_FILL\n";
 }
 
-void CRectangle::Resize(float factor, bool zoom = false)
+bool CRectangle::Resize(float factor, bool zoom = false)
 {
 	Point mid13, mid14, Corner3, Corner4;
 
@@ -102,6 +102,7 @@ void CRectangle::Resize(float factor, bool zoom = false)
 					Corner1.y = mid14.y + side14;
 					Corner2.y = mid14.y - side14;
 				}
+			return true;
 		}
 	}
 	else
@@ -129,6 +130,7 @@ void CRectangle::Resize(float factor, bool zoom = false)
 				Corner2.y = mid14.y - side14;
 			}
 	}
+	return false;
 }
 
 void CRectangle::PrintInfo(Output* pOut)

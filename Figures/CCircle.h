@@ -12,7 +12,7 @@ public:
 	void Load(ifstream &Infile);
 	char GetType();
 
-	void Resize(float K, bool zoom);
+	bool Resize(float K, bool zoom);
     Point GetCenter();
 	bool ValidMove(Point, bool srcamble);
 	void Move(Point);

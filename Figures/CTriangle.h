@@ -15,7 +15,7 @@ public:
 
 	bool IsValid(Point, Point, Point);
 	void Save(ofstream &OutFile);
-	void Resize(float factor, bool zoom);
+	bool Resize(float factor, bool zoom);
 	 void Load(ifstream &Infile) ;
 	void PrintInfo(Output* pOut);
 	Point GetCenter();
