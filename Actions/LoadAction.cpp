@@ -28,9 +28,18 @@ bool LoadAction::ReadActionParameters()
 bool LoadAction::Execute()
 {
 	bool t = ReadActionParameters();
-	LoadFile.open(FileName);
-	pManager->LoadAll(LoadFile);
 	Output* pOut = pManager->GetOutput();
+	LoadFile.open(FileName);
+	if (!LoadFile.is_open())
+	{
+		pOut->PrintMessage("Error file not found");
+		if (UI.InterfaceMode == MODE_ZOOM)
+			pOut->DrawIMAGE("Load", ZOOM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		else
+			pOut->DrawIMAGE("Load", ITM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		return false;
+	}
+	pManager->LoadAll(LoadFile);
 	if (UI.InterfaceMode == MODE_ZOOM)
 		pOut->DrawIMAGE("Load", ZOOM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	else

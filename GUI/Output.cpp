@@ -17,8 +17,8 @@ Output::Output()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 51;
-	
+	UI.MenuItemWidth = 55;
+	UI.MenuItemWidth = 51;	
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = LIGHTSKYBLUE;	//Filling color
 	UI.MsgColor = RED;		//Messages color

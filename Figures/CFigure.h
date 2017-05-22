@@ -38,7 +38,7 @@ public:
 
 	virtual Point GetCenter()=0;
 	//virtual void Rotate() = 0;	//Rotate the figure
-	virtual void Resize(float, bool zoom = false) = 0;	//Resize the figure
+	virtual bool Resize(float, bool zoom = false) = 0;	//Resize the figure
 	virtual void Move(Point) = 0;		//Move the figure
 	virtual bool ValidMove(Point,bool srcamble = 0)=0;
 	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file

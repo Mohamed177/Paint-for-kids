@@ -50,7 +50,7 @@ public:
 	void UpdateInterface(ActionType act) const;	//Redraws all the drawing window	
 	void SaveAll(ofstream &OutFile) const;
 	void LoadAll(ifstream &OutFile) ;
-	void ResizeSelected(float factor);
+	bool ResizeSelected(float factor);
 	bool Delete_Figs();
 	void ScrambleDelete();
 	void Copy();

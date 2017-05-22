@@ -16,7 +16,7 @@ public:
 
 	void Save(ofstream &OutFile);
 	void Load(ifstream &Infile);
-	virtual void Resize(float, bool zoom);
+	virtual bool Resize(float, bool zoom);
 	void PrintInfo(Output* pOut);
 	void Move(Point nCorner);
 	 double GetArea();

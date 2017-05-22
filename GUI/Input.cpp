@@ -146,7 +146,6 @@ ActionType Input::GetUserAction() const
 			case ZOOM_DEL:						{ return	DEL;	}	//Delete a figure(s)
 			case ZOOM_SAVE:						{ return	SAVE;	}	//Save the whole graph to a file
 			case ZOOM_LOAD:						{ return	LOAD;	}	//Load a graph from a file
-			case ZOOM_SWITCH_PLAY:				{ return	TO_PLAY; } // SWITCHES FROM DRAW MODE TO PLAY MODE YA RIAD YA 312
 			case ZOOM_SELECT:					{ return	TO_SELECT;}
 			case ZOOM_ZOOMIN:					{ return	ZOOMIN; }
 			case ZOOM_ZOOMOUT:					{ return	ZOOMOUT; }

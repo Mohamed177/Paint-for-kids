@@ -95,7 +95,7 @@ void CTriangle::PrintInfo(Output* pOut)
 	pOut->PrintMessage(info);
 }
 
-void CTriangle::Resize(float factor, bool zoom = false)
+bool CTriangle::Resize(float factor, bool zoom = false)
 {
 	Point mid;
 	mid.x = (p1.x + p2.x + p3.x) / 3;
@@ -123,7 +123,9 @@ void CTriangle::Resize(float factor, bool zoom = false)
 				p1 = v1;
 				p2 = v2;
 				p3 = v3;
+				return true;
 			}
+			return false;
 		}
 		else 
 		{
@@ -148,7 +150,7 @@ void CTriangle::Resize(float factor, bool zoom = false)
 			p3.x = (p3.x + mid.x) / 2;
 			p3.y = (p3.y + mid.y) / 2;
 		}
-
+		return true;
 	}
 }
 

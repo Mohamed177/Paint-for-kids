@@ -46,12 +46,12 @@ bool ResizeAction::Execute()
 	bool t = ReadActionParameters();
 	if (!t)
 		return false;
-	pManager->ResizeSelected(factor);
+	bool done = pManager->ResizeSelected(factor);
 	pManager->Saved = false;
 	pManager->first_zoom = true;
 	while (!pManager->RedoList.empty())
 		pManager->RedoList.pop();
-	return true;
+	return done;
 }
 
 ResizeAction::~ResizeAction()

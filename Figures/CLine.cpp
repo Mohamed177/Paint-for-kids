@@ -103,7 +103,7 @@ void CLine::Load(ifstream &Infile)
 
 }
 
-void CLine::Resize(float factor, bool zoom = false)
+bool CLine::Resize(float factor, bool zoom = false)
 {
 	Point mid, temp1 = p1, temp2 = p2;
 	mid.x = (p1.x + p2.x) / 2;
@@ -129,7 +129,9 @@ void CLine::Resize(float factor, bool zoom = false)
 		{
 			p1 = temp1;
 			p2 = temp2;
+			return false;
 		}
+	return true;
 }
 
 bool CLine::ValidMove(Point p, bool scramble = 0) 
