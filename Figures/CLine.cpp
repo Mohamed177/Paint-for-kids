@@ -142,7 +142,7 @@ bool CLine::ValidMove(Point p, bool scramble = 0)
 	int left_border = 0;
 	if (scramble)
 		left_border = UI.width / 2;
-	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width && v1.x>=left_border &&v2.x >=left_border))
+	if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width-13 &&v2.x <= UI.width-13 && v1.x>=left_border &&v2.x >=left_border))
 	{
 		return true;
 	}
