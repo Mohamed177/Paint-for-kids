@@ -18,6 +18,14 @@ bool SendFront::ReadActionParameters()
 
 bool SendFront::Execute()
 {
-	bool t = pManager->Send(1);
+	bool t = pManager->Send(0);
 	return false;
+}
+
+void SendFront::Undo()
+{
+}
+
+void SendFront::Redo()
+{
 }

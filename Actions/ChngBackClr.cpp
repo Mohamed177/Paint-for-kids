@@ -27,17 +27,17 @@ bool ChngBackClr::Execute()
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
 		pOut->CreateSelcted_ZoomToolBar();
-		pOut->Clickeffect("Background", 406, 0, 58, 50);
+		pOut->Clickeffect("Background", ZOOM_CHNG_BK_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else if (UI.InterfaceMode == MODE_ZOOM)
 	{
 		pOut->CreateZoomToolBar();
-		pOut->Clickeffect("Background", 406, 0, 58, 50);
+		pOut->Clickeffect("Background", ZOOM_CHNG_BK_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else
 	{
 		pOut->CreateDrawToolBar();
-		pOut->Clickeffect("Background", 427, 0, 61, 50);
+		pOut->Clickeffect("Background", ITM_CHNG_BK_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	pManager->Saved = false;
 	if (UI.InterfaceMode == MODE_DRAW)

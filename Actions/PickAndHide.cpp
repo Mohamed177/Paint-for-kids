@@ -120,7 +120,7 @@ void PickAndHide::Redo()
 void PickAndHide:: PH_TypeMode()
 {
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("PH_FigsCE", 0, 0, 61, 50);
+	pOut->DrawIMAGE("PH_FigsCE", 0 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	char s = 'a';    // to get the type
 	pManager->PickHideCopy(figlist, figcount);   // creating a new figlist. to not affect the main one
@@ -268,7 +268,7 @@ void PickAndHide:: PH_TypeMode()
 void PickAndHide::PH_FillColorMode()
 {
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("PH_FillColorCE", 61, 0, 61, 50);
+	pOut->DrawIMAGE("PH_FillColorCE", 1 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
@@ -487,7 +487,7 @@ f:
 void PickAndHide:: PH_TypeAndFillMode()
 {
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("PH_BothCE", 122, 0, 61, 50);
+	pOut->DrawIMAGE("PH_BothCE", 2 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	int mssg = 0; // to print the message , look @ the end of the func.
 	int filled = 0; // to check if i pressed on a filled fig. , CUZ the base FILLCOLOR will mess with the code
 	int selected = 0; // check if i pressed a filled fig or not 
@@ -762,8 +762,10 @@ void PickAndHide:: PH_AreaMode()
 		//Divide x coord of the point clicked by the menu item width (int division)
 		//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 		if (ClickedItemOrder == 2) return;
-		if (ClickedItemOrder == 0) { ma = true;    pOut->DrawIMAGE("DECE", 0, 0, 61, 50); }
-		else if (ClickedItemOrder == 1) { ma = false;  pOut->DrawIMAGE("ASCCE", 61, 0, 61, 50); }
+		if (ClickedItemOrder == 0) { ma = true;    pOut->DrawIMAGE("DECE", 0 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		}
+		else if (ClickedItemOrder == 1) { ma = false;  pOut->DrawIMAGE("ASCCE", 1 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+		}
 		else goto f;
 	}
 	else goto f;

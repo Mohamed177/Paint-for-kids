@@ -30,6 +30,8 @@
 #include "Actions\Scramble.h"
 #include "Actions\UndoAction.h"
 #include "Actions\RedoAction.h"
+#include "Actions\SendBack.h"
+#include "Actions\SendFront.h"
 #include <fstream>
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -110,6 +112,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		case ZOOMIN:
 			pAct = new ZoomIn(this);
+			break;
+		case SEND_BACK:
+			pAct = new SendBack(this);
+			break;
+		case BRNG_FRNT:
+			pAct = new SendFront(this);
 			break;
 
 		case ZOOMOUT:
@@ -227,7 +235,7 @@ void ApplicationManager::UpdateInterface(ActionType act) const
 		else if (SelectAction::getZoomSlctCount() == 0)
 			pOut->CreateZoomToolBar();
 	}
-	else if (act == TO_SCRAMBLE_FIND)
+	else if (act == TO_SCRAMBLE_FIND &&no_of_zoomed_figs !=0)
 	{
 		for (int i = 0; i < no_of_zoomed_figs; i++)
 		{
@@ -239,7 +247,7 @@ void ApplicationManager::UpdateInterface(ActionType act) const
 	else {
 		for (int i = 0; i < FigCount; i++)
 			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
-		if ((FigCount > 0) && (UI.InterfaceMode == MODE_DRAW)) pOut->DrawIMAGE("to play", 1160, 0, 58, 50); 
+		if ((FigCount > 0) && (UI.InterfaceMode == MODE_DRAW)) pOut->DrawIMAGE("to play", ITM_SWITCH_PLAY* UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -344,35 +352,60 @@ void ApplicationManager::ResizeSelected(float factor)
 
 bool ApplicationManager::Delete_Figs()
 {
-	bool deleted1 = false;
-	int i = 0;
-	vector<CFigure*> temp;
-	for (int j = 0; j < FigCount; j++)
+	if (UI.InterfaceMode == MODE_ZOOM) 
 	{
-		temp.push_back(FigList[j]->copy());
-		temp[j]->setID(FigList[j]->getID());
-		temp[j]->SetSelected(FigList[j]->IsSelected());
-	}
-	UndoFigList.push(temp);
-	while (i < FigCount)
-	{
-		if (FigList[i]->IsSelected())
+		int i = 0;
+		while (i <no_of_zoomed_figs)
 		{
-			FigList[i] = NULL;
-			for (int j = i; j < FigCount-1; j++)
+			if (ZoomList[i]->IsSelected())
 			{
-				swap(FigList[j], FigList[j+1]);
+				ZoomList[i] = NULL;
+				delete ZoomList[i];
+				for (int j = i; j < no_of_zoomed_figs- 1; j++)
+				{
+					swap(ZoomList[j], ZoomList[j + 1]);
+				}
+				no_of_zoomed_figs--;
+				SelectAction::ResetZoomSlctCount();
 			}
-			FigCount--;
-			deleted1 = true;
-			SelectAction::setSCounter(0);
+			else
+			{
+				i++;
+			}
 		}
-		else
+		return false;
+	}else
+	{
+		bool deleted1 = false;
+		int i = 0;
+		vector<CFigure*> temp;
+		for (int j = 0; j < FigCount; j++)
 		{
-			i++;
+			temp.push_back(FigList[j]->copy());
+			temp[j]->setID(FigList[j]->getID());
+			temp[j]->SetSelected(FigList[j]->IsSelected());
 		}
+		UndoFigList.push(temp);
+		while (i < FigCount)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i] = NULL;
+				for (int j = i; j < FigCount - 1; j++)
+				{
+					swap(FigList[j], FigList[j + 1]);
+				}
+				FigCount--;
+				deleted1 = true;
+				SelectAction::setSCounter(0);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		return deleted1;
 	}
-	return deleted1;
 }
 
 void ApplicationManager::ScrambleDelete()
@@ -752,11 +785,11 @@ bool ApplicationManager::Send( int x )
 {
 	int count = 0;
 	// send front 
-	if (x = 0) 
+	if (x == 0) 
 	{
 		for (int  i = FigCount-1; i >=0; i--)
 		{
-			if (FigList[i]->ISFILLED())
+			if (FigList[i]->IsSelected())
 			{
 				for (int  j = i; j < FigCount-1-count; j++)
 				{
@@ -775,7 +808,7 @@ bool ApplicationManager::Send( int x )
 	{
 		for (int i =  0 ; i <FigCount; i++)
 		{
-			if (FigList[i]->ISFILLED())
+			if (FigList[i]->IsSelected())
 			{
 				for (int j = i; j >0+count; j--)
 				{
@@ -1104,7 +1137,6 @@ void ApplicationManager::PickHideCopy(CFigure** cpylist,int& figcount)
 
 void ApplicationManager::printselected(int counter) const
 {
-	pOut->DrawIMAGE("Select", 244, 0, 61, 50);
 	if (counter == 1)
 	{
 		for (int i = 0; i < FigCount; i++)

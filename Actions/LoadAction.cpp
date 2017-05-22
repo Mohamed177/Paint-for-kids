@@ -15,9 +15,9 @@ bool LoadAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	if (UI.InterfaceMode == MODE_ZOOM)
-		pOut->DrawIMAGE("LoadCE", 1044, 0, 58, 50);
+		pOut->DrawIMAGE("LoadCE", ZOOM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	else
-		pOut->DrawIMAGE("LoadCE", 1101, 0, 61, 50);
+		pOut->DrawIMAGE("LoadCE", ITM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->setdrawint(1);
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please enter the name of the text folder to load from : ");
@@ -31,7 +31,10 @@ bool LoadAction::Execute()
 	LoadFile.open(FileName);
 	pManager->LoadAll(LoadFile);
 	Output* pOut = pManager->GetOutput();
-	pOut->DrawIMAGE("Load", 1101, 0, 61, 50);
+	if (UI.InterfaceMode == MODE_ZOOM)
+		pOut->DrawIMAGE("Load", ZOOM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	else
+		pOut->DrawIMAGE("Load", ITM_LOAD * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	LoadFile.close();
 	pManager->Saved = true;
 	if (UI.InterfaceMode == MODE_DRAW)

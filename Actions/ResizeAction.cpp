@@ -36,7 +36,7 @@ bool ResizeAction::ReadActionParameters()
 	}
 	pOut->ClearToolBar();
 	pOut->CreateDrawToolBar();
-	pOut->Clickeffect("Resize", 549, 0, 61, 50);
+	pOut->Clickeffect("Resize", ITM_RESIZE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	pOut->ClearStatusBar();
 	return true;
 }

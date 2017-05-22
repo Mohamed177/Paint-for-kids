@@ -29,17 +29,17 @@ bool ChangeFillColor::Execute()
 	if (UI.InterfaceMode == MODE_ZOOM && SelectAction::getZoomSlctCount() > 0)
 	{
 		pOut->CreateSelcted_ZoomToolBar();
-		pOut->Clickeffect("Fill", 348, 0, 58, 50);
+		pOut->Clickeffect("Fill", ZOOM_CHNG_FILL_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else if (UI.InterfaceMode == MODE_ZOOM)
 	{
 		pOut->CreateZoomToolBar();
-		pOut->Clickeffect("Fill", 348, 0, 58, 50);
+		pOut->Clickeffect("Fill", ZOOM_CHNG_FILL_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	else
 	{
 		pOut->CreateDrawToolBar();
-		pOut->Clickeffect("Fill", 366, 0, 61, 50);
+		pOut->Clickeffect("Fill", ITM_CHNG_FILL_CLR * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 	if (UI.InterfaceMode == MODE_DRAW)
 	{

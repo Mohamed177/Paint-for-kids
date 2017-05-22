@@ -65,7 +65,7 @@ void CCircle::Resize(float K = 2,bool zoom = false)
 	 int left_border = 0;
 	 if (scramble)
 		 left_border = UI.width / 2;
-	 if ((v1.y > UI.ToolBarHeight && (v1.y+Radius) > UI.ToolBarHeight && (v1.y+Radius) < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&(v1.x-Radius) <= UI.width && ( v1.x +Radius)<=UI.width &&v1.x >=left_border && (v1.x - Radius) >=left_border && (v1.x + Radius) >= left_border))
+	 if ((v1.y > UI.ToolBarHeight && (v1.y-Radius) > UI.ToolBarHeight && (v1.y+Radius) < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&(v1.x-Radius) <= UI.width && ( v1.x +Radius)<=UI.width &&v1.x >=left_border && (v1.x - Radius) >=left_border && (v1.x + Radius) >= left_border))
 	 {
 		 return true;
 	 }

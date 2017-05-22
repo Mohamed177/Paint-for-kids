@@ -22,3 +22,11 @@ bool SendBack::Execute()
 	 bool t = pManager->Send(1);
 	 return false;
 }
+
+void SendBack::Undo()
+{
+}
+
+void SendBack::Redo()
+{
+}

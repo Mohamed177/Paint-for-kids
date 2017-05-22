@@ -15,7 +15,7 @@ bool AddLineAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	
-	pOut->DrawIMAGE("LineCE", 0, 0, 61, 50);
+	pOut->DrawIMAGE("LineCE", ITM_LINE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	pOut->PrintMessage("Drawing a New Line : Click at first point");
 
@@ -63,7 +63,7 @@ bool AddLineAction::Execute()
 		pManager->first_zoom = true;
 
 		Output* pOut = pManager->GetOutput();
-		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
+		pOut->DrawIMAGE("Line", ITM_LINE*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		while (!pManager->RedoList.empty())
 			pManager->RedoList.pop();
 		return true;
@@ -71,7 +71,7 @@ bool AddLineAction::Execute()
 	else
 	{
 		Output* pOut = pManager->GetOutput();
-		pOut->DrawIMAGE("Line", 0, 0, 61, 50);
+		pOut->DrawIMAGE("Line",ITM_LINE * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		pOut->PrintMessage("Error ! Please Draw at DrawArea");
 		return false;
 	}

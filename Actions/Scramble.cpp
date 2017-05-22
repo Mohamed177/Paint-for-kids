@@ -34,7 +34,7 @@ bool Scramble::Execute()
 	pManager->RandomOrder();
 	pManager->RandomPoint();
 	pManager->UpdateInterface(TO_SCRAMBLE_FIND);
-	pOut->DrawIMAGE("scrambleCE", 61, 0, 61, 50);
+	pOut->DrawIMAGE("scrambleCE", 1 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 	bool playing;
 	string score = "";
 	pOut->PrintMessage("Choose the highlighted figures.");
@@ -43,7 +43,7 @@ bool Scramble::Execute()
 	{
 		int z_id = pManager->highlight();
 		pManager->UpdateInterface(TO_SCRAMBLE_FIND);
-		pOut->DrawIMAGE("scrambleCE", 61, 0, 61, 50);
+		pOut->DrawIMAGE("scrambleCE", 1 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 		pOut->PrintMessage(score);
 		playing = ReadActionParameters();
 		if (!playing)
@@ -78,7 +78,9 @@ bool Scramble::Execute()
 			Sleep(100);
 		}
 	}
-	pOut->DrawIMAGE("scramble", 61, 0, 61, 50);
+	pOut->DrawIMAGE("scramble", 1 * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	pManager->UpdateInterface(TO_PLAY);
+	pOut->ClearStatusBar();
 	return false;
 }
 

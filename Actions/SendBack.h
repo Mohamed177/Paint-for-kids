@@ -12,5 +12,9 @@ public:
 	~SendBack();
 	bool ReadActionParameters();
 	bool Execute();
+	virtual void Undo() ;
+
+	// Inherited via Action
+	virtual void Redo() ;
 };
 

@@ -30,10 +30,16 @@ bool DeleteAction::Execute()
 	
 	pManager->Saved = false;
 
-	if (1)
+	if (UI.InterfaceMode == MODE_ZOOM)
 	{
 		Output* pOut = pManager->GetOutput();
-		pOut->Clickeffect("Delete", 976, 0, 61, 50);
+		pOut->Clickeffect("Delete", ZOOM_DEL * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+	else 
+	{
+		Output* pOut = pManager->GetOutput();
+		pOut->Clickeffect("Delete", ITM_DEL * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	
 	}
 	if (done)
 		while (!pManager->RedoList.empty())

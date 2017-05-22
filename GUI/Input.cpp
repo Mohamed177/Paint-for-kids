@@ -73,7 +73,8 @@ ActionType Input::GetUserAction() const
 			case ITM_EXIT:						{ return EXIT;}
 			case ITM_UNDO:						{ return UNDO; }
 			case ITM_REDO:						{ return REDO; }
-
+			case ITM_SBACK: { return SEND_BACK; }
+			case ITM_SFRONT: { return BRNG_FRNT; }
 				/*	//	case ITM_MOVE:  return	MOVE,			//Move a figure(s)
 						//   case ITM_RESIZE:  return	RESIZE,			//Resize a figure(s)
 			//    case ITM_ROTATE:  return	ROTATE,			//Rotate a figure(s)
@@ -133,7 +134,7 @@ ActionType Input::GetUserAction() const
 		{
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
-			int ClickedItemOrder = (x / (UI.MenuItemWidth - 3));
+			int ClickedItemOrder = (x / (UI.MenuItemWidth));
 			//Divide x coord of the point clicked by the menu item width (int division)
 			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
 

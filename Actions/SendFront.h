@@ -13,5 +13,9 @@ public:
 	~SendFront();
 	bool ReadActionParameters();
 	bool Execute();
+	virtual void Undo() override;
+
+	// Inherited via Action
+	virtual void Redo() override;
 };
 

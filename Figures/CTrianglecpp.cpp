@@ -118,7 +118,7 @@ void CTriangle::Resize(float factor, bool zoom = false)
 		}
 		if (!zoom)
 		{
-			if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width))
+			if ((v1.y > UI.ToolBarHeight && v2.y > UI.ToolBarHeight && v3.y > UI.ToolBarHeight&& v1.y < (UI.height - UI.StatusBarHeight) && v2.y < (UI.height - UI.StatusBarHeight) && v3.y < (UI.height - UI.StatusBarHeight) && v1.x <= UI.width &&v2.x <= UI.width &&v3.x <= UI.width&& v1.x>=0 &&v2.x >=0 &&v3.x >=0))
 			{
 				p1 = v1;
 				p2 = v2;
