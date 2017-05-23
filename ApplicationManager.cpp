@@ -267,6 +267,8 @@ ApplicationManager::~ApplicationManager()
 		delete ZoomList[i];
 	for (int i = 0; i<Ccount; i++)
 		delete CopyList[i];
+	for (int i = 0; i<no_of_zoomed_figs; i++)
+		delete ScrambleList[i];
 	Action* tact;
 	while (!RedoList.empty())
 	{
@@ -288,7 +290,7 @@ ApplicationManager::~ApplicationManager()
 void ApplicationManager::SaveAll(ofstream &OutFile) const
 {
 	string drwcolor = UI.DrawColor, fllclr = UI.FillColor, bckclr = UI.BkGrndColor;
-	OutFile << (string)UI.DrawColor << ' ' << (string)UI.FillColor << ' ' << (string)UI.BkGrndColor << endl << FigCount << endl;
+	OutFile << (string)UI.DrawColor<< ' ' << (string)UI.FillColor << ' ' << (string)UI.BkGrndColor << endl << FigCount << endl;
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Save(OutFile);
 }
@@ -374,6 +376,7 @@ bool ApplicationManager::Delete_Figs()
 		{
 			if (ZoomList[i]->IsSelected())
 			{
+				delete ZoomList[i];
 				ZoomList[i] = NULL;
 				delete ZoomList[i];
 				for (int j = i; j < no_of_zoomed_figs- 1; j++)
@@ -405,6 +408,7 @@ bool ApplicationManager::Delete_Figs()
 		{
 			if (FigList[i]->IsSelected())
 			{
+				delete FigList[i];
 				FigList[i] = NULL;
 				for (int j = i; j < FigCount - 1; j++)
 				{

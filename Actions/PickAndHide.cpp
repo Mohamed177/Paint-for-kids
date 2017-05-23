@@ -17,6 +17,10 @@ PickAndHide::PickAndHide(ApplicationManager* pApp) : Action (pApp)
 
 PickAndHide::~PickAndHide()
 {
+	for (int  i = 0; i < figcount; i++)
+	{
+		delete figlist[i];
+	}
 }
 
 bool PickAndHide::ReadActionParameters()
