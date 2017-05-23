@@ -374,8 +374,8 @@ bool ApplicationManager::Delete_Figs()
 		{
 			if (ZoomList[i]->IsSelected())
 			{
-				ZoomList[i] = NULL;
 				delete ZoomList[i];
+				ZoomList[i] = NULL;
 				for (int j = i; j < no_of_zoomed_figs- 1; j++)
 				{
 					swap(ZoomList[j], ZoomList[j + 1]);
@@ -405,6 +405,7 @@ bool ApplicationManager::Delete_Figs()
 		{
 			if (FigList[i]->IsSelected())
 			{
+				delete FigList[i];
 				FigList[i] = NULL;
 				for (int j = i; j < FigCount - 1; j++)
 				{
@@ -516,6 +517,7 @@ void ApplicationManager::Cut()
 		if (FigList[i]->IsSelected())
 		{
 			CopyList[Ccount++] = FigList[i]->copy();
+			delete FigList[i];
 			FigList[i] = NULL;
 			for (int j = i; j < FigCount - 1; j++)
 			{

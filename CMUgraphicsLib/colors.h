@@ -82,13 +82,13 @@ class color {
 		}
 		else if (s == "ORANGE")
 		{
-			ucRed = 225;
+			ucRed = 255;
 			ucGreen = 165;
 			ucBlue = 0;
 		}
 		else if (s == "PINK")
 		{
-			ucRed = 225;
+			ucRed = 255;
 			ucGreen = 192;
 			ucBlue = 203;
 		}
@@ -140,9 +140,9 @@ class color {
 			return string("VIOLET");
 		else if (ucRed == 190 && ucGreen == 190 && ucBlue == 190)
 			return string("GRAY");
-		else if (ucRed == 225 && ucGreen == 165 && ucBlue == 0)
+		else if (ucRed == 255 && ucGreen == 165 && ucBlue == 0)
 			return string("ORANGE");
-		else if (ucRed == 225 && ucGreen == 192 && ucBlue == 203)
+		else if (ucRed == 255 && ucGreen == 192 && ucBlue == 203)
 			return string("PINK");
 		else if (ucRed == 46 && ucGreen == 139 && ucBlue == 87)
 			return string("SEAGREEN");
