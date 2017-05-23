@@ -47,7 +47,7 @@ bool Scramble::Execute()
 		pOut->PrintMessage(score);
 		playing = ReadActionParameters();
 		if (!playing)
-			break;
+			return false;
 		if (p.x < UI.width / 2 || p.y >= UI.height-UI.StatusBarHeight)
 			continue;
 		score = "";
